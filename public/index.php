@@ -7,25 +7,26 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use App\Controllers\AuthController;
-use App\Controllers\SiteController;
 use App\Core\Application;
 
-//Define root directory for all Application.
+/**
+ * Define root directory for all Application.
+ */
 $rootDriPath = dirname( __DIR__ );
 
+/**
+ * Create Application object instance.
+ */
 $app = new Application( $rootDriPath );
 
-$app->router->get( '/', 'home' );
+/**
+ * include "./../routers/web.php" file for whole Application router.
+ */
+require_once $rootDriPath . '/routers/web.php';
 
-$app->router->get( '/contact', [SiteController::class, 'showContact'] );
-$app->router->post( '/contact', [SiteController::class, 'handelContact'] );
-
-// $app->router->get( '/login', [AuthController::class, 'handelContact'] );
-$app->router->get( '/login', [AuthController::class, 'login'] );
-$app->router->get( '/register', [AuthController::class, 'registration'] );
-$app->router->post( '/register', [AuthController::class, 'registration'] );
-
+/**
+ * Here starting run whole Application.
+ */
 $app->run();
 
 ?>
