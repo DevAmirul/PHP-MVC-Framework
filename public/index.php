@@ -8,7 +8,8 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use App\Application;
+use App\Core\Application;
+use App\Controller\SiteController;
 
 
 $rootDriPath = dirname(__DIR__);
@@ -17,7 +18,8 @@ $app = new Application($rootDriPath);
 
 $app->router->get( '/', 'home' );
 
-$app->router->get( '/contact', 'contact');
+$app->router->get( '/contact', [SiteController::class, 'showContact']);
+$app->router->post( '/contact', [SiteController::class, 'handelContact'] );
 
 $app->run();
 
