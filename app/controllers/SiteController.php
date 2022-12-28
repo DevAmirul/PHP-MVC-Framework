@@ -1,18 +1,25 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controllers;
 
-use App\Core\Application;
 use App\Core\Controller;
+use App\Core\Request;
 
-class SiteController extends Controller{
+class SiteController extends Controller {
 
-    public function handelContact() {
-        return 'hello';
+
+    public function handelContact( Request $request ) {
+        $body = $request->getBody();
+        echo '<pre>';
+        var_dump( $body );
+        echo '</pre>';
+        exit;
+
+        // return 'hello';
     }
 
     public function showContact() {
         $params = ['name' => 'sabbir'];
-        return $this->viewRender( 'contact', $params );
+        return $this->view( 'contact', $params );
     }
 }

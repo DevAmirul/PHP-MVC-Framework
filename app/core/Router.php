@@ -37,9 +37,11 @@ class Router {
         }
 
         if ( is_array( $callback ) ) {
-            $callback[0] = new $callback[0]();
+            Application::$app->controller = new $callback[0]();
+            $callback[0] = Application::$app->controller;
         }
-        return call_user_func( $callback );
+
+        return call_user_func( $callback, $this->request );
     }
 
     public function View( $view, $params = [] ) {
@@ -50,16 +52,17 @@ class Router {
     }
 
     protected function layoutContent() {
+        $layout = Application::$app->controller->layout ?? 'main';
         ob_start();
-        include_once Application::$ROOT_DIR_PATH . "/views/layout/main.php";
+        include_once Application::$ROOT_DIR_PATH . "/views/layout/$layout.php";
         return ob_get_clean();
-
     }
 
     protected function renderOnlyView( $view, $params ) {
         foreach ( $params as $key => $value ) {
             $$key = $value;
         }
+
         ob_start();
         include_once Application::$ROOT_DIR_PATH . "/views/$view.php";
         return ob_get_clean();
