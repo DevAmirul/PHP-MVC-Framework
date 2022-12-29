@@ -20,16 +20,26 @@ case MATCH;
     }
     public static function checkRules( $propertyValue, $rule, $attributes ) {
 
+        if ( !is_object( $rule ) ) {
+            foreach ($rule as $key => $value) {
+                
+            }
+            exit;
+        }
+
         if ( empty( $propertyValue ) && $rule->name === RULE::REQUIRE->name ) {
             return RULE::error( $rule );
         }
-        if ( empty( $propertyValue ) && $rule->name === RULE::REQUIRE->name ) {
+
+        if ( !filter_var( $propertyValue )  && $rule->name === RULE::EMAIL->name ) {
             return RULE::error( $rule );
         }
-        if ( empty( $propertyValue ) && $rule->name === RULE::REQUIRE->name ) {
+
+        if ( empty( $propertyValue ) && $rule->name === RULE::MIN->name ) {
             return RULE::error( $rule );
         }
-        if ( empty( $propertyValue ) && $rule->name === RULE::REQUIRE->name ) {
+
+        if ( empty( $propertyValue ) && $rule->name === RULE::MATCH->name ) {
             return RULE::error( $rule );
         }
 

@@ -23,8 +23,8 @@ class RegisterModel extends Model {
     public function rules() {
         return [
             'fullName'=>[RULE::REQUIRE],
-            'email'=>[RULE::EMAIL],
-            'password'=>[RULE::MIN],
+            'email'=>[RULE::EMAIL,RULE::REQUIRE],
+            'password'=>[RULE::REQUIRE,[RULE::MIN,'min'=>8]],
             'confirmPassword'=>[RULE::MATCH]
         ];
     }
