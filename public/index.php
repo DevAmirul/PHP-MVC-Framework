@@ -12,17 +12,17 @@ use App\Core\Application;
 /**
  * Define root directory for all Application.
  */
-$rootDriPath = dirname( __DIR__ );
+define( 'ROOT_DIR_PATH', dirname( __DIR__ ) );
 
 /**
  * Create Application object instance.
  */
-$app = new Application( $rootDriPath );
+$app = new Application( ROOT_DIR_PATH );
 
 /**
  * include "./../routers/web.php" file for whole Application router.
  */
-require_once $rootDriPath . '/routers/web.php';
+require_once ROOT_DIR_PATH . '/routers/web.php';
 
 /**
  * Here starting run whole Application.

@@ -16,18 +16,17 @@ class Application {
     /**
      * Application __construct function
      *
-     * @param String $driPath
+     * @param string $driPath
      */
-    public function __construct( String $driPath ) {
+    public function __construct( string $ROOT_DIR_PATH ) {
         self::$app           = $this;
-        self::$ROOT_DIR_PATH = $driPath;
+        self::$ROOT_DIR_PATH = $ROOT_DIR_PATH;
         $this->request       = new Request();
         $this->response      = new Response();
         $this->router        = new Router( $this->request, $this->response );
     }
 
     /**
-     * Application run function,
      * Application run start this function.
      */
     public function run() {

@@ -5,8 +5,13 @@ namespace Routes;
 use App\Controllers\AuthController;
 use App\Controllers\SiteController;
 
-/**
- * Here declare all routers.
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register routes for your application.
+|
  */
 
 $app->router->get( '/', 'home' );

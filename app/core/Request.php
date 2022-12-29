@@ -4,6 +4,11 @@ namespace App\Core;
 
 class Request {
 
+    /**
+     * This function return user input path after remove all param and query
+     *
+     * @return string
+     */
     public function getPath() {
         $path     = $_SERVER['REQUEST_URI'] ?? '/';
         $position = strpos( $path, '?' );
@@ -15,18 +20,38 @@ class Request {
         return substr( $path, 0, $position );
     }
 
+    /**
+     * This function return user input method
+     *
+     * @return string
+     */
     public function getMethod() {
         return strtolower( $_SERVER['REQUEST_METHOD'] );
     }
 
+    /**
+     * This function checks and returns whether the method is GET
+     *
+     * @return string
+     */
     public function isGet() {
         return $this->getMethod() === 'get';
     }
 
+    /**
+     * This function checks and returns whether the method is POST
+     *
+     * @return string
+     */
     public function isPost() {
         return $this->getMethod() === 'post';
     }
 
+    /**
+     * This function checks and returns whether input data valid or not
+     * 
+     * @return array
+     */
     public function getBody() {
         $body = [];
 

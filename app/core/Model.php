@@ -3,7 +3,12 @@
 namespace App\Core;
 
 abstract class Model {
-    public function loadData( $data ) {
+
+    /**
+     * @param array $data
+     * @return void
+     */
+    public function loadData(array $data ) {
         foreach ( $data as $key => $value ) {
             if ( property_exists( $this, $key ) ) {
                 $this->$key = $value;
