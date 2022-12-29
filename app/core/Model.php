@@ -26,16 +26,10 @@ abstract class Model {
             $propertyValue = $this->$attributes;
 
             foreach ( $rules as $rule ) {
-
                 $this->rulesError[$attributes][] = RULE::checkRules( $propertyValue, $rule, $attributes );
             }
 
         }
-        echo '<pre>';
-        var_dump($this->rulesError);
-        echo '</pre>';
-        exit;
-
-
     }
+
 }

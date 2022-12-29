@@ -13,62 +13,46 @@ case MATCH;
         return match( $value ) {
             RULE::REQUIRE=> 'The field is required',
             RULE::EMAIL => 'The field must be valid email address',
-            RULE::MIN => 'Min length of this field must be {min}',
-            RULE::MAX => 'Max length of this field must be {max}',
-            RULE::MATCH=> 'The field must be same as {match}',
+            RULE::MIN => 'Min length of this field must be {MIN}',
+            RULE::MAX => 'Max length of this field must be {MAX}',
+            RULE::MATCH=> 'The field must be same as {MATCH}',
         };
     }
     public static function checkRules( $propertyValue, $rule, $attributes ) {
-
+        $ruleName = $rule;
         if ( !is_object( $rule ) ) {
-            foreach ($rule as $key => $value) {
-                
-            }
-            exit;
+            $ruleName = $rule[0];
+
         }
 
-        if ( empty( $propertyValue ) && $rule->name === RULE::REQUIRE->name ) {
-            return RULE::error( $rule );
+        if ( $ruleName === RULE::REQUIRE && empty( $propertyValue ) ) {
+            return RULE::error( $ruleName );
         }
 
-        if ( !filter_var( $propertyValue )  && $rule->name === RULE::EMAIL->name ) {
-            return RULE::error( $rule );
+        if ( $ruleName === RULE::EMAIL && !filter_var( $propertyValue ) ) {
+            return RULE::error( $ruleName );
         }
 
-        if ( empty( $propertyValue ) && $rule->name === RULE::MIN->name ) {
-            return RULE::error( $rule );
+        if ( $ruleName === RULE::MIN && $rule[1] > strlen( $propertyValue ) ) {
+
+            return RULE::stringReplace( RULE::MIN->name, $rule[1], RULE::error( $ruleName ));
         }
 
-        if ( empty( $propertyValue ) && $rule->name === RULE::MATCH->name ) {
-            return RULE::error( $rule );
+        if ( $ruleName === RULE::MAX && $rule[1] < strlen( $propertyValue ) ) {
+            return RULE::error( $ruleName );
         }
 
-        // return RULE::stringReplace($rulesError);
-    }
-    private static function stringReplace( array $rulesError ) {
-        foreach ( $rulesError as $key => $error ) {
-
+        if ( $ruleName === RULE::MATCH && empty( $propertyValue ) ) {
+            return RULE::error( $ruleName );
         }
     }
 
+    private static function stringReplace( $find,$replace, $String ) {
+        str_replace();
+        echo '<pre>';
+        var_dump( $stringReplace, $replaceString);
+        echo '</pre>';
+        exit;
+
+    }
 }
-// echo gettype( RULE::EMAIL->value );
-// echo RULEEnum::REQUIRE->name;
-// enum Status:int {
-// case DRAFT     = 1;
-// case PUBLISHED = 2;
-// case ARCHIVED  = 3;
-
-//     public static function color( $t ): string {
-//         return match( $t ) {
-//             Status::DRAFT => Status::d(),
-//             Status::PUBLISHED => 'green',
-//             Status::ARCHIVED => 'red',
-//         };
-//     }
-//     public static function d() {
-//         return 'this is d';
-//     }
-// }
-// // $s = Status::color(Status::ARCHIVED);
-// echo gettype( Status::DRAFT );

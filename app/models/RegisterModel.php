@@ -24,8 +24,8 @@ class RegisterModel extends Model {
         return [
             'fullName'=>[RULE::REQUIRE],
             'email'=>[RULE::EMAIL,RULE::REQUIRE],
-            'password'=>[RULE::REQUIRE,[RULE::MIN,'min'=>8]],
-            'confirmPassword'=>[RULE::MATCH]
+            'password'=>[RULE::REQUIRE,[RULE::MIN, 8]],
+            'confirmPassword'=>[RULE::MATCH,[RULE::MAX, 10]]
         ];
     }
 }
