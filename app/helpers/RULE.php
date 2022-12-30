@@ -2,6 +2,11 @@
 
 namespace App\Helpers;
 
+/**
+ * RULE enum
+ * this enum work for user input validation rules
+ */
+
 enum RULE {
 case REQUIRE ;
 case EMAIL;
@@ -9,20 +14,33 @@ case MIN;
 case MAX;
 case MATCH;
 
-    private static function error( $value ): string {
-        return match( $value ) {
+    /**
+     * This method accept this enum rule name and match enum,then return a particular string
+     *
+     * @param  RULE $ruleName
+     * @return string
+     */
+    private static function error( RULE $ruleName ): string {
+        return match( $ruleName ) {
             RULE::REQUIRE=> 'The field is required',
             RULE::EMAIL => 'The field must be valid email address',
-            RULE::MIN => 'Min length of this field must be {MIN}',
-            RULE::MAX => 'Max length of this field must be {MAX}',
-            RULE::MATCH=> 'The field must be same as {MATCH}',
+            RULE::MIN => 'Min length of this field must be MIN',
+            RULE::MAX => 'Max length of this field must be MAX',
+            RULE::MATCH=> 'The field must be same as MATCH',
         };
     }
-    public static function checkRules( $propertyValue, $rule, $attributes ) {
+
+    /**
+     * This method check user input and return a error string from error() method
+     *
+     * @param  string     $propertyValue
+     * @param  array|RULE $rule
+     * @return string
+     */
+    public static function checkRules( string $propertyValue, array | RULE $rule ) {
         $ruleName = $rule;
         if ( !is_object( $rule ) ) {
             $ruleName = $rule[0];
-
         }
 
         if ( $ruleName === RULE::REQUIRE && empty( $propertyValue ) ) {
@@ -34,25 +52,28 @@ case MATCH;
         }
 
         if ( $ruleName === RULE::MIN && $rule[1] > strlen( $propertyValue ) ) {
+            return RULE::stringReplace( $ruleName->name, $rule[1], RULE::error( $ruleName ) );
 
-            return RULE::stringReplace( RULE::MIN->name, $rule[1], RULE::error( $ruleName ));
         }
 
         if ( $ruleName === RULE::MAX && $rule[1] < strlen( $propertyValue ) ) {
-            return RULE::error( $ruleName );
+            return RULE::stringReplace( $ruleName->name, $rule[1], RULE::error( $ruleName ) );
         }
 
         if ( $ruleName === RULE::MATCH && empty( $propertyValue ) ) {
-            return RULE::error( $ruleName );
+            return RULE::stringReplace( $ruleName->name, $rule[1], RULE::error( $ruleName ) );
         }
     }
 
-    private static function stringReplace( $find,$replace, $String ) {
-        str_replace();
-        echo '<pre>';
-        var_dump( $stringReplace, $replaceString);
-        echo '</pre>';
-        exit;
-
+    /**
+     * This method replace error string and return a new replaced error string
+     *
+     * @param  string     $find
+     * @param  string|int $replace
+     * @param  string     $errorString
+     * @return string
+     */
+    private static function stringReplace( string $find, string | int $replace, string $errorString ) {
+        return str_replace( $find, $replace, $errorString );
     }
 }

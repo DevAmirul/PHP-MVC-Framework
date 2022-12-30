@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Core;
+
 use App\Helpers\RULE;
 
 abstract class Model {
 
     public array $rulesError = [];
+
     /**
      * @param array $data
      * @return void
@@ -16,11 +18,15 @@ abstract class Model {
                 $this->$key = $value;
             }
         }
-
     }
 
     abstract function rules();
 
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
     public function validate() {
         foreach ( $this->rules() as $attributes => $rules ) {
             $propertyValue = $this->$attributes;
@@ -28,8 +34,12 @@ abstract class Model {
             foreach ( $rules as $rule ) {
                 $this->rulesError[$attributes][] = RULE::checkRules( $propertyValue, $rule, $attributes );
             }
-
         }
+        echo '<pre>';
+        var_dump( $this->rulesError );
+        echo '</pre>';
+        exit;
+
     }
 
 }

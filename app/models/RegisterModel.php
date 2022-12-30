@@ -16,16 +16,16 @@ class RegisterModel extends Model {
     }
 
     /**
-     * Here define validation rules
+     * Here define user input validation rules
      *
      * @return array
      */
     public function rules() {
         return [
-            'fullName'=>[RULE::REQUIRE],
-            'email'=>[RULE::EMAIL,RULE::REQUIRE],
-            'password'=>[RULE::REQUIRE,[RULE::MIN, 8]],
-            'confirmPassword'=>[RULE::MATCH,[RULE::MAX, 10]]
+            'fullName'        => [RULE::REQUIRE, [RULE::MAX, 4]],
+            'email'           => [RULE::EMAIL, RULE::REQUIRE],
+            'password'        => [[RULE::MIN, 8]],
+            'confirmPassword' => [[RULE::MATCH, 'password']],
         ];
     }
 }
