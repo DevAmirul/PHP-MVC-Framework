@@ -21,7 +21,6 @@ class SiteController extends Controller {
     }
 
     public function showContact() {
-        $params = ['name' => 'sabbir'];
-        return $this->view( 'contact', $params );
+        return $this->view( 'contact', ['name' => 'sabbir'] );
     }
 }

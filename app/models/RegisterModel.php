@@ -6,10 +6,10 @@ use App\Helpers\RULE;
 
 class RegisterModel extends Model {
 
-    public String $fullName;
-    public String $email;
-    public String $password;
-    public String $confirmPassword;
+    public String $fullName = '';
+    public String $email = '';
+    public String $password = '';
+    public String $confirmPassword = '';
 
     public function register() {
         echo 'creation new user';
@@ -22,10 +22,10 @@ class RegisterModel extends Model {
      */
     public function rules() {
         return [
-            'fullName'        => [RULE::REQUIRE, [RULE::MAX, 4]],
+            'fullName'        => [RULE::REQUIRE, RULE::EMAIL, [RULE::MAX, 4]],
             'email'           => [RULE::EMAIL, RULE::REQUIRE],
             'password'        => [[RULE::MIN, 8]],
-            'confirmPassword' => [[RULE::MATCH, 'password']],
+            'confirmPassword' => [RULE::REQUIRE, [RULE::MATCH, 'password'], [RULE::MIN, 8]],
         ];
     }
 }

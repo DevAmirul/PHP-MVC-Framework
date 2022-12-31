@@ -2,16 +2,15 @@
 
 namespace App\Core;
 
-use App\Core\Controller;
 
 class Application {
 
+    public static $app;
     public static $ROOT_DIR_PATH;
     public Router $router;
     public Request $request;
     public Response $response;
     public Controller $controller;
-    public static $app;
 
     /**
      * Application __construct function
@@ -27,7 +26,7 @@ class Application {
     }
 
     /**
-     * Application run start this function.
+     * Application run start from this function.
      */
     public function run() {
         echo $this->router->resolve();
