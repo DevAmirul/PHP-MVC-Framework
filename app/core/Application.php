@@ -2,7 +2,6 @@
 
 namespace App\Core;
 
-
 class Application {
 
     public static $app;
@@ -11,6 +10,7 @@ class Application {
     public Request $request;
     public Response $response;
     public Controller $controller;
+    public Database $db;
 
     /**
      * Application __construct function
@@ -23,6 +23,8 @@ class Application {
         $this->request       = new Request();
         $this->response      = new Response();
         $this->router        = new Router( $this->request, $this->response );
+        $this->db            = new Database();
+
     }
 
     /**
