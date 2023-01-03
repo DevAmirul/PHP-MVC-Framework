@@ -5,14 +5,17 @@
  * @copyright 2022 Amirul
  */
 
-require_once __DIR__ . '/../vendor/autoload.php';
+
+/**
+ * Define root directory.
+ */
+define( 'ROOT_DIR_PATH', dirname( __DIR__ ) );
+
+require_once ROOT_DIR_PATH . '/vendor/autoload.php';
 
 use App\Core\Application;
 
-/**
- * Define root directory for all Application.
- */
-define( 'ROOT_DIR_PATH', dirname( __DIR__ ) );
+
 
 /**
  * load .env file.
@@ -42,5 +45,6 @@ require_once ROOT_DIR_PATH . '/routers/web.php';
  * Here starting run whole Application.
  */
 $app->run();
+
 
 ?>
