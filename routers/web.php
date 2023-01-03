@@ -22,3 +22,5 @@ $app->router->post( '/contact', [SiteController::class, 'handelContact'] );
 $app->router->get( '/login', [AuthController::class, 'login'] );
 $app->router->get( '/register', [AuthController::class, 'registration'] );
 $app->router->post( '/register', [AuthController::class, 'registration'] );
+
+// $app->router->post( '/pdo', 'pdo' );

@@ -17,14 +17,13 @@ class Application {
      *
      * @param string $driPath
      */
-    public function __construct( string $ROOT_DIR_PATH ) {
+    public function __construct( string $ROOT_DIR_PATH, array $config ) {
         self::$app           = $this;
         self::$ROOT_DIR_PATH = $ROOT_DIR_PATH;
         $this->request       = new Request();
         $this->response      = new Response();
         $this->router        = new Router( $this->request, $this->response );
-        $this->db            = new Database();
-
+        $this->db            = new Database( $config['db'] );
     }
 
     /**
