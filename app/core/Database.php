@@ -18,17 +18,15 @@ class Database {
         } catch ( \PDOException$e ) {
             echo $e->getMessage();
         }
-
     }
 
     /**
-     * applyMigrations function
+     * This method main migration method.
      *
      * @return void
      */
     public function applyMigrations() {
         $newMigrationsList = [];
-        $ins               = [];
 
         $this->createMigrationsTable();
         $appliedMigration = $this->getAppliedMigrations();
@@ -44,10 +42,13 @@ class Database {
 
             $className = pathinfo( $migration, PATHINFO_FILENAME );
 
-            $instance = new $className;
-            $instance->up( $this->pdo );
-            $this->output( 'Created table name - ' . $className );
-            $newMigrationsList[] = $migration;
+            $instance          = new $className;
+            $tableColumArray   = $instance->up( $this->pdo );
+            $createTableReturn = $this->createTableSqlStatement( $tableColumArray, $className );
+
+            if ( $createTableReturn ) {
+                $newMigrationsList[] = $migration;
+            }
         }
 
         if ( !empty( $newMigrationsList ) ) {
@@ -101,5 +102,39 @@ class Database {
 
     private function output( string $outputStr ) {
         echo $outputStr . PHP_EOL;
+    }
+
+    private function createTableSqlStatement( array $tableColumArray, string $className ) {
+        $constraintsStrArray = [];
+
+        $className = substr( $className, 5 );
+
+        foreach ( $tableColumArray as $constraints ) {
+            $constraintsStrArray[] = implode( ' ', $constraints );
+        }
+        $constraintsStatement = implode( ', ', $constraintsStrArray );
+
+        $sqlStatement = "CREATE TABLE {$className} ( {$constraintsStatement} ) ENGINE=INNODB;";
+
+        if ( !$this->pdo->exec( $sqlStatement ) ) {
+            $this->output( 'Created table name - ' . $className );
+            return true;
+        } else {
+            $this->output( $className . ' - could not be created' );
+            return false;
+        }
+    }
+
+    private function dropTableSqlStatement( string $className ) {
+        $className = substr( $className, 5 );
+
+        $sqlStatement = "DROP TABLE {$className}";
+        if ( !$this->pdo->exec( $sqlStatement ) ) {
+            $this->output( 'Deleted table name - ' . $className );
+            return true;
+        } else {
+            $this->output( $className . ' - could not be deleted' );
+            return false;
+        }
     }
 }
