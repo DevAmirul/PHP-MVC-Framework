@@ -1,6 +1,6 @@
 <?php
 
-class m001_initial {
+class m002_hello {
 
     /**
      * Undocumented function
@@ -8,7 +8,7 @@ class m001_initial {
      * @return void
      */
     public function up( $pdo ) {
-        $sql = "CREATE TABLE user (
+        $sql = "CREATE TABLE hello (
             id INT PRIMARY KEY AUTO_INCREMENT,
             fullname VARCHAR(255) NOT NULL,
             email VARCHAR(255) NOT NULL,
@@ -25,23 +25,8 @@ class m001_initial {
      *
      * @return void
      */
-    public function down( $pdo ) {
+    public function down($pdo) {
         $sql = "DROP TABLE user";
         $pdo->exec( $sql );
     }
 }
-
-// class name {
-//     public $a;
-//     function __construct( $var ) {
-//         $this->a = $var;
-//     }
-
-//     function x() {
-//         $this->b= 4;
-//     }
-// }
-// class child extends name{
-//     public $b;
-
-// }

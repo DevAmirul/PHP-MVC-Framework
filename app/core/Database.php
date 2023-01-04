@@ -28,6 +28,7 @@ class Database {
      */
     public function applyMigrations() {
         $newMigrationsList = [];
+        $ins               = [];
 
         $this->createMigrationsTable();
         $appliedMigration = $this->getAppliedMigrations();
@@ -42,18 +43,17 @@ class Database {
             require_once Application::$ROOT_DIR_PATH . '/migrations/' . $migration;
 
             $className = pathinfo( $migration, PATHINFO_FILENAME );
-            $instance  = new $className;
-            echo 'Hello world!' . PHP_EOL;
-            $instance->up();
-            echo 'Hello world!' . PHP_EOL;
 
+            $instance = new $className;
+            $instance->up( $this->pdo );
+            $this->output( 'Created table name - ' . $className );
             $newMigrationsList[] = $migration;
         }
 
         if ( !empty( $newMigrationsList ) ) {
             $this->saveMigrations( $newMigrationsList );
         } else {
-            echo 'All migration are applied';
+            $this->output( 'All migration are applied' );
         }
 
     }
@@ -91,12 +91,15 @@ class Database {
      * @return void
      */
     public function saveMigrations( array $newMigrationsList ) {
-        $migrationListStr = implode( "' ,'", $newMigrationsList );
+        $migrationListStr = implode( "'), ('", $newMigrationsList );
 
-        $statement = $this->pdo->prepare( "INSERT INTO migrations (migration) VALUES(
-            'hello','this') " );
+        $statement = $this->pdo->prepare( "INSERT INTO migrations (migration) VALUES( '$migrationListStr' )" );
 
         $statement->execute();
 
+    }
+
+    private function output( string $outputStr ) {
+        echo $outputStr . PHP_EOL;
     }
 }
