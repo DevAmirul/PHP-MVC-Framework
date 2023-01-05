@@ -39,6 +39,7 @@ abstract class Model {
                 $this->rulesError[$attributes][] = $this->checkRules( $propertyValue, $rule, $attributes );
             }
         }
+        return true;
     }
 
     /**

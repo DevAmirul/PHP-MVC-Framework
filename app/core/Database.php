@@ -78,10 +78,10 @@ class Database {
      * @return void
      */
     public function getAppliedMigrations() {
-        $statement = $this->pdo->prepare( "SELECT migration FROM migrations" );
-        $statement->execute();
+        $sqlStatement = $this->pdo->prepare( "SELECT migration FROM migrations" );
+        $sqlStatement->execute();
 
-        return $statement->fetchAll( \PDO::FETCH_COLUMN );
+        return $sqlStatement->fetchAll( \PDO::FETCH_COLUMN );
 
     }
 
@@ -94,9 +94,9 @@ class Database {
     public function saveMigrations( array $newMigrationsList ) {
         $migrationListStr = implode( "'), ('", $newMigrationsList );
 
-        $statement = $this->pdo->prepare( "INSERT INTO migrations (migration) VALUES( '$migrationListStr' )" );
+        $sqlStatement = $this->pdo->prepare( "INSERT INTO migrations (migration) VALUES( '$migrationListStr' )" );
 
-        $statement->execute();
+        $sqlStatement->execute();
 
     }
 
