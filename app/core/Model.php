@@ -32,6 +32,8 @@ abstract class Model {
      * @return void
      */
     public function validate() {
+        $CountError = 0;
+
         foreach ( $this->rules() as $attributes => $rules ) {
             $propertyValue = $this->$attributes;
 
@@ -39,7 +41,13 @@ abstract class Model {
                 $this->rulesError[$attributes][] = $this->checkRules( $propertyValue, $rule, $attributes );
             }
         }
-        return true;
+
+        foreach ( $this->rules() as $key => $value ) {
+            if ( $this->rulesError[$key][0] ) {
+                $CountError ++;
+            }
+        }
+        return ($CountError === 0) ? true : false ;
     }
 
     /**

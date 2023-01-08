@@ -16,10 +16,10 @@ abstract class DbModel extends Model {
         foreach ( $columNames as $columName ) {
             $Statement->bindValue( ":{$columName}", $this->$columName );
         }
-        $Statement->execute();
-        return true;
-
-
+        if ($Statement->execute()) {
+            return true;
+        }
+        return false;
 
     }
 
@@ -33,17 +33,3 @@ abstract class DbModel extends Model {
         return Application::$app->db->pdo->prepare( $sqlStatement );
     }
 }
-
-// class par {
-//     protected $a;
-//     function xx() {
-//         echo $this->a;
-//     }
-// }
-
-// class child extends par {
-//     protected $a = 3;
-// }
-
-// $q = new child();
-// echo $q->xx();

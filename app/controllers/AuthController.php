@@ -28,12 +28,8 @@ class AuthController extends Controller {
 
         $Users = new Users();
         if ( $request->isPost() ) {
-
             $Users->loadData();
-
-
-            if ( $Users->validate() && $Users->register()) {
-                
+            if ( $Users->validate() === true && $Users->save() === true ) {
                 return $this->view( 'register', ['model' => $Users] );
             }
         }

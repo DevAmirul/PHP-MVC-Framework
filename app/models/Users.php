@@ -7,15 +7,13 @@ use App\Helpers\RULE;
 class Users extends DbModel {
 
     protected $tableName           = 'users';
+
     public String $fullName        = '';
     public String $email           = '';
     public String $password        = '';
     public String $confirmPassword = '';
 
-    public function register() {
-        $this->save();
-    }
-
+    
     public function columnName() {
         return [
             'fullName', 'email', 'password'
