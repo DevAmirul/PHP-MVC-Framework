@@ -28,4 +28,14 @@ class Controller {
     protected function view( string $view, array $params = [] ) {
         return Application::$app->router->view( $view, $params );
     }
+
+    /**
+     * This method call original redirect method from Application::$app->router.
+     *
+     * @param  string $redirectLink
+     * @return string
+     */
+    protected function redirect( string $redirectLink ) {
+        return Application::$app->router->redirect( $redirectLink );
+    }
 }

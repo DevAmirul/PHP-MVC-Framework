@@ -26,16 +26,16 @@ class AuthController extends Controller {
      */
     public function registration( Request $request ) {
 
-        $Users = new Users();
+        $users = new Users();
         if ( $request->isPost() ) {
-            $Users->loadData();
-            if ( $Users->validate() === true && $Users->save() === true ) {
-                return $this->view( 'register', ['model' => $Users] );
+            $users->loadData();
+            if ( $users->validate() && $users->save() ) {
+                $this->redirect('/');
             }
         }
 
         $this->setLayout( 'auth' );
-        return $this->view( 'register', ['model' => $Users] );
+        return $this->view( 'register', ['model' => $users] );
 
     }
 }

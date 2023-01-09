@@ -53,7 +53,6 @@ class Router {
         if ( $callback === false ) {
             $this->response->setHttpStatusCode( 404 );
             return $this->View( 'not_found/404' );
-
         }
 
         if ( is_string( $callback ) ) {
@@ -114,5 +113,14 @@ class Router {
         return ob_get_clean();
     }
 
+    /**
+     * This method redirect any page.
+     *
+     * @param  string $redirectLink
+     * @return void
+     */
+    public function redirect( string $redirectLink ) {
+        header( 'Location: ' . $redirectLink );
+    }
 }
 ?>
