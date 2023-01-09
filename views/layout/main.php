@@ -1,3 +1,6 @@
+<?php
+    use App\Core\Application;
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -42,6 +45,12 @@
       <div class="row">
         <div class="col">
 
+        <?php if (Application::$app->session->getFlush('success')): ?>
+          <div class="alert alert-success">
+            <?php echo Application::$app->session->getFlush('success'); ?>
+          </div>
+        <?php endif; ?>
+        
           {{content}}
 
         </div>

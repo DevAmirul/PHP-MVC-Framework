@@ -11,6 +11,7 @@ class Application {
     public Response $response;
     public Controller $controller;
     public Database $db;
+    public Session $session;
 
     /**
      * Application __construct function
@@ -24,6 +25,8 @@ class Application {
         $this->response      = new Response();
         $this->router        = new Router( $this->request, $this->response );
         $this->db            = new Database( $config['db'] );
+        $this->session       = new Session();
+
     }
 
     /**

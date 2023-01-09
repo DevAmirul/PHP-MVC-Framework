@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Core\Controller;
 use App\Core\Request;
 use App\Models\Users;
+use GrahamCampbell\ResultType\Success;
 
 class AuthController extends Controller {
 
@@ -30,6 +31,8 @@ class AuthController extends Controller {
         if ( $request->isPost() ) {
             $users->loadData();
             if ( $users->validate() && $users->save() ) {
+                
+                $this->setFlush('success' , 'Thanks for registration');
                 $this->redirect('/');
             }
         }

@@ -19,7 +19,7 @@ class Controller {
     }
 
     /**
-     * Controller view function
+     * This method call original view method from Application::$app->router class.
      *
      * @param string $view
      * @param array $params
@@ -30,12 +30,21 @@ class Controller {
     }
 
     /**
-     * This method call original redirect method from Application::$app->router.
+     * This method call original redirect method from Application::$app->router class.
      *
      * @param  string $redirectLink
      * @return string
      */
     protected function redirect( string $redirectLink ) {
         return Application::$app->router->redirect( $redirectLink );
+    }
+
+    /**
+     * This method call original setFlush method from Application::$app->session class.
+     *
+     * @return void
+     */
+    protected function setFlush( $key, $message ) {
+        return Application::$app->session->setFlash( $key, $message );
     }
 }
