@@ -14,33 +14,45 @@ class Session {
         foreach ( $flashMessages as $key => &$flashMessage ) {
             $flashMessage['remove'] = true;
         }
-
         $_SESSION[self::$FLASH_KEY] = $flashMessages;
-        echo '<pre>';
-        var_dump( $_SESSION[self::$FLASH_KEY] );
-        echo '</pre>';
-
     }
 
-    public function setFlash( $key, $value ) {
+    /**
+     * This method used to set flash message.
+     *
+     * @param  string $key
+     * @param  string $value
+     * @return void
+     */
+    public function setFlash(string $key,string $message ) {
         $_SESSION[self::$FLASH_KEY][$key] = [
             'remove' => false,
-            'value'  => $value,
+            'message'  => $message,
         ];
     }
 
-    public function getFlush( $key ) {
-        return $_SESSION[self::$FLASH_KEY][$key]['value'] ?? false;
+    /**
+     * This method return specific flush session.
+     *
+     * @param  string $key
+     * @return string
+     */
+    public function getFlush(string $key ) {
+        return $_SESSION[self::$FLASH_KEY][$key]['message'] ?? false;
     }
 
+    /**
+     * This __destruct method remove flash session.
+     * @return void
+     */
     public function __destruct() {
         $flashMessages = $_SESSION[self::$FLASH_KEY] ?? [];
 
         foreach ( $flashMessages as $key => &$flashMessage ) {
-            if ($flashMessage['remove']) {
-                unset($flashMessages[$key]);
+            if ( $flashMessage['remove'] ) {
+                unset( $flashMessages[$key] );
             }
         }
-        unset( $flashMessages );
+        $_SESSION[self::$FLASH_KEY] = $flashMessages;
     }
 }

@@ -29,8 +29,8 @@ class Users extends DbModel {
         return [
             'fullName'        => [RULE::REQUIRE],
             'email'           => [RULE::EMAIL],
-            'password'        => [[RULE::MIN, 3]],
-            'confirmPassword' => [[RULE::MATCH, 'password'], [RULE::MIN, 3]],
+            'password'        => [[RULE::MIN, 2]],
+            'confirmPassword' => [[RULE::MATCH, 'password'], [RULE::MIN, 2]],
         ];
     }
 }

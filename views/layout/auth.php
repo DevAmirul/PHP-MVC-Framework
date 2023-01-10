@@ -1,3 +1,6 @@
+<?php
+use App\Core\Application;
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -14,7 +17,11 @@
     <div class="container">
       <div class="row">
         <div class="col">
-
+          <?php if ( Application::$app->session->getFlush( 'login' ) ): ?>
+          <div class="alert alert-success">
+            <?php echo Application::$app->session->getFlush( 'login' ); ?>
+          </div>
+          <?php endif;?>
           {{content}}
 
         </div>

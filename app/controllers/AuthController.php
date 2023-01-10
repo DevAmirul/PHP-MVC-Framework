@@ -31,8 +31,8 @@ class AuthController extends Controller {
         if ( $request->isPost() ) {
             $users->loadData();
             if ( $users->validate() && $users->save() ) {
-                
                 $this->setFlush('success' , 'Thanks for registration');
+                $this->setFlush('hello' , 'hello for hello');
                 $this->redirect('/');
             }
         }

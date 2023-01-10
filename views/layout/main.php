@@ -1,5 +1,5 @@
 <?php
-    use App\Core\Application;
+use App\Core\Application;
 ?>
 <!doctype html>
 <html lang="en">
@@ -45,12 +45,12 @@
       <div class="row">
         <div class="col">
 
-        <?php if (Application::$app->session->getFlush('success')): ?>
+         <?php if ( Application::$app->session->getFlush( 'success' ) ): ?>
           <div class="alert alert-success">
-            <?php echo Application::$app->session->getFlush('success'); ?>
+            <?php echo Application::$app->session->getFlush( 'success' ); ?>
           </div>
-        <?php endif; ?>
-        
+        <?php endif;?>
+
           {{content}}
 
         </div>
