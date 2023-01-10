@@ -6,7 +6,7 @@ use App\Helpers\RULE;
 
 abstract class Model {
 
-    public array $rulesError = [];
+    public array $Error = [];
 
     /**
      * Abstract rules method.
@@ -27,7 +27,7 @@ abstract class Model {
     }
 
     /**
-     * This method passes the roles to the checkRules() method and if any errors are found then assigns them to the $this->rulesError = [] property.
+     * This method passes the roles to the checkRules() method and if any errors are found then assigns them to the $this->Error = [] property.
      *
      * @return void
      */
@@ -38,12 +38,12 @@ abstract class Model {
             $propertyValue = $this->$attributes;
 
             foreach ( $rules as $rule ) {
-                $this->rulesError[$attributes][] = $this->checkRules( $propertyValue, $rule, $attributes );
+                $this->Error[$attributes][] = $this->checkRules( $propertyValue, $rule, $attributes );
             }
         }
 
         foreach ( $this->rules() as $key => $value ) {
-            if ( $this->rulesError[$key][0] ) {
+            if ( $this->Error[$key][0] ) {
                 $CountError ++;
             }
         }
@@ -106,16 +106,16 @@ abstract class Model {
      * @return array|bool
      */
     public function hasError( string $attribute ) {
-        return $this->rulesError[$attribute] ?? false;
+        return $this->Error[$attribute] ?? false;
     }
 
     /**
-     * if there are any error then return first error of $rulesError[] array.
+     * if there are any error then return first error of $Error[] array.
      *
      * @param  string $attribute
      * @return array|bool
      */
     public function getError( string $attribute ) {
-        return $this->rulesError[$attribute][0] ?? false;
+        return $this->Error[$attribute][0] ?? false;
     }
 }

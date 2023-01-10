@@ -32,4 +32,11 @@ abstract class DbModel extends Model {
     public function prepare( $sqlStatement ) {
         return Application::$app->db->pdo->prepare( $sqlStatement );
     }
+
+    public function findOne(array $where)
+    {
+        $attribute = array_keys($where);
+        $sql = "SELECT * FROM $this->tableName WHERE email = :email and fullName = :fullName"
+
+    }
 }

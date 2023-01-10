@@ -4,8 +4,8 @@ namespace App\Controllers;
 
 use App\Core\Controller;
 use App\Core\Request;
+use App\Models\Login;
 use App\Models\Users;
-use GrahamCampbell\ResultType\Success;
 
 class AuthController extends Controller {
 
@@ -14,7 +14,14 @@ class AuthController extends Controller {
      *
      * @return string
      */
-    public function login() {
+    public function login(Request $request) {
+        $login = new Login();
+        if ($request->isPost()) {
+            $login->loadData();
+            if ($login->validate() && $login->login()) {
+                $this->redirect('/');
+            }
+        }
         $this->setLayout( 'auth' );
         return $this->view( 'login' );
     }
@@ -32,7 +39,6 @@ class AuthController extends Controller {
             $users->loadData();
             if ( $users->validate() && $users->save() ) {
                 $this->setFlush('success' , 'Thanks for registration');
-                $this->setFlush('hello' , 'hello for hello');
                 $this->redirect('/');
             }
         }
