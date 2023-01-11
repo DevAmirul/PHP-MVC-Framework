@@ -2,25 +2,32 @@
 
 namespace App\Models;
 
-use App\Core\Application;
-use App\Core\Model;
+use App\Core\DbModel;
 use App\Helpers\RULE;
-use App\Helpers\RULES;
 
-class Login extends Model {
+class Login extends DbModel {
 
     public string $email    = '';
     public string $password = '';
 
+    public function columnName() {
+
+    }
+
     public function rules() {
         return [
-            'email'    => [RULE::REQUIRE],
-            'password' => [RULE::EMAIL, RULE::REQUIRE],
+            'email'    => [RULE::EMAIL,RULE::REQUIRE],
+            'password' => [RULE::REQUIRE],
         ];
     }
 
     public function login() {
-        $users = Users::findOne( ['email' => '$this->email'] );
+        $users = new Users();
+        $users->findOne( ['email' => "$this->email"] );
+        // echo '<pre>';
+        // var_dump( $users );
+        // echo '</pre>';
+        // exit;
         if ( !$users ) {
             $this->Error[$this->email][] = 'User does not exist with this email';
             return false;
@@ -29,8 +36,7 @@ class Login extends Model {
             return false;
         }
 
-        return Application::$app->login($users);
-
+        // return Application::$app->login( $users );
 
     }
 }

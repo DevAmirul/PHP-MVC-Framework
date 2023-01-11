@@ -16,7 +16,7 @@ abstract class DbModel extends Model {
         foreach ( $columNames as $columName ) {
             $Statement->bindValue( ":{$columName}", $this->$columName );
         }
-        if ($Statement->execute()) {
+        if ( $Statement->execute() ) {
             return true;
         }
         return false;
@@ -33,10 +33,21 @@ abstract class DbModel extends Model {
         return Application::$app->db->pdo->prepare( $sqlStatement );
     }
 
-    public function findOne(array $where)
-    {
-        $attribute = array_keys($where);
-        $sql = "SELECT * FROM $this->tableName WHERE email = :email and fullName = :fullName"
+    public function findOne( array $where ) {
+        $attributes = array_keys( $where );
+        $sql        = implode( ' AND ', array_map( fn( $attr ) => "$attr = :$attr", $attributes ) );
+        $Statement  = $this->prepare( "SELECT * FROM $this->tableName WHERE $sql" );
+
+        foreach ( $where as $key => $item ) {
+            $Statement->bindValue( ":{$key}", $item );
+        }
+
+        $Statement->execute();
+        echo '<pre>';
+        var_dump( $Statement->fetchObject(__CLASS__));
+        echo '</pre>';
+        exit;
+        return $Statement->fetchObject( static::class );
 
     }
 }

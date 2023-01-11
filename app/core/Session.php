@@ -24,10 +24,10 @@ class Session {
      * @param  string $value
      * @return void
      */
-    public function setFlash(string $key,string $message ) {
+    public function setFlash( string $key, string $message ) {
         $_SESSION[self::$FLASH_KEY][$key] = [
-            'remove' => false,
-            'message'  => $message,
+            'remove'  => false,
+            'message' => $message,
         ];
     }
 
@@ -37,7 +37,7 @@ class Session {
      * @param  string $key
      * @return string
      */
-    public function getFlush(string $key ) {
+    public function getFlush( string $key ) {
         return $_SESSION[self::$FLASH_KEY][$key]['message'] ?? false;
     }
 

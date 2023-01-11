@@ -14,16 +14,18 @@ class AuthController extends Controller {
      *
      * @return string
      */
-    public function login(Request $request) {
+    public function login( Request $request ) {
         $login = new Login();
-        if ($request->isPost()) {
+
+        if ( $request->isPost() ) {
             $login->loadData();
-            if ($login->validate() && $login->login()) {
+
+            if ( $login->validate() && $login->login() ) {
                 $this->redirect('/');
             }
         }
         $this->setLayout( 'auth' );
-        return $this->view( 'login' );
+        return $this->view( 'login', ['model' => $login] );
     }
 
     /**
@@ -38,8 +40,8 @@ class AuthController extends Controller {
         if ( $request->isPost() ) {
             $users->loadData();
             if ( $users->validate() && $users->save() ) {
-                $this->setFlush('success' , 'Thanks for registration');
-                $this->redirect('/');
+                $this->setFlush( 'success', 'Thanks for registration' );
+                $this->redirect( '/' );
             }
         }
 
