@@ -1,6 +1,4 @@
-<?php
-use App\Core\Application;
-?>
+<?php use App\Core\Application;?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -29,6 +27,7 @@ use App\Core\Application;
         </li>
       </ul>
     </div>
+    <?php if ( Application::$app->isGuest() ): ?>
     <div class="collapse navbar-collapse ml-auto" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
@@ -39,6 +38,20 @@ use App\Core\Application;
         </li>
       </ul>
     </div>
+    <?php else: ?>
+      <div class="collapse navbar-collapse ml-auto" id="navbarNav">
+
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="">Welcome
+          <?= Application::$app->session->get( 'user' )->fullName ?></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/logout">Logout</a>
+        </li>
+      </ul>
+    </div>
+    <?php endif;?>
   </div>
 </nav>
     <div class="container">

@@ -48,7 +48,7 @@ class Session {
      * @param  array|string|int $value
      * @return void
      */
-    public function set( string $key, array | string | int $value ) {
+    public function set( string $key, array | string | int | object $value ) {
         $_SESSION[$key] = $value;
     }
 
@@ -59,7 +59,17 @@ class Session {
      * @return array|string|int
      */
     public function get( string $key ) {
-        return $_SESSION[$key];
+        return $_SESSION[$key] ?? false;
+    }
+
+    /**
+     * This method remove specific session value.
+     *
+     * @param  string $key
+     * @return void
+     */
+    public function remove( string $key ) {
+        unset( $_SESSION[$key] );
     }
 
     /**

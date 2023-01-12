@@ -6,8 +6,8 @@ use App\Helpers\RULE;
 
 class Users extends DbModel {
 
-    protected $tableName = 'users';
-    public string $primaryKey = 'id';
+    protected string $tableName = 'users';
+    public string $primaryKey   = 'id';
 
     public String $fullName        = '';
     public String $email           = '';
@@ -18,7 +18,7 @@ class Users extends DbModel {
     public function columnName() {
         $this->password = password_hash( $this->password, PASSWORD_DEFAULT );
         return [
-            'fullName', 'email', 'password', 'status'
+            'fullName', 'email', 'password', 'status',
         ];
     }
     /**
