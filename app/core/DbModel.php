@@ -5,7 +5,8 @@ namespace App\Core;
 use App\Core\Model;
 
 abstract class DbModel extends Model {
-    protected $tableName;
+    protected string $tableName;
+    public string $primaryKey;
 
     abstract public function columnName();
 
@@ -41,13 +42,7 @@ abstract class DbModel extends Model {
         foreach ( $where as $key => $item ) {
             $Statement->bindValue( ":{$key}", $item );
         }
-
         $Statement->execute();
-        echo '<pre>';
-        var_dump( $Statement->fetchObject(__CLASS__));
-        echo '</pre>';
-        exit;
-        return $Statement->fetchObject( static::class );
-
+        return $Statement->fetchObject(static::class);
     }
 }

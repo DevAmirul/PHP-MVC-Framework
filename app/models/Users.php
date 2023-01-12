@@ -7,6 +7,7 @@ use App\Helpers\RULE;
 class Users extends DbModel {
 
     protected $tableName = 'users';
+    public string $primaryKey = 'id';
 
     public String $fullName        = '';
     public String $email           = '';

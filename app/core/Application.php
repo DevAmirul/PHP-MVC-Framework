@@ -12,6 +12,7 @@ class Application {
     public Controller $controller;
     public Database $db;
     public Session $session;
+    public ?DbModel $user;
 
     /**
      * Application __construct function
@@ -34,5 +35,11 @@ class Application {
      */
     public function run() {
         echo $this->router->resolve();
+    }
+
+    public function login(DbModel $user )
+    {
+        $this->user =$user;
+        $this->session->set('user', $user->primaryKey);
     }
 }

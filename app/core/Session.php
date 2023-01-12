@@ -42,6 +42,27 @@ class Session {
     }
 
     /**
+     * This method used to set session value.
+     *
+     * @param  string            $key
+     * @param  array|string|int $value
+     * @return void
+     */
+    public function set( string $key, array | string | int $value ) {
+        $_SESSION[$key] = $value;
+    }
+
+    /**
+     * This method return specific session value.
+     *
+     * @param  string $key
+     * @return array|string|int
+     */
+    public function get( string $key ) {
+        return $_SESSION[$key];
+    }
+
+    /**
      * This __destruct method remove flash session.
      * @return void
      */

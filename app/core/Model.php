@@ -3,6 +3,7 @@
 namespace App\Core;
 
 use App\Helpers\RULE;
+use Error;
 
 abstract class Model {
 
@@ -116,6 +117,7 @@ abstract class Model {
      * @return array|bool
      */
     public function getError( string $attribute ) {
+
         return $this->Error[$attribute][0] ?? false;
     }
 }
