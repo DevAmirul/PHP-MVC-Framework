@@ -8,7 +8,8 @@
             "App\\Core\\Form\\": "app/core/form",
             "App\\Controllers\\": "app/controllers",
             "App\\Models\\": "app/models",
-            "App\\Helpers\\": "app/helpers"
+            "App\\Helpers\\": "app/helpers",
+            "App\\Core\\Middleware\\": "app/core/middleware"
         }
     },
     "authors": [

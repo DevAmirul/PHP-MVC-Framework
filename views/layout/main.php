@@ -43,8 +43,8 @@
 
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="">Welcome
-          <?= Application::$app->session->get( 'user' )->fullName ?></a>
+          <a class="nav-link" href="/profile">
+          <?= Application::$app->session->get( 'user' )->fullName ?> Profile</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/logout">Logout</a>

@@ -3,11 +3,16 @@
 namespace App\Controllers;
 
 use App\Core\Controller;
+use App\Core\Middleware\AuthMiddleware;
 use App\Core\Request;
 use App\Models\Login;
 use App\Models\Users;
 
 class AuthController extends Controller {
+
+    public function __construct(){
+        $this->registerMiddleware(new AuthMiddleware(['profile']));
+    }
 
     /**
      * login controller function
@@ -21,7 +26,7 @@ class AuthController extends Controller {
             $login->loadData();
 
             if ( $login->validate() && $login->login() ) {
-                $this->redirect('/');
+                $this->redirect( '/' );
             }
         }
         $this->setLayout( 'auth' );
@@ -48,5 +53,9 @@ class AuthController extends Controller {
         $this->setLayout( 'auth' );
         return $this->view( 'register', ['model' => $users] );
 
+    }
+
+    public function profile() {
+        return $this->view( 'profile' );
     }
 }

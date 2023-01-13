@@ -3,10 +3,16 @@
 namespace App\Core;
 
 use App\Core\Application;
+use App\Core\Middleware\BaseMiddleware;
 
 class Controller {
 
     public String $layout = 'main';
+
+    /**
+     * @var App\Core\Middleware\BaseMiddleware
+     */
+    protected array $middleware = [];
 
     /**
      * Set html layout file name in this function
@@ -46,5 +52,25 @@ class Controller {
      */
     protected function setFlush( $key, $message ) {
         return Application::$app->session->setFlash( $key, $message );
+    }
+
+    /**
+     * Here Register middleware
+     *
+     * @param  BaseMiddleware $middleware
+     * @return void
+     */
+    public function registerMiddleware( BaseMiddleware $middleware ) {
+        $this->middleware[] = $middleware;
+    }
+
+    /**
+     * Middleware getters
+     *
+     * @return array
+     */
+    public function getMiddleware()
+    {
+        return $this->middleware;
     }
 }

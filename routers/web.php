@@ -25,3 +25,5 @@ $app->router->post( '/logout', [AuthController::class, 'logout'] );
 
 $app->router->get( '/register', [AuthController::class, 'registration'] );
 $app->router->post( '/register', [AuthController::class, 'registration'] );
+
+$app->router->get( '/profile', [AuthController::class, 'profile'] );
