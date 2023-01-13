@@ -2,14 +2,8 @@
 
 namespace App\Core\Middleware;
 
-use App\Core\Application;
+abstract class BaseMiddleware {
 
-class BaseMiddleware {
+    abstract public function execute();
 
-    public function execute()
-    {
-        if (Application::$app->isGuest()) {
-
-        }
-    }
 }

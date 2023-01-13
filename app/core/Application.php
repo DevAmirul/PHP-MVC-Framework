@@ -42,7 +42,12 @@ class Application {
      * Application run start from this function.
      */
     public function run() {
-        echo $this->router->resolve();
+        try {
+            echo $this->router->resolve();
+        } catch ( \Exception $error ) {
+            $this->response->setHttpStatusCode( $error->getCode() );
+            echo $this->router->View( 'error/errorPage' , ['exception'=>$error]);
+        }
     }
 
     public function login( DbModel $user ) {

@@ -35,6 +35,6 @@ class Login extends DbModel {
         }
 
         return Application::$app->login( $user );
-
     }
+
 }

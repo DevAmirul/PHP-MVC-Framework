@@ -8,6 +8,7 @@ use App\Core\Middleware\BaseMiddleware;
 class Controller {
 
     public String $layout = 'main';
+    public string $action = '';
 
     /**
      * @var App\Core\Middleware\BaseMiddleware

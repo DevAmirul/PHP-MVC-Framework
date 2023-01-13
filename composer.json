@@ -9,7 +9,8 @@
             "App\\Controllers\\": "app/controllers",
             "App\\Models\\": "app/models",
             "App\\Helpers\\": "app/helpers",
-            "App\\Core\\Middleware\\": "app/core/middleware"
+            "App\\Core\\Middleware\\": "app/core/middleware",
+            "App\\Core\\Exception\\": "app/core/exception"
         }
     },
     "authors": [
