@@ -2,8 +2,7 @@
 
 namespace App\Core;
 
-use App\Helpers\RULE;
-use Error;
+use App\Enums\RULE;
 
 abstract class Model {
 
@@ -45,10 +44,10 @@ abstract class Model {
 
         foreach ( $this->rules() as $key => $value ) {
             if ( $this->Error[$key][0] ) {
-                $CountError ++;
+                $CountError++;
             }
         }
-        return ($CountError === 0) ? true : false ;
+        return ( $CountError === 0 ) ? true : false;
     }
 
     /**

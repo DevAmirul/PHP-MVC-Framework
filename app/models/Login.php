@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Core\Application;
 use App\Core\DbModel;
-use App\Helpers\RULE;
+use App\Enums\RULE;
 
 class Login extends DbModel {
 

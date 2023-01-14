@@ -4,7 +4,7 @@ namespace App\Core;
 
 class Database {
 
-    public \PDO $pdo;
+    public \PDO$pdo;
 
     public function __construct( array $dbConfig ) {
         $dsn      = $dbConfig['dsn'] ?? '';
@@ -42,8 +42,8 @@ class Database {
 
             $className = pathinfo( $migration, PATHINFO_FILENAME );
 
-            $instance          = new $className;
-            $tableColumArray   = $instance->up( $this->pdo );
+            $classInstance     = new $className;
+            $tableColumArray   = $classInstance->up();
             $createTableReturn = $this->createTableSqlStatement( $tableColumArray, $className );
 
             if ( $createTableReturn ) {
@@ -78,10 +78,10 @@ class Database {
      * @return void
      */
     public function getAppliedMigrations() {
-        $sqlStatement = $this->pdo->prepare( "SELECT migration FROM migrations" );
-        $sqlStatement->execute();
-
-        return $sqlStatement->fetchAll( \PDO::FETCH_COLUMN );
+        if ( $sqlStatement = $this->pdo->prepare( "SELECT migration FROM migrations" ) ) {;
+            $sqlStatement->execute();
+        }
+        return $sqlStatement->fetchAll( \PDO::FETCH_COLUMN ) ?? false;
 
     }
 
@@ -117,7 +117,7 @@ class Database {
         $sqlStatement = "CREATE TABLE {$className} ( {$constraintsStatement} ) ENGINE=INNODB;";
 
         if ( !$this->pdo->exec( $sqlStatement ) ) {
-            $this->output( 'Created table name - ' . $className );
+            $this->output( 'Created table name - ' . $className . ' table' );
             return true;
         } else {
             $this->output( $className . ' - could not be created' );
@@ -125,16 +125,24 @@ class Database {
         }
     }
 
-    private function dropTableSqlStatement( string $className ) {
-        $className = substr( $className, 5 );
-
-        $sqlStatement = "DROP TABLE {$className}";
-        if ( !$this->pdo->exec( $sqlStatement ) ) {
-            $this->output( 'Deleted table name - ' . $className );
-            return true;
+    public function dropMigrations() {
+        if ( $migratedTableName = $this->getAppliedMigrations() ) {
+            $migratedTableName = ['m000_migrations', ...$migratedTableName];
+            foreach ( $migratedTableName as $tableName ) {
+                if ( $tableName === '.' || $tableName === '..' ) {
+                    continue;
+                }
+                $tableName    = pathinfo( $tableName, PATHINFO_FILENAME );
+                $tableName    = substr( $tableName, 5 );
+                $sqlStatement = "DROP TABLE {$tableName}";
+                if ( !$this->pdo->exec( $sqlStatement ) ) {
+                    $this->output( 'Deleted table name - ' . $tableName . ' table' );
+                } else {
+                    $this->output( $tableName . ' - could not be deleted' );
+                }
+            }
         } else {
-            $this->output( $className . ' - could not be deleted' );
-            return false;
+            $this->output( 'No tables found' );
         }
     }
 }

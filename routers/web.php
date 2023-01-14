@@ -3,7 +3,6 @@
 namespace Routes;
 
 use App\Controllers\AuthController;
-use App\Controllers\SiteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +14,7 @@ use App\Controllers\SiteController;
  */
 
 $app->router->get( '/', 'home' );
-
-$app->router->get( '/contact', [SiteController::class, 'showContact'] );
-$app->router->post( '/contact', [SiteController::class, 'handelContact'] );
+$app->router->get( '/aboutUs', 'aboutUs' );
 
 $app->router->get( '/login', [AuthController::class, 'login'] );
 $app->router->post( '/login', [AuthController::class, 'login'] );

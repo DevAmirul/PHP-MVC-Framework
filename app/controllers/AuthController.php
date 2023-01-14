@@ -11,9 +11,9 @@ use App\Models\Users;
 
 class AuthController extends Controller {
 
-    public function __construct() {
-        $this->registerMiddleware( new AuthMiddleware( ['profile'] ) );
-    }
+    // public function __construct() {
+    //     $this->registerMiddleware( new AuthMiddleware( ['profile'] ) );
+    // }
 
     /**
      * login controller function

@@ -2,7 +2,7 @@
 namespace App\Models;
 
 use App\Core\DbModel;
-use App\Helpers\RULE;
+use App\Enums\RULE;
 
 class Users extends DbModel {
 

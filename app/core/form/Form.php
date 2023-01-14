@@ -6,7 +6,7 @@ use App\Core\Model;
 
 class Form {
 
-    public $model;
+    public Model $model;
 
     public function __construct( Model $model ) {
         $this->model = $model;
@@ -42,10 +42,11 @@ class Form {
         );
     }
 
-    public function submit( string | null $class = null ) {
+    public function submit( string | null $class = null, string $text, ) {
         return sprintf(
-            '<button type="submit" class="btn btn-primary %s">Submit</button>',
-            $class
+            '<button type="submit" class="btn btn-primary %s">%s</button>',
+            $class,
+            $text
         );
 
     }

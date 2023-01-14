@@ -10,7 +10,6 @@ define( 'ROOT_DIR_PATH', ( __DIR__ ) );
 
 require_once ROOT_DIR_PATH . '/vendor/autoload.php';
 
-
 /**
  * load .env file.
  */
@@ -34,6 +33,6 @@ $app = new Application( ROOT_DIR_PATH, $config );
  * Here starting run whole Application.
  */
 
-$app->db->applyMigrations();
+$app->db->dropMigrations();
 
 ?>

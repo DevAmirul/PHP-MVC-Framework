@@ -17,14 +17,4 @@ class m001_users {
             ['created_at', 'TIMESTAMP', 'DEFAULT', 'CURRENT_TIMESTAMP'],
         ];
     }
-
-    /**
-     * Undocumented function
-     *
-     * @return void
-     */
-    public function down() {
-        // $sql = "DROP TABLE user";
-        // $pdo->exec( $sql );
-    }
 }

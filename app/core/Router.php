@@ -66,8 +66,9 @@ class Router {
             $controller->action           = $callback[1];
             $callback[0]                  = $controller;
 
-            //execute middleware
-            foreach ( $controller->getMiddleware() as $middleware ) {
+            //execute middleware method.
+            $allMiddleware = Application::$app->registerMiddleware->registerMiddleware();
+            foreach ( $allMiddleware as $middleware ) {
                 $middleware->execute();
             }
         }
@@ -82,42 +83,7 @@ class Router {
      * @return string
      */
     public function View( string $view, array $params = [] ) {
-        $layoutContent = $this->layoutContent();
-        $viewContent   = $this->renderOnlyView( $view, $params );
-
-        return str_replace( '{{content}}', $viewContent, $layoutContent );
-    }
-
-    /**
-     * This method Set and include main layout name
-     * then send view() method
-     *
-     * @return string
-     */
-    protected function layoutContent() {
-        $layout = Application::$app->controller->layout ?? 'main';
-
-        ob_start();
-        include_once Application::$ROOT_DIR_PATH . "/views/layout/$layout.php";
-        return ob_get_clean();
-    }
-
-    /**
-     * This method include html content Based on user's needs
-     * then send view() method
-     *
-     * @param string $view
-     * @param array $params
-     * @return string
-     */
-    protected function renderOnlyView( $view, $params ) {
-        foreach ( $params as $key => $value ) {
-            $$key = $value;
-        }
-
-        ob_start();
-        include_once Application::$ROOT_DIR_PATH . "/views/$view.php";
-        return ob_get_clean();
+        return Application::$app->view->View( $view, $params );
     }
 
     /**

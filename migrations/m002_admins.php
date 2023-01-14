@@ -17,12 +17,4 @@ class m002_admins {
             ['created_at', 'TIMESTAMP', 'DEFAULT', 'CURRENT_TIMESTAMP'],
         ];
     }
-
-    /**
-     * Undocumented function
-     *
-     * @return void
-     */
-    public function down( $pdo ) {
-    }
 }
