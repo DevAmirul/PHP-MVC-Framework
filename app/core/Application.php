@@ -17,7 +17,6 @@ class Application {
     public Database $db;
     public Session $session;
     public RegisterMiddleware $registerMiddleware;
-    public  ? DbModel $user;
 
     /**
      * Application __construct function
@@ -34,15 +33,6 @@ class Application {
         $this->db                 = new Database( $config['db'] );
         $this->session            = new Session();
         $this->registerMiddleware = new RegisterMiddleware();
-        
-        // $this->userClass     = $config['userClass'];
-        // $cla                 = new $this->userClass();
-        // $primaryValue        = $this->session->get( 'user' );
-        // if ( $primaryValue ) {
-        //     $primaryKey = $cla->primaryKey;
-        //     $this->user = $cla->findOne( [$primaryKey => $primaryValue] );
-        // }
-
     }
 
     /**
@@ -57,17 +47,7 @@ class Application {
         }
     }
 
-    public function login( DbModel $user ) {
-        $this->session->set( 'user', $user );
-        return true;
-    }
-
-    public function logout( string $key ) {
-        $this->user = null;
-        $this->session->remove( $key );
-    }
-
-    public function isGuest() {
-        return ( $this->session->get( 'user' ) ) ? false : true;
+    public function isGuest( $user = 'user' ) {
+        return ( $this->session->get( $user ) ) ? false : true;
     }
 }

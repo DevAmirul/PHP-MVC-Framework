@@ -6,7 +6,7 @@
 
 use App\Core\Application;
 
-define( 'ROOT_DIR_PATH', ( __DIR__ ) );
+define( 'ROOT_DIR_PATH', ( dirname(__DIR__) ) );
 
 require_once ROOT_DIR_PATH . '/vendor/autoload.php';
 

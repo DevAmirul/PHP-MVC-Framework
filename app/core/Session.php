@@ -73,7 +73,7 @@ class Session {
     }
 
     /**
-     * This __destruct method remove flash session.
+     * This __destruct method removes all flash sessions.
      * @return void
      */
     public function __destruct() {

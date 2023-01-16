@@ -4,22 +4,12 @@ namespace App\Controllers;
 
 use App\Core\Application;
 use App\Core\Controller;
-use App\Core\Middleware\AuthMiddleware;
 use App\Core\Request;
 use App\Models\Login;
 use App\Models\Users;
 
 class AuthController extends Controller {
 
-    // public function __construct() {
-    //     $this->registerMiddleware( new AuthMiddleware( ['profile'] ) );
-    // }
-
-    /**
-     * login controller function
-     *
-     * @return string
-     */
     public function login( Request $request ) {
         $login = new Login();
 
@@ -36,16 +26,12 @@ class AuthController extends Controller {
 
 
     public function logout() {
-        Application::$app->logout( 'user' );
+        $login = new Login();
+        $login->logoutModel('user');
         $this->redirect('/');
     }
 
-    /**
-     * registration controller function
-     *
-     * @param  Request $request
-     * @return void
-     */
+
     public function registration( Request $request ) {
 
         $users = new Users();

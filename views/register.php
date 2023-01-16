@@ -1,5 +1,5 @@
 <?php
-$form = new App\Core\Form\Form( $model );
+$form = new App\Core\FormTemplate\Form( $model );
 
 $this->title = 'Register';
 ?>

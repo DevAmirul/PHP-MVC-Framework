@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Core\Application;
 use App\Core\DbModel;
 use App\Enums\RULE;
 
@@ -11,9 +10,7 @@ class Login extends DbModel {
     public string $email    = '';
     public string $password = '';
 
-    public function columnName() {
-
-    }
+    public function columnName() {}
 
     public function rules() {
         return [
@@ -27,14 +24,14 @@ class Login extends DbModel {
         $user  = $users->findOne( ['email' => "$this->email"] );
 
         if ( !$user ) {
-            $this->Error['email'][0] = 'User does not exist with this email';
+            $this->Error['email'] = 'User does not exist with this email';
             return false;
         } elseif ( !password_verify( $this->password, $user->password ) ) {
-            $this->Error['password'][0] = 'password is incorrect';
+            $this->Error['password'] = 'Password is incorrect';
             return false;
         }
 
-        return Application::$app->login( $user );
+        return $this->loginModel( 'user', $user );
     }
 
 }

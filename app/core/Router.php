@@ -87,7 +87,7 @@ class Router {
     }
 
     /**
-     * This method redirect any page.
+     * Use this method to redirect any page.
      *
      * @param  string $redirectLink
      * @return void

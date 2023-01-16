@@ -42,8 +42,6 @@ class Controller {
 
     /**
      * This method call original setFlush method from Application::$app->session class.
-     *
-     * @return void
      */
     protected function setFlush( $key, $message ) {
         return Application::$app->session->setFlash( $key, $message );

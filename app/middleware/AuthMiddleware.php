@@ -14,6 +14,11 @@ class AuthMiddleware extends BaseMiddleware {
         $this->actions = $actions;
     }
 
+    /**
+     * this method execute middleware and throw new error.
+     *
+     * @return error object
+     */
     public function execute() {
         if ( Application::$app->isGuest() ) {
             if ( in_array( Application::$app->controller->action, $this->actions ) ) {

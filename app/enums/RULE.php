@@ -4,7 +4,7 @@ namespace App\Enums;
 
 /**
  * RULE enum
- * this enum work for user input validation rules
+ * This enum work for user input validation rules
  */
 
 enum RULE {

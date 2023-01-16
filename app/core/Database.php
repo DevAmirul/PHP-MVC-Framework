@@ -21,7 +21,7 @@ class Database {
     }
 
     /**
-     * This method main migration method.
+     * This is the main migration method.
      *
      * @return void
      */
@@ -56,11 +56,10 @@ class Database {
         } else {
             $this->output( 'All migration are applied' );
         }
-
     }
 
     /**
-     * Undocumented function
+     * This method create migrations table.
      *
      * @return void
      */
@@ -73,9 +72,9 @@ class Database {
     }
 
     /**
-     * Undocumented function
+     * This method fetch all migrated table name from migrations table.
      *
-     * @return void
+     * @return array
      */
     public function getAppliedMigrations() {
         if ( $sqlStatement = $this->pdo->prepare( "SELECT migration FROM migrations" ) ) {;
@@ -86,7 +85,7 @@ class Database {
     }
 
     /**
-     * Undocumented function
+     * This method save migrated table name to migrations table migration column.
      *
      * @param  array $newMigrationsList
      * @return void
@@ -95,15 +94,25 @@ class Database {
         $migrationListStr = implode( "'), ('", $newMigrationsList );
 
         $sqlStatement = $this->pdo->prepare( "INSERT INTO migrations (migration) VALUES( '$migrationListStr' )" );
-
         $sqlStatement->execute();
-
     }
-
+    /**
+     * This method print migrations-CLI output.
+     *
+     * @param  string $outputStr
+     * @return void
+     */
     private function output( string $outputStr ) {
         echo $outputStr . PHP_EOL;
     }
 
+    /**
+     * This method create sql table statement and execute that sql statement.
+     *
+     * @param  array  $tableColumArray
+     * @param  string $className
+     * @return bool
+     */
     private function createTableSqlStatement( array $tableColumArray, string $className ) {
         $constraintsStrArray = [];
 
@@ -125,6 +134,11 @@ class Database {
         }
     }
 
+    /**
+     * This method drop all migrated table,and clear database.
+     *
+     * @return void
+     */
     public function dropMigrations() {
         if ( $migratedTableName = $this->getAppliedMigrations() ) {
             $migratedTableName = ['m000_migrations', ...$migratedTableName];
@@ -142,7 +156,7 @@ class Database {
                 }
             }
         } else {
-            $this->output( 'No tables found' );
+            $this->output( 'No table found' );
         }
     }
 }

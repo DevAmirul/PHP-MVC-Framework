@@ -6,7 +6,7 @@
         "psr-4": {
             "App\\": "app",
             "App\\Core\\": "app/core",
-            "App\\Core\\Form\\": "app/core/form",
+            "App\\Core\\FormTemplate\\": "app/core/formTemplate",
             "App\\Controllers\\": "app/controllers",
             "App\\Models\\": "app/models",
             "App\\Enums\\": "app/enums",

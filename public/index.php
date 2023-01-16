@@ -5,7 +5,6 @@
  * @copyright 2022 Amirul
  */
 
-
 /**
  * Define root directory.
  */
@@ -15,8 +14,6 @@ require_once ROOT_DIR_PATH . '/vendor/autoload.php';
 
 use App\Core\Application;
 
-
-
 /**
  * load .env file.
  */
@@ -24,7 +21,6 @@ $dotenv = Dotenv\Dotenv::createImmutable( ROOT_DIR_PATH );
 $dotenv->load();
 
 $config = [
-    'userClass' => App\Models\Users::class,
     'db' => [
         'dsn'      => $_ENV['DB_DSN'],
         'user'     => $_ENV['DB_USER'],
@@ -46,6 +42,3 @@ require_once ROOT_DIR_PATH . '/routers/web.php';
  * Here starting run whole Application.
  */
 $app->run();
-
-
-?>

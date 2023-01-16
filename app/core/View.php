@@ -7,7 +7,7 @@ class View {
     public string $title = '';
 
     /**
-     * This view() method render and view html page in front you
+     * This view() method render and view html page in front you.
      *
      * @param  string $view
      * @param  array  $params
@@ -21,8 +21,7 @@ class View {
     }
 
     /**
-     * This method Set and include main layout name
-     * then send view() method
+     * This method Set and include main layout name, then send view() method.
      *
      * @return string
      */
@@ -35,8 +34,7 @@ class View {
     }
 
     /**
-     * This method include html content Based on user's needs
-     * then send view() method
+     * This method include html content Based on user's needs then send view() method.
      *
      * @param string $view
      * @param array $params

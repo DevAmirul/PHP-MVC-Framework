@@ -3,9 +3,9 @@
 class m001_users {
 
     /**
-     * Undocumented function
+     * This up() method return table sql attribute to database class.
      *
-     * @return void
+     * @return array
      */
     public function up() {
         return [

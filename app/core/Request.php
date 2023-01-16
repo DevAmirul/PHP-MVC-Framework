@@ -5,7 +5,7 @@ namespace App\Core;
 class Request {
 
     /**
-     * This function return user input path after remove all param and query
+     * This function return user input path after remove all param and query.
      *
      * @return string
      */
@@ -21,7 +21,7 @@ class Request {
     }
 
     /**
-     * This function return user input method
+     * This function return user input method.
      *
      * @return string
      */
@@ -30,7 +30,7 @@ class Request {
     }
 
     /**
-     * This function checks and returns whether the method is GET
+     * This function checks and returns whether the method is GET.
      *
      * @return string
      */
@@ -39,7 +39,7 @@ class Request {
     }
 
     /**
-     * This function checks and returns whether the method is POST
+     * This function checks and returns whether the method is POST.
      *
      * @return string
      */
@@ -48,8 +48,8 @@ class Request {
     }
 
     /**
-     * This function checks and returns whether input data valid or not
-     * 
+     * This function checks and returns whether input data valid or not.
+     *
      * @return array
      */
     public function getBody() {

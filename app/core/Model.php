@@ -38,12 +38,12 @@ abstract class Model {
             $propertyValue = $this->$attributes;
 
             foreach ( $rules as $rule ) {
-                $this->Error[$attributes][] = $this->checkRules( $propertyValue, $rule, $attributes );
+                $this->Error[$attributes] = $this->checkRules( $propertyValue, $rule, $attributes );
             }
         }
 
         foreach ( $this->rules() as $key => $value ) {
-            if ( $this->Error[$key][0] ) {
+            if ( $this->Error[$key] ) {
                 $CountError++;
             }
         }
@@ -116,7 +116,6 @@ abstract class Model {
      * @return array|bool
      */
     public function getError( string $attribute ) {
-
-        return $this->Error[$attribute][0] ?? false;
+        return $this->Error[$attribute] ?? false;
     }
 }

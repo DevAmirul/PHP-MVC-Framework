@@ -5,7 +5,7 @@ namespace App\Core;
 class Response {
 
     /**
-     * This method set http status
+     * This method set http status code
      *
      * @param integer $code
      * @return void
