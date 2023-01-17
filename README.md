@@ -3,7 +3,7 @@ PHP MVC Framework. <br>
 Minimalistic custom framework created for educational purposes.
 
 
-## This is a Tiny PHP MVC Framework, with which a crud application can be built.The framework is not well tested on production. If you use it on production you use it on your own risk.
+## This is my own custom Tiny PHP MVC Framework, with which a crud application can be built.The framework is not well tested on production. If you use it on production you use it on your own risk.
 
 ## This repository is a small crude application built by my own custom tiny PHP framework.
 
