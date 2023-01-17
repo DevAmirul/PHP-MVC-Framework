@@ -20,11 +20,11 @@ class Session {
     /**
      * This method used to set flash message.
      *
-     * @param  string $key
-     * @param  string $value
+     * @param  string|int $key
+     * @param  mixed $message
      * @return void
      */
-    public function setFlash( string $key, string $message ) {
+    public function setFlash( string | int $key, mixed $message ) {
         $_SESSION[self::$FLASH_KEY][$key] = [
             'remove'  => false,
             'message' => $message,
