@@ -5,7 +5,7 @@ Minimalistic custom framework created for educational purposes.
 
 ## This is a Tiny PHP MVC Framework, with which a crud application can be built.The framework is not well tested on production. If you use it on production you use it on your own risk.
 
-## Here is a small crud application created by my own custom tiny php framework.
+## This repository is a small crude application built by my own custom tiny PHP framework.
 
 ----
 ## Installation
