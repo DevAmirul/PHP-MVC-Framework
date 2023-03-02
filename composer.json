@@ -1,6 +1,6 @@
 {
     "name": "DevAmirul/Tiny-MVC-Framework",
-    "description": "This is a tiny PHP MVC framework, with which a crud application can be built.The framework is not well tested on production. If you use it on production you use it on your own risk.",
+    "description": "This is a tiny PHP MVC framework",
     "type": "framework",
     "autoload": {
         "psr-4": {
