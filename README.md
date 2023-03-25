@@ -1,7 +1,7 @@
 # Tiny-MVC-Framework
 Minimalistic tiny php mvc framework created for educational purposes.
 
-## This is a tiny framework made by me.The framework has not been tested in production. I will be working more on this framework in the future. I have followed the MVC pattern here.
+## A small PHP framework developed by me.The framework has not been tested in production. I will be working more on this framework in the future. I have followed the MVC pattern here.
 
 #### This repository is a small crude application built by my own custom tiny PHP framework.
 
