@@ -1,18 +1,24 @@
 {
-    "name": "DevAmirul/Tiny-MVC-Framework",
-    "description": "This is a tiny PHP MVC framework",
-    "type": "framework",
+    "name": "devamirul/php-micro-framework",
+    "description": "php micro mvc framework",
+    "type": "project",
+    "keywords": [
+        "framework",
+        "project"
+    ],
     "autoload": {
+        "files": [
+            "src/core/Helpers/Helper.php"
+        ],
         "psr-4": {
-            "App\\": "app",
-            "App\\Core\\": "app/core",
-            "App\\Core\\FormTemplate\\": "app/core/formTemplate",
-            "App\\Controllers\\": "app/controllers",
-            "App\\Models\\": "app/models",
-            "App\\Enums\\": "app/enums",
-            "App\\Middleware\\": "app/middleware",
-            "App\\Core\\Exception\\": "app/core/exception"
+            "Devamirul\\PhpMicro\\": "src/",
+            "App\\": "app/"
         }
+    },
+    "scripts": {
+        "start": [
+            "php -S 127.0.0.1:8000"
+        ]
     },
     "authors": [
         {
@@ -22,6 +28,7 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "vlucas/phpdotenv": "5.5.x-dev"
+        "vlucas/phpdotenv": "^5.5@dev",
+        "catfan/medoo": "dev-master"
     }
 }

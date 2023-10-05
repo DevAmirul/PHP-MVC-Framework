@@ -2,43 +2,26 @@
 
 /**
  * @author Amirul islam <contact.amirull@gmail.com>
- * @copyright 2022 Amirul
+ * @copyright 2023 Amirul
  */
 
 /**
  * Define root directory.
  */
-define( 'ROOT_DIR_PATH', dirname( __DIR__ ) );
+define('APP_ROOT', dirname(__DIR__));
 
-require_once ROOT_DIR_PATH . '/vendor/autoload.php';
+require_once APP_ROOT . '/vendor/autoload.php';
 
-use App\Core\Application;
-
-/**
- * load .env file.
- */
-$dotenv = Dotenv\Dotenv::createImmutable( ROOT_DIR_PATH );
-$dotenv->load();
-
-$config = [
-    'db' => [
-        'dsn'      => $_ENV['DB_DSN'],
-        'user'     => $_ENV['DB_USER'],
-        'password' => $_ENV['DB_PASSWORD'],
-    ],
-];
+use Devamirul\PhpMicro\core\Foundation\Application\Application;
+use Devamirul\PhpMicro\core\Foundation\Application\Facade\Facades\Router as FacadesRouter;
+use Devamirul\PhpMicro\core\Foundation\Application\Router\Router;
 
 /**
  * Create Application object instance.
  */
-$app = new Application( ROOT_DIR_PATH, $config );
+$app = Application::singleton();
 
-/**
- * include "./../routers/web.php" file for whole Application router.
- */
-require_once ROOT_DIR_PATH . '/routers/web.php';
+require_once APP_ROOT . '/routes/web.php';
 
-/**
- * Here starting run whole Application.
- */
 $app->run();
+
