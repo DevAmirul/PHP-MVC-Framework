@@ -11,7 +11,6 @@ use Devamirul\PhpMicro\core\Foundation\Application\Traits\Singleton;
 class Application {
     use BaseContainer, Singleton, AppContainer, Container;
 
-
     private function __construct() {
         $this->registerAppContainer();
         $this->registerContainer();
@@ -19,16 +18,10 @@ class Application {
     }
 
     public function run() {
-
-        dd(Router::resolve());
+        try {
+            echo Router::resolve();
+        } catch (\Exception $error) {
+            echo $error;
+        }
     }
-
-    // public function run() {
-    //     try {
-    //         echo $this->router->resolve();
-    //     } catch ( \Exception$error ) {
-    //         $this->response->setHttpStatusCode( $error->getCode() );
-    //         echo $this->router->View( 'error/errorPage', ['exception' => $error] );
-    //     }
-    // }
 }

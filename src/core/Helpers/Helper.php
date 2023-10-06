@@ -10,8 +10,8 @@ if (!function_exists('app')) {
 }
 
 if (!function_exists('config')) {
-    function config(string $target, string $key): string | array {
-        $data = require APP_ROOT . "/config/{$target}.php";
+    function config(string $file, string $key): string | array {
+        $data = require APP_ROOT . "/config/{$file}.php";
         if (isset($data[$key])) {
             return $data[$key];
         } else {
@@ -65,16 +65,36 @@ if (!function_exists('session')) {
     }
 }
 
+if (!function_exists('vdd')) {
+    function vdd(mixed $value): void {
+        echo '<pre>';
+        var_dump($value);
+        echo '</pre>';
+    }
+}
+
 if (!function_exists('dd')) {
     function dd(mixed $value): void {
-        var_dump($value);
+        if (is_string($value)) {
+            echo $value;
+        } else {
+            echo '<pre>';
+            print_r($value);
+            echo '</pre>';
+        }
         die();
     }
 }
 
 if (!function_exists('dump')) {
     function dump(mixed $value): void {
-        var_dump($value);
+        if (is_string($value)) {
+            echo $value;
+        } else {
+            echo '<pre>';
+            print_r($value);
+            echo '</pre>';
+        }
     }
 }
 

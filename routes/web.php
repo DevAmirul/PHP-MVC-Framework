@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\HomeController;
+// use App\Http\Controllers\HomeController;
 use Devamirul\PhpMicro\core\Foundation\Application\Facade\Facades\Router;
 
 /*
@@ -12,17 +12,14 @@ use Devamirul\PhpMicro\core\Foundation\Application\Facade\Facades\Router;
 |
  */
 
-Router::get('/', function(){
-    return 'xxx';
+Router::get('/home/:id/user/:name', [App\Http\Controllers\HomeController::class, 'home'])
+// ->where('id', '^\d+$');
+    ->where(['id' => '^\d+$', 'name' => '^\d+$']);
+
+// Router::get('/about/:id', function () {
+//     echo 'from about function';
+// })->middleware('auth')->name('name')->where('id', '[1-9]$');
+
+Router::get('/about/ok', function () {
+    return 'hello';
 });
-
-Router::get('/home', [HomeController::class, 'home']);
-
-// $app->router->get('/login', [AuthController::class, 'login']);
-// $app->router->post('/login', [AuthController::class, 'login']);
-// $app->router->get('/logout', [AuthController::class, 'logout']);
-
-// $app->router->get('/register', [AuthController::class, 'registration']);
-// $app->router->post('/register', [AuthController::class, 'registration']);
-
-// $app->router->get('/profile', [AuthController::class, 'profile']);

@@ -12,14 +12,19 @@ class Request {
     /**
      * This function return user input path after remove all param and query.
      */
-    public function url() {
-        // $path     = $_SERVER['REQUEST_URI'] ?? '/';
-        // $position = strpos($path, '?');
+    public function path() {
+        $url = parse_url($_SERVER['REQUEST_URI']);
+        return trim($url['path']) ?? null;
+    }
 
-        // if ($position === false) return $path;
+    public function fragment() {
+        $url = parse_url($_SERVER['REQUEST_URI']);
+        return trim($url['fragment']) ?? null;
+    }
 
-        // return substr($path, 0, $position);
-        return parse_url($_SERVER['REQUEST_URI']);
+    public function query() {
+        $url = parse_url($_SERVER['REQUEST_URI']);
+        return trim($url['query']) ?? null;
     }
 
     /**
