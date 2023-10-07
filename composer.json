@@ -8,7 +8,9 @@
     ],
     "autoload": {
         "files": [
-            "src/core/Helpers/Helper.php"
+            "src/core/Helpers/GeneralHelper.php",
+            "src/core/Helpers/RequestHelper.php",
+            "src/core/Helpers/ResponseHelper.php"
         ],
         "psr-4": {
             "Devamirul\\PhpMicro\\": "src/",

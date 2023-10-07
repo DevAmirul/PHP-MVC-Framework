@@ -35,30 +35,6 @@ if (!function_exists('db')) {
     }
 }
 
-if (!function_exists('request')) {
-    function request(string $key, string $value): void {
-
-    }
-}
-
-if (!function_exists('redirect')) {
-    function redirect(string $redirectLink) {
-        header('Location: ' . $redirectLink);
-    }
-}
-
-if (!function_exists('response')) {
-    function response(int $code): void {
-        http_response_code($code);
-    }
-}
-
-if (!function_exists('app')) {
-    function app(string $key, string $value): void {
-
-    }
-}
-
 if (!function_exists('session')) {
     function session(string $key, string $value): void {
 
@@ -98,9 +74,4 @@ if (!function_exists('dump')) {
     }
 }
 
-if (!function_exists('abort')) {
-    function abort(int $code = 404): void {
-        response($code);
-        redirect('');
-    }
-}
+

@@ -9,5 +9,7 @@ return array(
     '320cde22f66dd4f5d3fd621d3e88b98f' => $vendorDir . '/symfony/polyfill-ctype/bootstrap.php',
     '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => $vendorDir . '/symfony/polyfill-mbstring/bootstrap.php',
     'a4a119a56e50fbb293281d9a48007e0e' => $vendorDir . '/symfony/polyfill-php80/bootstrap.php',
-    '1556f5526507412bf02bbfebb7b6a4c9' => $baseDir . '/src/core/Helpers/Helper.php',
+    '4d8f513a739e413cce6da4db01116d46' => $baseDir . '/src/core/Helpers/GeneralHelper.php',
+    '288c541863dae26eff949dd68b2d5a8e' => $baseDir . '/src/core/Helpers/RequestHelper.php',
+    'b5efb4726c1b4ddb3a6dfca47dc0d4be' => $baseDir . '/src/core/Helpers/ResponseHelper.php',
 );

@@ -4,7 +4,9 @@ namespace Devamirul\PhpMicro\core\Foundation\Application\Container;
 
 use Devamirul\PhpMicro\core\Foundation\Application\Application;
 use Devamirul\PhpMicro\core\Foundation\Application\Request\Request;
-use Devamirul\PhpMicro\core\Foundation\Application\Router\Router;
+use Devamirul\PhpMicro\core\Foundation\Router\Router;
+use Devamirul\PhpMicro\core\Foundation\Session\FlushMessage;
+use Devamirul\PhpMicro\core\Foundation\Session\Session;
 
 trait AppContainer {
 
@@ -21,9 +23,13 @@ trait AppContainer {
             return Application::singleton();
         });
 
-        // $this->bind('Session', function () {
-        //     return Session::singleton();
-        // });
+        $this->bind('Session', function () {
+            return Session::singleton();
+        });
+
+        $this->bind('Flush', function () {
+            return FlushMessage::singleton();
+        });
 
     }
 }
