@@ -31,6 +31,10 @@ class ComposerStaticInita1932bd67bb3d4f87ee188e57d44127b
         array (
             'Medoo\\' => 6,
         ),
+        'I' => 
+        array (
+            'ICanBoogie\\' => 11,
+        ),
         'G' => 
         array (
             'GrahamCampbell\\ResultType\\' => 26,
@@ -70,6 +74,10 @@ class ComposerStaticInita1932bd67bb3d4f87ee188e57d44127b
         'Medoo\\' => 
         array (
             0 => __DIR__ . '/..' . '/catfan/medoo/src',
+        ),
+        'ICanBoogie\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/icanboogie/datetime/lib',
         ),
         'GrahamCampbell\\ResultType\\' => 
         array (

@@ -11,6 +11,7 @@ return array(
     'Symfony\\Polyfill\\Ctype\\' => array($vendorDir . '/symfony/polyfill-ctype'),
     'PhpOption\\' => array($vendorDir . '/phpoption/phpoption/src/PhpOption'),
     'Medoo\\' => array($vendorDir . '/catfan/medoo/src'),
+    'ICanBoogie\\' => array($vendorDir . '/icanboogie/datetime/lib'),
     'GrahamCampbell\\ResultType\\' => array($vendorDir . '/graham-campbell/result-type/src'),
     'Form\\' => array($vendorDir . '/rlanvin/php-form/src'),
     'Dotenv\\' => array($vendorDir . '/vlucas/phpdotenv/src'),

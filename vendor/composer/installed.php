@@ -3,7 +3,7 @@
         'name' => 'devamirul/php-micro-framework',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '003f8a8098a5c482006d209834eee568c6f22a47',
+        'reference' => '596b02ef310a76c8d5160e69ebc3c853927724fb',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -24,7 +24,7 @@
         'devamirul/php-micro-framework' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '003f8a8098a5c482006d209834eee568c6f22a47',
+            'reference' => '596b02ef310a76c8d5160e69ebc3c853927724fb',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -37,6 +37,17 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../graham-campbell/result-type',
             'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'icanboogie/datetime' => array(
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => '57478fb233e2f26dda7c565644fff7b938629c69',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../icanboogie/datetime',
+            'aliases' => array(
+                0 => '9999999-dev',
+            ),
             'dev_requirement' => false,
         ),
         'phpoption/phpoption' => array(
