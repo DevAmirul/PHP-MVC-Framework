@@ -23,4 +23,10 @@ class Session extends AbstractSession{
     public function delete(string $key): void {
         unset($_SESSION[$key]);
     }
+
+    public function has(string $key): bool {
+        if (isset($_SESSION[$key])) return true;
+
+        else return false;
+    }
 }

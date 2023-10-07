@@ -2,13 +2,13 @@
 
 namespace App\Http\Middleware;
 
-use Devamirul\PhpMicro\core\Foundation\Middleware\MiddlewareInterface;
+use Devamirul\PhpMicro\core\Foundation\Middleware\Interface\Middleware;
 
-class AuthMiddleware implements MiddlewareInterface {
+class AuthMiddleware implements Middleware {
 
     public function handle() {
-        // dd('auth middleware');
-        return;
+        dd('auth middleware');
+        // return;
 
     }
 }

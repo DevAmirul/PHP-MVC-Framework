@@ -18,21 +18,38 @@ if (!function_exists('delete')) {
     }
 }
 
-if (!function_exists('csrf')) {
-    function csrf(): void {
-        if (!isset($_SESSION["csrf"])) {
-            $_SESSION["csrf"] = bin2hex(random_bytes(50));
+if (!function_exists('setCsrf')) {
+    function setCsrf(): string {
+        if (!session()->has('csrf')) {
+            session()->set('csrf', bin2hex(random_bytes(50)));
         }
-        echo '<input type="hidden" name="csrf" value="' . $_SESSION["csrf"] . '">';
+        return '<input type="hidden" name="csrf" value="' . session()->get('csrf') . '">';
     }
 }
 
-function is_csrf_valid() {
-    if (!isset($_SESSION['csrf']) || !isset($_POST['csrf'])) {
-        return false;
+if (!function_exists('isCsrfValid')) {
+    function isCsrfValid() {
+        if (!session()->has('csrf') || !isset($_POST['csrf'])) {
+            return false;
+        }
+        if (session()->get('csrf') != $_POST['csrf']) {
+            return false;
+        }
+        return true;
     }
-    if ($_SESSION['csrf'] != $_POST['csrf']) {
-        return false;
+}
+
+if (!function_exists('formStart')) {
+    function formStart(string $action, string $method, string $classes = '') {
+        return sprintf(
+            '<form action="%s" method="%s" class="%s">',
+            $action, $method, $classes
+        );
     }
-    return true;
+}
+
+if (!function_exists('formEnd')) {
+    function formEnd() {
+        return '</form>';
+    }
 }

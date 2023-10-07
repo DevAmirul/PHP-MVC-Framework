@@ -29,7 +29,7 @@ class Router {
             'path'       => ($path === '/') ? '/' : explode('/', $path),
             'callback'   => $callback,
             'name'       => null,
-            'middleware' => null,
+            'middleware' => config('middleware', $this->method) ? config('middleware', $this->method) : null,
             'where'      => null,
         ];
         return $this;
@@ -83,7 +83,8 @@ class Router {
      *
      */
     public function middleware(string | array $middlewareNames): Router {
-        $this->routes[$this->method][array_key_last($this->routes[$this->method])]['middleware'] = $middlewareNames;
+
+        $this->routes[$this->method][array_key_last($this->routes[$this->method])]['middleware'][] = $middlewareNames;
 
         return $this;
     }
@@ -92,7 +93,6 @@ class Router {
      *
      */
     public function where(string | array $expression = null) {
-        $currentUrl = $this->routes[$this->request->method()];
         if (is_string($expression)) {
             $this->routes[$this->method][array_key_last($this->routes[$this->method])]['where'] = [$expression];
         } else {
@@ -139,6 +139,7 @@ class Router {
                     }
 
                     if (ltrim($this->request->path(), '/') === ltrim($url, '/')) {
+                        // dd($this->routes);
 
                         BaseMiddleware::resolve($routes['middleware']);
 
@@ -169,7 +170,6 @@ class Router {
     public function route(string $name, string | array $params = null) {
 
         foreach ($this->routes[$this->request->method()] as $routes) {
-
             if ($routes['name'] === $name) {
 
                 if (is_string($params)) {
@@ -180,6 +180,7 @@ class Router {
                     $url        = '';
                     $whereIndex = 0;
                     // dd($routes['where']);
+
                     foreach ($routes['path'] as $key => $value) {
                         if (str_starts_with($value, ':') && $params) {
                             $url .= '/' . $params[$whereIndex];

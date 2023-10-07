@@ -1,7 +1,9 @@
 <?php
 
-if (!function_exists('request')) {
-    function request(string $key, string $value): void {
+use Devamirul\PhpMicro\core\Foundation\Application\Request\Request;
 
+if (!function_exists('request')) {
+    function request(): void {
+        Request::singleton();
     }
 }

@@ -10,9 +10,9 @@ if (!function_exists('responseCode')) {
 }
 
 if (!function_exists('abort')) {
-    function abort(int $code = 404): void {
+    function abort(int $code = 404, string $message = ''): void {
         responseCode($code);
-        redirect('');
+        view('index' , ['$message' => $message]);
     }
 }
 

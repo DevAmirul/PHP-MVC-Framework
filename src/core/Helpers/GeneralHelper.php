@@ -2,6 +2,9 @@
 
 use Devamirul\PhpMicro\core\Foundation\Application\Application;
 use Devamirul\PhpMicro\core\Foundation\Application\Facade\Facades\View;
+use Devamirul\PhpMicro\core\Foundation\Exceptions\NotFoundException;
+use Devamirul\PhpMicro\core\Foundation\Session\FlushMessage;
+use Devamirul\PhpMicro\core\Foundation\Session\Session;
 use Dotenv\Dotenv;
 
 if (!function_exists('app')) {
@@ -16,7 +19,7 @@ if (!function_exists('config')) {
         if (isset($data[$key])) {
             return $data[$key];
         } else {
-            throw new Exception("Key:($key) Not Found");
+            throw new NotFoundException("Key:($key) Not Found");
         }
     }
 }
@@ -32,12 +35,6 @@ if (!function_exists('env')) {
 
 if (!function_exists('db')) {
     function db(string $key, string $value): void {
-
-    }
-}
-
-if (!function_exists('session')) {
-    function session(string $key, string $value): void {
 
     }
 }
@@ -90,5 +87,17 @@ if (!function_exists('setTitle')) {
 if (!function_exists('getTitle')) {
     function getTitle(): string {
         return View::getTitle();
+    }
+}
+
+if (!function_exists('session')) {
+    function session(): Session {
+        return Session::singleton();
+    }
+}
+
+if (!function_exists('flush')) {
+    function flush(): FlushMessage {
+        return FlushMessage::singleton();
     }
 }

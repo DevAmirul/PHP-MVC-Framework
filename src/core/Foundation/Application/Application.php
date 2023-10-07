@@ -19,7 +19,7 @@ class Application {
 
     public function run() {
         try {
-            echo Router::resolve();
+            echo var_export(Router::resolve(), true);
         } catch (\Exception $error) {
             echo $error;
         }

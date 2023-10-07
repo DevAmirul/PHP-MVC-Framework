@@ -2,12 +2,12 @@
 
 namespace App\Http\Middleware;
 
-use Devamirul\PhpMicro\core\Foundation\Middleware\MiddlewareInterface;
+use Devamirul\PhpMicro\core\Foundation\Middleware\Interface\Middleware;
 
-class GuestMiddleware implements MiddlewareInterface {
+class GuestMiddleware implements Middleware {
 
     public function handle() {
-        return throw new \Exception('guest..............');
-        // return ;
+        // return throw new \Exception('guest no allow..............');
+        return ;
     }
 }

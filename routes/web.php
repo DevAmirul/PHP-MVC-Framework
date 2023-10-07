@@ -25,9 +25,7 @@ Router::get('/home/:id', [App\Http\Controllers\HomeController::class, 'index'])
     ->name('index')
     ->where('[1-9]$');
 
-Router::get('/home/:id', [App\Http\Controllers\HomeController::class, 'create'])
-    ->name('create')
-    ->where('[1-9]$');
+Router::post('/home', [App\Http\Controllers\HomeController::class, 'create'])->name('create');
 
 // Router::post('/about/:id/:o', function () {
 //     echo 'form user route func';
@@ -39,8 +37,7 @@ Router::get('/about/:id/:o', function () {
     echo 'form about route func';
 })->where(['[0-9]$', '[a-z]$'])->name('about');
 
-Router::get('/user/:id/:xx', function ($id, $xx) {
-    dd($xx);
-    return view('index');
+Router::get('/user', function () {
+    return view('404');
 
-})->where(['[0-9]$', '[0-9]$'])->name('user');
+})->name('user');

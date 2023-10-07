@@ -36,5 +36,9 @@ trait AppContainer {
             return View::singleton();
         });
 
+        $this->bind('Request', function () {
+            return Request::singleton();
+        });
+
     }
 }

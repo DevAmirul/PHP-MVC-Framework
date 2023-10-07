@@ -53,8 +53,8 @@ class View {
         }
         ob_start();
 
-        include_once APP_ROOT . "/resources/views/$view.view.php";
-
+        include_once APP_ROOT . "/resources/views/" . $view . ".view.php";
+        // dd(APP_ROOT.'/resources/views/' . $view . '.view.php');
         return ob_get_clean();
     }
 

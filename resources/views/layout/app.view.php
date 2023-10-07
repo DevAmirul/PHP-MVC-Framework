@@ -19,7 +19,7 @@
   ?>
 
   <main>
-   {{content}}
+    {{content}}
   </main>
 
   <?php

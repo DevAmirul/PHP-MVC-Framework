@@ -54,14 +54,13 @@ class Request {
     public function input(string $key = '', mixed $default = null): mixed {
         if ($key) {
             if (isset($_REQUEST[$key])) {
-                return filter_input(INPUT_SERVER, $_REQUEST[$key], FILTER_SANITIZE_SPECIAL_CHARS);
-                // return $_REQUEST[$key];
+                return $_REQUEST[$key];
             }
         } else {
             $input = [];
 
             foreach ($_REQUEST as $index => $value) {
-                $input[$index] = filter_input(INPUT_SERVER, $index, FILTER_SANITIZE_SPECIAL_CHARS);
+                $input[$index] = $value;
             }
             return $input;
         }
@@ -72,8 +71,21 @@ class Request {
         $all = [];
 
         foreach ($_REQUEST as $key => $value) {
-            $all[$key] = filter_input(INPUT_SERVER, $key, FILTER_SANITIZE_SPECIAL_CHARS);
+            $all[$key] = $value;
         }
         return $all;
+    }
+
+    public function only(): mixed {
+        $only = [];
+
+        $args = func_get_args();
+
+        foreach ($args as $key) {
+            if (isset($_REQUEST[$key])) {
+                $only[$key] = $_REQUEST[$key];
+            }
+        }
+        return $only;
     }
 }
