@@ -2,7 +2,6 @@
 
 // use App\Http\Controllers\HomeController;
 
-use Devamirul\PhpMicro\core\Foundation\Application\Facade\Facades\Flush;
 use Devamirul\PhpMicro\core\Foundation\Application\Facade\Facades\Router;
 
 /*
@@ -22,23 +21,26 @@ use Devamirul\PhpMicro\core\Foundation\Application\Facade\Facades\Router;
 //     echo 'from about function';
 // })->middleware('auth')->name('name')->where('[1-9]$');
 
-Router::get('/home/:id', [App\Http\Controllers\HomeController::class, 'home'])
-    ->name('home')
+Router::get('/home/:id', [App\Http\Controllers\HomeController::class, 'index'])
+    ->name('index')
     ->where('[1-9]$');
 
-Router::post('/about/:id/:o', function () {
-    echo 'form user route func';
-})
-    ->name('postAbout')
-    ->where(['[0-9]$', '[a-z]$']);
+Router::get('/home/:id', [App\Http\Controllers\HomeController::class, 'create'])
+    ->name('create')
+    ->where('[1-9]$');
+
+// Router::post('/about/:id/:o', function () {
+//     echo 'form user route func';
+// })
+//     ->name('postAbout')
+//     ->where(['[0-9]$', '[a-z]$']);
 
 Router::get('/about/:id/:o', function () {
     echo 'form about route func';
 })->where(['[0-9]$', '[a-z]$'])->name('about');
 
-Router::get('/user/:id', function () {
+Router::get('/user/:id/:xx', function ($id, $xx) {
+    dd($xx);
+    return view('index');
 
-    // Flush::set('name', 'amirul');
-    echo Flush::get('name');
-
-})->where('[0-9]$')->name('user');
+})->where(['[0-9]$', '[0-9]$'])->name('user');

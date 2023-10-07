@@ -1,6 +1,7 @@
 <?php
 
 use Devamirul\PhpMicro\core\Foundation\Application\Application;
+use Devamirul\PhpMicro\core\Foundation\Application\Facade\Facades\View;
 use Dotenv\Dotenv;
 
 if (!function_exists('app')) {
@@ -74,4 +75,20 @@ if (!function_exists('dump')) {
     }
 }
 
+/**
+ * Set the value of title.
+ */
+if (!function_exists('setTitle')) {
+    function setTitle(string $title): void {
+        View::setTitle($title);
+    }
+}
 
+/**
+ * Get the value of title.
+ */
+if (!function_exists('getTitle')) {
+    function getTitle(): string {
+        return View::getTitle();
+    }
+}

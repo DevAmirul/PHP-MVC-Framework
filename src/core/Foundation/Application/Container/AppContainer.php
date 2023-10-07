@@ -7,6 +7,7 @@ use Devamirul\PhpMicro\core\Foundation\Application\Request\Request;
 use Devamirul\PhpMicro\core\Foundation\Router\Router;
 use Devamirul\PhpMicro\core\Foundation\Session\FlushMessage;
 use Devamirul\PhpMicro\core\Foundation\Session\Session;
+use Devamirul\PhpMicro\core\Foundation\View\View;
 
 trait AppContainer {
 
@@ -29,6 +30,10 @@ trait AppContainer {
 
         $this->bind('Flush', function () {
             return FlushMessage::singleton();
+        });
+
+        $this->bind('View', function () {
+            return View::singleton();
         });
 
     }

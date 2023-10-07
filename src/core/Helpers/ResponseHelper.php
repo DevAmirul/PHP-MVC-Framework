@@ -1,16 +1,17 @@
 <?php
 
 use Devamirul\PhpMicro\core\Foundation\Application\Facade\Facades\Router;
+use Devamirul\PhpMicro\core\Foundation\Application\Facade\Facades\View;
 
-if (!function_exists('response')) {
-    function response(int $code): void {
+if (!function_exists('responseCode')) {
+    function responseCode(int $code): void {
         http_response_code($code);
     }
 }
 
 if (!function_exists('abort')) {
     function abort(int $code = 404): void {
-        response($code);
+        responseCode($code);
         redirect('');
     }
 }
@@ -24,5 +25,11 @@ if (!function_exists('redirect')) {
 if (!function_exists('route')) {
     function route(string $name, array | string $params = null) {
         Router::route($name, $params);
+    }
+}
+
+if (!function_exists('view')) {
+    function view(string $path, ?array $data = null) {
+        return View::view($path, $data);
     }
 }

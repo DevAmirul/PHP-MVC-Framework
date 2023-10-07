@@ -8,7 +8,7 @@ use Devamirul\PhpMicro\core\Foundation\Session\Abstract\Session as AbstractSessi
 class Session extends AbstractSession{
     use Singleton;
 
-    public function __construct() {
+    private function __construct() {
         parent::__construct();
     }
 

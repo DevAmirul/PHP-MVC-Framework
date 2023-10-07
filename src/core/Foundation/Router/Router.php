@@ -14,8 +14,7 @@ class Router {
 
     public Request $request;
 
-    private function __construct() {
-    }
+    private function __construct() { }
 
     public function setDependency(Request $request) {
         $this->request = $request;
@@ -113,6 +112,7 @@ class Router {
         if (isset($this->routes[$this->request->method()])) {
             foreach ($this->routes[$this->request->method()] as $routes) {
                 $url        = '';
+                $params = [];
                 $whereIndex = 0;
 
                 if (sizeof($routes['path']) === sizeof($path)) {
@@ -130,7 +130,8 @@ class Router {
                                 }
                                 $whereIndex++;
                             }
-                            
+                            $params[] = $path[$key];
+
                             $url .= '/' . $path[$key];
                         } else {
                             break;
@@ -143,7 +144,7 @@ class Router {
 
                         if (is_callable($routes['callback'])) {
 
-                            return call_user_func($routes['callback'], $this->request);
+                            return call_user_func($routes['callback'], ...$params);
 
                         } elseif (is_array($routes['callback'])) {
 
