@@ -226,6 +226,52 @@
             "install-path": "../phpoption/phpoption"
         },
         {
+            "name": "rlanvin/php-form",
+            "version": "v2.0.1",
+            "version_normalized": "2.0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rlanvin/php-form.git",
+                "reference": "d68c4fe9cc2e9191175169409d718a59ea1bff55"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rlanvin/php-form/zipball/d68c4fe9cc2e9191175169409d718a59ea1bff55",
+                "reference": "d68c4fe9cc2e9191175169409d718a59ea1bff55",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">=5.4.0"
+            },
+            "suggest": {
+                "ext-intl": "Intl extension is useful for validating formatted numbers"
+            },
+            "time": "2016-04-11T09:58:23+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Form\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Lightweight form validation library for PHP",
+            "homepage": "https://github.com/rlanvin/php-form",
+            "keywords": [
+                "form",
+                "validation"
+            ],
+            "support": {
+                "issues": "https://github.com/rlanvin/php-form/issues",
+                "source": "https://github.com/rlanvin/php-form/tree/master"
+            },
+            "install-path": "../rlanvin/php-form"
+        },
+        {
             "name": "symfony/polyfill-ctype",
             "version": "1.x-dev",
             "version_normalized": "1.9999999.9999999.9999999-dev",

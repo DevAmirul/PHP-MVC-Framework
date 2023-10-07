@@ -10,7 +10,8 @@
         "files": [
             "src/core/Helpers/GeneralHelper.php",
             "src/core/Helpers/RequestHelper.php",
-            "src/core/Helpers/ResponseHelper.php"
+            "src/core/Helpers/ResponseHelper.php",
+            "src/core/Helpers/FormHelper.php"
         ],
         "psr-4": {
             "Devamirul\\PhpMicro\\": "src/",
@@ -31,6 +32,7 @@
     "minimum-stability": "dev",
     "require": {
         "vlucas/phpdotenv": "^5.5@dev",
-        "catfan/medoo": "dev-master"
+        "catfan/medoo": "dev-master",
+        "rlanvin/php-form": "2.*"
     }
 }

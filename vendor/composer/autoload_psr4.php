@@ -12,6 +12,7 @@ return array(
     'PhpOption\\' => array($vendorDir . '/phpoption/phpoption/src/PhpOption'),
     'Medoo\\' => array($vendorDir . '/catfan/medoo/src'),
     'GrahamCampbell\\ResultType\\' => array($vendorDir . '/graham-campbell/result-type/src'),
+    'Form\\' => array($vendorDir . '/rlanvin/php-form/src'),
     'Dotenv\\' => array($vendorDir . '/vlucas/phpdotenv/src'),
     'Devamirul\\PhpMicro\\' => array($baseDir . '/src'),
     'App\\' => array($baseDir . '/app'),

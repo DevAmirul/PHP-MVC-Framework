@@ -13,6 +13,7 @@ class ComposerStaticInita1932bd67bb3d4f87ee188e57d44127b
         '4d8f513a739e413cce6da4db01116d46' => __DIR__ . '/../..' . '/src/core/Helpers/GeneralHelper.php',
         '288c541863dae26eff949dd68b2d5a8e' => __DIR__ . '/../..' . '/src/core/Helpers/RequestHelper.php',
         'b5efb4726c1b4ddb3a6dfca47dc0d4be' => __DIR__ . '/../..' . '/src/core/Helpers/ResponseHelper.php',
+        '95f77dceff237e1d2d9264e28760af65' => __DIR__ . '/../..' . '/src/core/Helpers/FormHelper.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -33,6 +34,10 @@ class ComposerStaticInita1932bd67bb3d4f87ee188e57d44127b
         'G' => 
         array (
             'GrahamCampbell\\ResultType\\' => 26,
+        ),
+        'F' => 
+        array (
+            'Form\\' => 5,
         ),
         'D' => 
         array (
@@ -69,6 +74,10 @@ class ComposerStaticInita1932bd67bb3d4f87ee188e57d44127b
         'GrahamCampbell\\ResultType\\' => 
         array (
             0 => __DIR__ . '/..' . '/graham-campbell/result-type/src',
+        ),
+        'Form\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/rlanvin/php-form/src',
         ),
         'Dotenv\\' => 
         array (

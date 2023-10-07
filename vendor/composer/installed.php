@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'devamirul/php-micro-framework',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => NULL,
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '003f8a8098a5c482006d209834eee568c6f22a47',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -22,9 +22,9 @@
             'dev_requirement' => false,
         ),
         'devamirul/php-micro-framework' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => NULL,
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '003f8a8098a5c482006d209834eee568c6f22a47',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -48,6 +48,15 @@
             'aliases' => array(
                 0 => '1.9.x-dev',
             ),
+            'dev_requirement' => false,
+        ),
+        'rlanvin/php-form' => array(
+            'pretty_version' => 'v2.0.1',
+            'version' => '2.0.1.0',
+            'reference' => 'd68c4fe9cc2e9191175169409d718a59ea1bff55',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../rlanvin/php-form',
+            'aliases' => array(),
             'dev_requirement' => false,
         ),
         'symfony/polyfill-ctype' => array(

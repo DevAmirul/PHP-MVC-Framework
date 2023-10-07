@@ -12,4 +12,5 @@ return array(
     '4d8f513a739e413cce6da4db01116d46' => $baseDir . '/src/core/Helpers/GeneralHelper.php',
     '288c541863dae26eff949dd68b2d5a8e' => $baseDir . '/src/core/Helpers/RequestHelper.php',
     'b5efb4726c1b4ddb3a6dfca47dc0d4be' => $baseDir . '/src/core/Helpers/ResponseHelper.php',
+    '95f77dceff237e1d2d9264e28760af65' => $baseDir . '/src/core/Helpers/FormHelper.php',
 );
