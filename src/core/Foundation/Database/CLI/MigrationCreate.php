@@ -1,15 +1,14 @@
 <?php
 
-define('APP_ROOT', dirname(__DIR__));
-
 
 $table = (string) readline('Enter a table name: ');
 
+// echo '../../../../../database/migrations/';
 if ($table) {
-    if (file_exists(APP_ROOT . '/database/migrations/' . $table . '_table.php')) {
+    if (file_exists('../../../../../database/migrations/' . $table . '_table.php')) {
         echo 'error: - A file with this name already exists in the migrations folder, please try another name.';
     } else {
-        $resource = fopen(APP_ROOT . '/database/migrations/' . $table . '_table.php', "w")
+        $resource = fopen('../../../../../database/migrations/' . $table . '_table.php', "w")
         or die("Unable to create file!");
 
         fwrite($resource, getMigrationTemplate($table . '_table', $table));
@@ -27,10 +26,10 @@ $model = (string) readline('Want to create a model (yes/no): ');
 
 if ($model == 'yes') {
 
-    if (file_exists(APP_ROOT . '/app/Models/' . ucfirst($table) . '.php')) {
+    if (file_exists('../../../../../app/Models/' . ucfirst($table) . '.php')) {
         echo 'error: - A file with this name already exists in the models folder, please try another name.';
     } else {
-        $resource = fopen(APP_ROOT . '/app/Models/' . ucfirst($table) . '.php', "w")
+        $resource = fopen('../../../../../app/Models/' . ucfirst($table) . '.php', "w")
             or die("Unable to create file!");
 
         fwrite($resource, getModelTemplate(ucfirst($table)));
@@ -51,10 +50,10 @@ $controller = (string) readline('Want to create a Controller (yes/no): ');
 
 if ($controller == 'yes') {
 
-    if (file_exists(APP_ROOT . '/app/Http/Controllers/' . ucfirst($table) . 'Controller.php')) {
+    if (file_exists('../../../../../app/Http/Controllers/' . ucfirst($table) . 'Controller.php')) {
         echo 'error: - A file with this name already exists in the controllers folder, please try another name.';
     } else {
-        $resource = fopen(APP_ROOT . '/app/Http/Controllers/' . ucfirst($table) . 'Controller.php', "w")
+        $resource = fopen('../../../../../app/Http/Controllers/' . ucfirst($table) . 'Controller.php', "w")
         or die("Unable to create file!");
 
         fwrite($resource, getControllerTemplate(ucfirst($table)));

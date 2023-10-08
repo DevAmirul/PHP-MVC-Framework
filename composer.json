@@ -20,8 +20,10 @@
     },
     "scripts": {
         "start": [
-            "php -S 127.0.0.1:8000"
-        ]
+            "cd && php -S 127.0.0.1:8000 && cd -"
+        ],
+        "migration": "cd src/core/Foundation/Database/CLI && php MigrationCreate.php && cd -",
+        "drop": "cd src/core/Foundation/Database/CLI && php MigrationDrop.php && php MCreate.php  && cd -"
     },
     "authors": [
         {

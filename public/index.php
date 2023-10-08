@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @author Amirul islam <contact.amirull@gmail.com>
- * @copyright 2023 Amirul
+ * @author Amirul islam <inbox.amirul@gmail.com>
+ * @copyright 2023 Amirul Islam
  */
 
 /**

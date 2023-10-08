@@ -8,8 +8,6 @@ use Medoo\Medoo;
 class BaseDatabase {
     use Singleton;
 
-    public $DB;
-
     private function __construct() {}
 
     public function db(): Medoo {

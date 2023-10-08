@@ -2,15 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Users;
+use Devamirul\PhpMicro\core\Foundation\Application\Facade\Facades\DB;
 use Devamirul\PhpMicro\core\Foundation\Application\Request\Request;
 use Devamirul\PhpMicro\core\Foundation\Controller\BaseController;
 
 class HomeController extends BaseController {
-
-    // public function __construct(Request $request){
-
-    // }
 
     public function index() {
         return view('index', ['app' => 'ok']);
@@ -28,9 +24,13 @@ class HomeController extends BaseController {
         //     return $form->getErrors();
         // }
 
-        $d = new Users();
-        return $d->select(['name','email'])->last();
-        return ($d->db->last());
+        $d = DB::db()->query(
+            "SELECT * FROM users WHERE <name> = :name ", [
+                ":name" => "amirul",
+            ]
+        )->fetchAll();
+
+        return ($d);
 
         // $a =  $d->db;
         // return $d->action(function ($a) {
