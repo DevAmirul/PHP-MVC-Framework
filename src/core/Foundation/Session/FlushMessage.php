@@ -9,7 +9,6 @@ class FlushMessage extends AbstractSession {
     use Singleton;
 
     private function __construct() {
-        parent::__construct();
 
         if (isset($_SESSION['flush'])) {
             foreach ($_SESSION['flush'] as $key => $flashMessage) {

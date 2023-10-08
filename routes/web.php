@@ -38,6 +38,12 @@ Router::get('/about/:id/:o', function () {
 })->where(['[0-9]$', '[a-z]$'])->name('about');
 
 Router::get('/user', function () {
-    return view('404');
+    return abort(402);
+    // return ();
 
 })->name('user');
+
+Router::get('/home', function () {
+    return 'ok';
+
+})->name('home');

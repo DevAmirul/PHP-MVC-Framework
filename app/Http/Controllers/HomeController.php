@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Users;
 use Devamirul\PhpMicro\core\Foundation\Application\Request\Request;
 use Devamirul\PhpMicro\core\Foundation\Controller\BaseController;
-use Form\Validator;
 
 class HomeController extends BaseController {
 
@@ -27,7 +27,23 @@ class HomeController extends BaseController {
         // } else {
         //     return $form->getErrors();
         // }
-        abort(404);
-        // dd(session()->get('csrf'));
+
+        $d = new Users();
+        return $d->select(['name','email'])->last();
+        return ($d->db->last());
+
+        // $a =  $d->db;
+        // return $d->action(function ($a) {
+
+        //     $a->insert("account", [
+        //         "name"  => "foo",
+        //         "email" => "bar@abc.com",
+        //     ]);
+
+        //     $a->delete("account", [
+        //         "user_id" => 2312,
+        //     ]);
+        // });
+
     }
 }

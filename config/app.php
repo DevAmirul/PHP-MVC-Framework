@@ -1,7 +1,12 @@
 <?php
 
 return [
-    'name'                  => env('APP_NAME', 'PhpMicroFramework'),
+    'name' => env('APP_NAME', 'PhpMicroFramework'),
 
-    'url'                   => env('APP_URL', 'http://localhost'),
+    'url'  => env('APP_URL', 'http://localhost'),
+
+    'home_url' => '/home',
+
+    'debug_mode' => env('APP_DEBUG', true),
+
 ];

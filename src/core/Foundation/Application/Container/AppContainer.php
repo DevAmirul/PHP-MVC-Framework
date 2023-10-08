@@ -4,6 +4,7 @@ namespace Devamirul\PhpMicro\core\Foundation\Application\Container;
 
 use Devamirul\PhpMicro\core\Foundation\Application\Application;
 use Devamirul\PhpMicro\core\Foundation\Application\Request\Request;
+use Devamirul\PhpMicro\core\Foundation\Database\BaseDatabase;
 use Devamirul\PhpMicro\core\Foundation\Router\Router;
 use Devamirul\PhpMicro\core\Foundation\Session\FlushMessage;
 use Devamirul\PhpMicro\core\Foundation\Session\Session;
@@ -38,6 +39,10 @@ trait AppContainer {
 
         $this->bind('Request', function () {
             return Request::singleton();
+        });
+
+        $this->bind('DB', function () {
+            return BaseDatabase::singleton();
         });
 
     }

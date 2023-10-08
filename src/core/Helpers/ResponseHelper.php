@@ -10,9 +10,12 @@ if (!function_exists('responseCode')) {
 }
 
 if (!function_exists('abort')) {
-    function abort(int $code = 404, string $message = ''): void {
-        responseCode($code);
-        view('index' , ['$message' => $message]);
+    function abort(int $code = 404, string $message = '') {
+        // responseCode($code);
+        return view('errors/' . $code, [
+            'message' => $message,
+            'code'=> $code
+        ]);
     }
 }
 
