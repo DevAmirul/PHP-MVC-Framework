@@ -4,6 +4,6 @@ namespace App\Models;
 
 use Devamirul\PhpMicro\core\Foundation\Models\BaseModel;
 
-class Ami extends BaseModel {
+class E extends BaseModel {
 
 }

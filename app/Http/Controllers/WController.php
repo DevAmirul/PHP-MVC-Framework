@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Devamirul\PhpMicro\core\Foundation\Application\Request\Request;
 use Devamirul\PhpMicro\core\Foundation\Controller\BaseController;
 
-class AmiController extends BaseController {
+class WController extends BaseController {
 
     /**
      * Dummy method
