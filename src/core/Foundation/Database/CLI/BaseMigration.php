@@ -2,8 +2,6 @@
 
 namespace Devamirul\PhpMicro\core\Foundation\Database\CLI;
 
-use PDOStatement;
-
 class BaseMigration extends CLIBaseDatabase {
 
     public static function getAppliedMigrations(): array {
@@ -14,8 +12,8 @@ class BaseMigration extends CLIBaseDatabase {
         return static::db()->insert('migrations', $migratedClassNames);
     }
 
-    public static function createMigrationsTable(): PDOStatement {
-        return static::db()->create('migrations', [
+    public static function createMigrationsTable() {
+        static::db()->create('migrations', [
             "id"         => [
                 "INT",
                 "NOT NULL",
@@ -33,6 +31,21 @@ class BaseMigration extends CLIBaseDatabase {
                 "CURRENT_TIMESTAMP",
             ],
         ], ["ENGINE" => "INNODB"]);
+    }
+
+    public static function dropTables($tableNames): string {
+        static::db()->drop($tableNames);
+        static::deleteMigratedTableNamesInMigrationsTable($tableNames);
+        
+        return $tableNames;
+    }
+
+    public static function deleteMigratedTableNamesInMigrationsTable($tableNames): void {
+        static::db()->delete('migrations', [
+            "AND" => [
+                "migration"   => $tableNames,
+            ]
+        ]);
     }
 
 }

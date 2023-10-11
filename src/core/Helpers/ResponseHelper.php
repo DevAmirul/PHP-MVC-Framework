@@ -12,6 +12,7 @@ if (!function_exists('responseCode')) {
 if (!function_exists('abort')) {
     function abort(int $code = 404, string $message = '') {
         // responseCode($code);
+        // TODO: responseCode .
         return view('errors/' . $code, [
             'message' => $message,
             'code'=> $code

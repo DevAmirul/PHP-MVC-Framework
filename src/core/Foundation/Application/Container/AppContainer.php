@@ -3,6 +3,7 @@
 namespace Devamirul\PhpMicro\core\Foundation\Application\Container;
 
 use Devamirul\PhpMicro\core\Foundation\Application\Application;
+use Devamirul\PhpMicro\core\Foundation\Application\Authentication;
 use Devamirul\PhpMicro\core\Foundation\Application\Request\Request;
 use Devamirul\PhpMicro\core\Foundation\Database\BaseDatabase;
 use Devamirul\PhpMicro\core\Foundation\Router\Router;
@@ -43,6 +44,10 @@ trait AppContainer {
 
         $this->bind('DB', function () {
             return BaseDatabase::singleton();
+        });
+
+        $this->bind('Auth', function () {
+            return Authentication::singleton();
         });
 
     }

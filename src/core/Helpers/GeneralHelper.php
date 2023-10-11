@@ -1,6 +1,7 @@
 <?php
 
 use Devamirul\PhpMicro\core\Foundation\Application\Application;
+use Devamirul\PhpMicro\core\Foundation\Application\Facade\Facades\Auth;
 use Devamirul\PhpMicro\core\Foundation\Application\Facade\Facades\View;
 use Devamirul\PhpMicro\core\Foundation\Exceptions\NotFoundException;
 use Devamirul\PhpMicro\core\Foundation\Session\FlushMessage;
@@ -30,12 +31,6 @@ if (!function_exists('env')) {
         $dotenv->safeLoad();
 
         return $_ENV[$key] ?? $default;
-    }
-}
-
-if (!function_exists('db')) {
-    function db(string $key, string $value): void {
-
     }
 }
 
@@ -77,7 +72,7 @@ if (!function_exists('dump')) {
  */
 if (!function_exists('setTitle')) {
     function setTitle(string $title): void {
-        View::setTitle($title);
+        View::singleton()->setTitle($title);
     }
 }
 
@@ -86,7 +81,7 @@ if (!function_exists('setTitle')) {
  */
 if (!function_exists('getTitle')) {
     function getTitle(): string {
-        return View::getTitle();
+        return View::singleton()->getTitle();
     }
 }
 
@@ -99,5 +94,17 @@ if (!function_exists('session')) {
 if (!function_exists('flush')) {
     function flush(): FlushMessage {
         return FlushMessage::singleton();
+    }
+}
+
+if (!function_exists('auth')) {
+    function auth(string $user = 'user'): bool | array {
+        return Auth::singleton()->auth($user);
+    }
+}
+
+if (!function_exists('hash')) {
+    function hash(string $password, string|int|null $algo = PASSWORD_DEFAULT, int $cost = 10): string {
+        return password_hash($password, $algo, ["cost" => $cost]);
     }
 }

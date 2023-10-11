@@ -12,12 +12,7 @@ if ($confirmation === 'y') {
     $db = BaseMigration::db();
 
     if (sizeof(BaseMigration::getAppliedMigrations()) === 0) {
-        try {
-            BaseMigration::createMigrationsTable();
-        } catch (\PDOException $th) {
-            echo $th;
-            die();
-        }
+        BaseMigration::createMigrationsTable();
     }
 
     $appliedMigrations = BaseMigration::getAppliedMigrations();
@@ -46,7 +41,6 @@ if ($confirmation === 'y') {
     }
 }
 
-
 function migrateTables($unMigratedFiles) {
     $migratedClassNames = [];
 
@@ -54,7 +48,6 @@ function migrateTables($unMigratedFiles) {
         if ($file === '.' || $file === '..') {
             continue;
         }
-
         require_once '../../../../../database/migrations/' . $file;
 
         $className = pathinfo($file, PATHINFO_FILENAME);

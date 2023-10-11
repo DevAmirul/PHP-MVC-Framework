@@ -37,6 +37,7 @@
         "vlucas/phpdotenv": "^5.5@dev",
         "catfan/medoo": "dev-master",
         "rlanvin/php-form": "2.*",
-        "icanboogie/datetime": "dev-master"
+        "icanboogie/datetime": "dev-master",
+        "phpmailer/phpmailer": "dev-master"
     }
 }

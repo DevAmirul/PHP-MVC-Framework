@@ -3,7 +3,7 @@
         'name' => 'devamirul/php-micro-framework',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '596b02ef310a76c8d5160e69ebc3c853927724fb',
+        'reference' => '3d8cda5e8a51aff93749e6efe4e71e0431f26dba',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -24,7 +24,7 @@
         'devamirul/php-micro-framework' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '596b02ef310a76c8d5160e69ebc3c853927724fb',
+            'reference' => '3d8cda5e8a51aff93749e6efe4e71e0431f26dba',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -45,6 +45,17 @@
             'reference' => '57478fb233e2f26dda7c565644fff7b938629c69',
             'type' => 'library',
             'install_path' => __DIR__ . '/../icanboogie/datetime',
+            'aliases' => array(
+                0 => '9999999-dev',
+            ),
+            'dev_requirement' => false,
+        ),
+        'phpmailer/phpmailer' => array(
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => 'a1fa2714c447adda7e6b07c4bfa290dfc1a035b2',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../phpmailer/phpmailer',
             'aliases' => array(
                 0 => '9999999-dev',
             ),

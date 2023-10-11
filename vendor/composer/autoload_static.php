@@ -26,6 +26,7 @@ class ComposerStaticInita1932bd67bb3d4f87ee188e57d44127b
         'P' => 
         array (
             'PhpOption\\' => 10,
+            'PHPMailer\\PHPMailer\\' => 20,
         ),
         'M' => 
         array (
@@ -70,6 +71,10 @@ class ComposerStaticInita1932bd67bb3d4f87ee188e57d44127b
         'PhpOption\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpoption/phpoption/src/PhpOption',
+        ),
+        'PHPMailer\\PHPMailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
         'Medoo\\' => 
         array (
