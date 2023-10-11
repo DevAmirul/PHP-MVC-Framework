@@ -4,27 +4,71 @@ use Devamirul\PhpMicro\core\Foundation\Database\CLI\BaseMigration;
 
 require_once '../../../../../vendor/autoload.php';
 
-// $confirmation = (string) readline('Are you sure? (y/n) ');
+$confirmation = (string) readline('Are you sure? (y/n) ');
 
-$db = BaseMigration::db();
+$migratedClassNames = [];
 
-// var_dump(BaseMigration::getAppliedMigrations());
+if ($confirmation === 'y') {
+    $db = BaseMigration::db();
 
-if (!BaseMigration::getAppliedMigrations()) {
-    try {
-        BaseMigration::createMigrationsTable();
-    } catch (\PDOException $th) {
-        echo $th;
-        die();
+    if (sizeof(BaseMigration::getAppliedMigrations()) === 0) {
+        try {
+            BaseMigration::createMigrationsTable();
+        } catch (\PDOException $th) {
+            echo $th;
+            die();
+        }
+    }
+
+    $appliedMigrations = BaseMigration::getAppliedMigrations();
+
+    $flattened_array = [];
+
+    array_walk_recursive($appliedMigrations, function ($array) use (&$flattened_array) {
+        $flattened_array[] = $array . '_table.php';
+    });
+
+    $appliedMigrations = $flattened_array;
+
+    if (sizeof($appliedMigrations) == 0) {
+        $migratedClassNames = [];
+
+        $unMigratedFiles = scandir('../../../../../database/migrations');
+
+        migrateTables($unMigratedFiles);
+
+    } else {
+        $filesOfMigrationsFolder = scandir('../../../../../database/migrations');
+
+        $unMigratedFiles = array_diff($filesOfMigrationsFolder, $appliedMigrations);
+
+        migrateTables($unMigratedFiles);
     }
 }
 
-$appliedMigrations = BaseMigration::getAppliedMigrations();
 
-if (!$appliedMigrations) {
+function migrateTables($unMigratedFiles) {
+    $migratedClassNames = [];
 
-    $filesOfMigrationFolder = scandir('../../../../../database/migrations');
+    foreach ($unMigratedFiles as $file) {
+        if ($file === '.' || $file === '..') {
+            continue;
+        }
 
-    echo $filesOfMigrationFolder;
+        require_once '../../../../../database/migrations/' . $file;
 
+        $className = pathinfo($file, PATHINFO_FILENAME);
+
+        $classInstance = (new $className())->up();
+
+        if ($classInstance) {
+            echo 'Created table:- ' . substr($className, 0, -6) . PHP_EOL;
+            $migratedClassNames[] = ['migration' => substr($className, 0, -6)];
+        }
+    }
+    if ($migratedClassNames) {
+        BaseMigration::updateMigrationsTable($migratedClassNames);
+    } else {
+        echo 'All tables are migrated' . PHP_EOL;
+    }
 }

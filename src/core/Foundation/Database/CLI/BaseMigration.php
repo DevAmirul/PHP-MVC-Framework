@@ -6,10 +6,12 @@ use PDOStatement;
 
 class BaseMigration extends CLIBaseDatabase {
 
-    public static function getAppliedMigrations(): array | bool {
+    public static function getAppliedMigrations(): array {
+        return static::db()->select('migrations', ['migration']);
+    }
 
-        return static::db()->get('migrations', 'table');
-
+    public static function updateMigrationsTable(array $migratedClassNames) {
+        return static::db()->insert('migrations', $migratedClassNames);
     }
 
     public static function createMigrationsTable(): PDOStatement {
@@ -30,7 +32,7 @@ class BaseMigration extends CLIBaseDatabase {
                 "DEFAULT",
                 "CURRENT_TIMESTAMP",
             ],
-        ], [ "ENGINE" => "INNODB" ]);
+        ], ["ENGINE" => "INNODB"]);
     }
 
 }

@@ -22,8 +22,8 @@
         "start": [
             "cd && php -S 127.0.0.1:8000 && cd -"
         ],
-        "migrate create": "cd src/core/Foundation/Database/CLI && php MigrationCreate.php && cd -",
-        "migrate drop": "cd src/core/Foundation/Database/CLI && php MigrationDrop.php && cd -",
+        "create": "cd src/core/Foundation/Database/CLI && php MigrationCreate.php && cd -",
+        "drop": "cd src/core/Foundation/Database/CLI && php MigrationDrop.php && cd -",
         "migrate": "cd src/core/Foundation/Database/CLI && php Migration.php && cd -"
     },
     "authors": [
