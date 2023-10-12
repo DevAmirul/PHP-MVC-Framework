@@ -8,11 +8,11 @@ use Devamirul\PhpMicro\core\Foundation\Controller\BaseController;
 
 class HomeController extends BaseController {
 
-    public function index() {
+    public function index(Request $request) {
         return view('index', ['app' => 'ok']);
     }
     public function create(Request $request) {
-
+        dd(url('/public'));
         // $form = new Validator([
         //     'name'  => ['required', 'trim', 'max_length' => 2],
         //     'email' => ['required', 'email'],

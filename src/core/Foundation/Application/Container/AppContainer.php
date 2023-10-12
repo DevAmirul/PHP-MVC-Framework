@@ -11,7 +11,7 @@ use Devamirul\PhpMicro\core\Foundation\Session\FlushMessage;
 use Devamirul\PhpMicro\core\Foundation\Session\Session;
 use Devamirul\PhpMicro\core\Foundation\View\View;
 
-trait AppContainer {
+class AppContainer extends BaseContainer{
 
     public function registerAppContainer() {
         $request = Request::singleton();

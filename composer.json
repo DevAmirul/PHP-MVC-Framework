@@ -20,7 +20,7 @@
     },
     "scripts": {
         "start": [
-            "cd && php -S 127.0.0.1:8000 && cd -"
+            "cd public && php -S 127.0.0.1:8000 && cd -"
         ],
         "create": "cd src/core/Foundation/Database/CLI && php MigrationCreate.php && cd -",
         "drop": "cd src/core/Foundation/Database/CLI && php MigrationDrop.php && cd -",

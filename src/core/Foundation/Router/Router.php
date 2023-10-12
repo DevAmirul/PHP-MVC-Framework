@@ -5,16 +5,18 @@ namespace Devamirul\PhpMicro\core\Foundation\Router;
 use Devamirul\PhpMicro\core\Foundation\Application\Request\Request;
 use Devamirul\PhpMicro\core\Foundation\Application\Traits\Singleton;
 use Devamirul\PhpMicro\core\Foundation\Middleware\BaseMiddleware;
+use Exception;
 
 class Router {
     use Singleton;
 
     private string $method;
     private array $routes = [];
+    private array $routeNames = [];
 
     public Request $request;
 
-    private function __construct() { }
+    private function __construct() {}
 
     public function setDependency(Request $request) {
         $this->request = $request;
@@ -74,7 +76,14 @@ class Router {
      *
      */
     public function name(string $name) {
+        if (!empty($this->routeNames)) {
+            if (in_array($name, $this->routeNames)) {
+                throw new Exception('Router name (' . $name . ') has been used more than once');
+            }
+        }
         $this->routes[$this->method][array_key_last($this->routes[$this->method])]['name'] = $name;
+
+        array_push($this->routeNames, $name);
 
         return $this;
     }
@@ -106,21 +115,24 @@ class Router {
      * And it is decided which router will do which job.
      */
     public function resolve() {
+        // dd($this->routes);
 
         $path = explode('/', ltrim($this->request->path(), '/'));
 
         if (isset($this->routes[$this->request->method()])) {
+
             foreach ($this->routes[$this->request->method()] as $routes) {
                 $url        = '';
-                $params = [];
+                $params     = [];
                 $whereIndex = 0;
 
                 if (sizeof($routes['path']) === sizeof($path)) {
 
                     foreach ($routes['path'] as $key => $route) {
 
-                        if ($route == $path[$key]) {
+                        if ($route === $path[$key]) {
                             $url .= '/' . $path[$key];
+
                             // dd($this->routes);
                         } elseif (str_starts_with($route, ':')) {
 
@@ -136,14 +148,18 @@ class Router {
                         } else {
                             break;
                         }
+                        // dd($path);
                     }
 
                     if (ltrim($this->request->path(), '/') === ltrim($url, '/')) {
-                        // dd($this->routes);
+                        if (!$url) {
+                            throw new \Exception('route not match');
+                        }
 
                         BaseMiddleware::resolve($routes['middleware']);
 
                         if (is_callable($routes['callback'])) {
+                            // dd($routes['path']);
 
                             return call_user_func($routes['callback'], ...$params);
 

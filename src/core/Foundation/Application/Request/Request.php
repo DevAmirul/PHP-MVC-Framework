@@ -31,7 +31,8 @@ class Request {
      * This function return user input method.
      */
     public function method(): string {
-        return strtolower($_SERVER['REQUEST_METHOD']);
+        $method = isset($_POST['_method']) ? $_POST['_method'] : $_SERVER['REQUEST_METHOD'];
+        return strtolower($method);
     }
 
     /**
@@ -46,6 +47,27 @@ class Request {
      */
     public function isPost(): string {
         return $this->method() === 'post';
+    }
+
+    /**
+     *
+     */
+    public function isDelete(): string {
+        return $this->method() === 'delete';
+    }
+
+    /**
+     *
+     */
+    public function isPut(): string {
+        return $this->method() === 'put';
+    }
+
+    /**
+     *
+     */
+    public function isPatch(): string {
+        return $this->method() === 'patch';
     }
 
     /**

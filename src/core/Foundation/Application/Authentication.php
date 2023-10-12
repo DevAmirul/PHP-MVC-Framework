@@ -3,6 +3,7 @@
 namespace Devamirul\PhpMicro\core\Foundation\Application;
 
 use Devamirul\PhpMicro\core\Foundation\Application\Traits\Singleton;
+use Devamirul\PhpMicro\core\Foundation\Session\FlushMessage;
 use Devamirul\PhpMicro\core\Foundation\Session\Session;
 
 class Authentication {
@@ -12,7 +13,7 @@ class Authentication {
         return Session::singleton()->has($user) ? Session::singleton()->get($user) : false;
     }
 
-    public function login(string $user = 'user', array $input, string $redirect = '/'): void {
+    public function attempt(string $user = 'user', array $input, string $redirect = '/'): string {
         $model = new $user();
 
         $modelData = $model->get(['email', 'password'], [
@@ -31,15 +32,8 @@ class Authentication {
     }
 
     public function logout(string $user = 'user', string $redirect = '/'): void {
-        if (Session::singleton()->has($user)) {
-
             Session::singleton()->delete($user);
-
             redirect($redirect);
-        } else {
-            return false;
-        }
-
     }
 
     public function guest(string $user = 'user'): bool {
@@ -49,9 +43,12 @@ class Authentication {
     public function registration(string $user = 'user', array $input, string $redirect = '/login'): void {
         $model = new $user();
 
-        $modelData = $model->insert($input);
+        $modelData = $model->insert($input)->getData();
 
-        redirect($redirect);
+        if ($modelData) {
+            FlushMessage::singleton()->set('success', 'Account created successfully.');
+            redirect($redirect);
+        }
     }
 
     // public function reset(string $user = 'user', array $input, string $redirect = '/login'): string {

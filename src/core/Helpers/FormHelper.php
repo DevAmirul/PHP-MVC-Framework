@@ -1,23 +1,5 @@
 <?php
 
-if (!function_exists('put')) {
-    function put(): string {
-        return '<input type="hidden" name="_method" value="put">';
-    }
-}
-
-if (!function_exists('patch')) {
-    function patch(): string {
-        return '<input type="hidden" name="_method" value="patch">';
-    }
-}
-
-if (!function_exists('delete')) {
-    function delete(): string {
-        return '<input type="hidden" name="_method" value="delete">';
-    }
-}
-
 if (!function_exists('setCsrf')) {
     function setCsrf(): string {
         if (!session()->has('csrf')) {
@@ -51,5 +33,17 @@ if (!function_exists('formStart')) {
 if (!function_exists('formEnd')) {
     function formEnd() {
         return '</form>';
+    }
+}
+
+if (!function_exists('setMethod')) {
+    function setMethod(string $methodName) {
+        return '<input type="hidden" name="_method" value="' . $methodName . '">';
+    }
+}
+
+if (!function_exists('url')) {
+    function url(string $path = null) {
+        return APP_ROOT . $path;
     }
 }

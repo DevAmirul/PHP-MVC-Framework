@@ -23,6 +23,7 @@ if (!function_exists('abort')) {
 if (!function_exists('redirect')) {
     function redirect(string $redirectLink) {
         header('Location: ' . $redirectLink);
+        exit;
     }
 }
 

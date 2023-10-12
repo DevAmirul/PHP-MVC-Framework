@@ -2,14 +2,13 @@
 
 namespace Devamirul\PhpMicro\core\Foundation\Application;
 
-use App\Containers\Container;
 use Devamirul\PhpMicro\core\Foundation\Application\Container\AppContainer;
+use Devamirul\PhpMicro\core\Foundation\Application\Container\BaseContainer\BaseContainer;
 use Devamirul\PhpMicro\core\Foundation\Application\Facade\Facades\Router;
-use Devamirul\PhpMicro\core\Foundation\Application\Traits\BaseContainer;
 use Devamirul\PhpMicro\core\Foundation\Application\Traits\Singleton;
 
-class Application {
-    use BaseContainer, Singleton, AppContainer, Container;
+class Application extends BaseContainer {
+    use Singleton, AppContainer, Container;
 
     private function __construct() {
         $this->registerAppContainer();

@@ -13,9 +13,10 @@ use Devamirul\PhpMicro\core\Foundation\Application\Facade\Facades\Router;
 |
  */
 
-// Router::get('/home/:id/user/:name', [App\Http\Controllers\HomeController::class, 'home'])
-// // ->where('^\d+$');
-//     ->where(['[a-z]', '^\d+$']);
+Router::get('/', function(){
+    return app()->getBindings();
+})
+->name('home');
 
 // Router::get('/about/:id', function () {
 //     echo 'from about function';
@@ -25,7 +26,8 @@ Router::get('/home/:id', [App\Http\Controllers\HomeController::class, 'index'])
     ->name('index')
     ->where('[1-9]$');
 
-Router::post('/home', [App\Http\Controllers\HomeController::class, 'create'])->name('create');
+Router::post('/home', [App\Http\Controllers\HomeController::class, 'create'])
+    ->name('create');
 
 // Router::post('/about/:id/:o', function () {
 //     echo 'form user route func';
@@ -35,15 +37,8 @@ Router::post('/home', [App\Http\Controllers\HomeController::class, 'create'])->n
 
 Router::get('/about/:id/:o', function () {
     echo 'form about route func';
-})->where(['[0-9]$', '[a-z]$'])->name('about');
+})->where(['[0-9]$', '[a-z]$'])->name('about')->middleware('auth');
 
-Router::get('/user', function () {
-    return abort(402);
-    // return ();
-
+Router::get('/user/ok', function () {
+    return abort(404);
 })->name('user');
-
-Router::get('/home', function () {
-    return 'ok';
-
-})->name('home');
