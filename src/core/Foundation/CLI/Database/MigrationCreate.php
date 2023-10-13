@@ -1,5 +1,6 @@
 <?php
 
+
 /**
  *
  */
@@ -9,7 +10,7 @@ $table = (string) readline('Enter a table name: ');
 $isFile = false;
 
 if ($table) {
-    if (file_exists('../../../../../database/migrations/' . $table . '_table.php')) {
+    if (file_exists('../../../../../database/migrations' . $table . '_table.php')) {
         echo 'error: - A file with this name already exists in the migrations folder, please try another name.' . PHP_EOL;
 
         $isFile = true;
@@ -110,10 +111,6 @@ class %s extends BaseMigration{
                 'AUTO_INCREMENT',
                 'PRIMARY KEY',
             ],
-            'name' => [
-                'VARCHAR(225)',
-                'NOT NULL',
-            ],
             'created_at' => [
                 'TIMESTAMP',
                 'NOT NULL',
@@ -131,7 +128,7 @@ class %s extends BaseMigration{
 }", $className, $tableName);
 }
 
-function getModelTemplate(string $model): string {
+function getModelTemplate(string $modelName): string {
     return sprintf(
         "<?php
 
@@ -141,10 +138,10 @@ use Devamirul\PhpMicro\core\Foundation\Models\BaseModel;
 
 class %s extends BaseModel {
 
-}", $model);
+}", $modelName);
 }
 
-function getControllerTemplate(string $controller): string {
+function getControllerTemplate(string $controllerName): string {
     return sprintf(
         "<?php
 
@@ -162,5 +159,5 @@ class %sController extends BaseController {
 
     }
 
-}", $controller);
+}", $controllerName);
 }

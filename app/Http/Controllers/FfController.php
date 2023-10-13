@@ -5,7 +5,7 @@
     use Devamirul\PhpMicro\core\Foundation\Application\Request\Request;
     use Devamirul\PhpMicro\core\Foundation\Controller\BaseController;
 
-    class AmirulController extends BaseController {
+    class FfController extends BaseController {
 
         /**
          * Dummy method

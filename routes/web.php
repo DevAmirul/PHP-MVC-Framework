@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
-
+use App\Models\E;
 use Devamirul\PhpMicro\core\Foundation\Application\Facade\Facades\Router;
 
 /*
@@ -39,6 +39,7 @@ Router::get('/about/:id/:o', function () {
     echo 'form about route func';
 })->where(['[0-9]$', '[a-z]$'])->name('about')->middleware('auth');
 
+
 Router::get('/user', function () {
-    return abort(404);
+    return 'user';
 })->name('user');

@@ -2,7 +2,7 @@
 
 namespace Devamirul\PhpMicro\core\Foundation\Application;
 
-use App\Containers\Container;
+use App\Providers\AppServiceProvider;
 use Devamirul\PhpMicro\core\Foundation\Application\Container\AppContainer;
 use Devamirul\PhpMicro\core\Foundation\Application\Container\BaseContainer\BaseContainer;
 use Devamirul\PhpMicro\core\Foundation\Application\Facade\Facades\Router;
@@ -12,8 +12,7 @@ class Application extends BaseContainer {
     use Singleton;
 
     private function __construct() {
-        (new AppContainer)->register();
-        (new Container)->register();
+        $this->callServiceProviders();
     }
 
     public function run() {
@@ -22,6 +21,17 @@ class Application extends BaseContainer {
         } catch (\Exception $error) {
             http_response_code($error->getCode());
             echo $error->getMessage();
+        }
+    }
+
+    public function callServiceProviders() : void {
+        $providers = config('app', 'providers');
+
+        foreach ($providers as $class) {
+            $provider = new $class();
+
+            $provider->register();
+            $provider->boot();
         }
     }
 }

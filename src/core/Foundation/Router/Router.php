@@ -138,7 +138,7 @@ class Router {
 
                             if ($routes['where']) {
                                 if (!preg_match('/' . $routes['where'][$whereIndex] . '/', $path[$key])) {
-                                    throw new \Exception('expression not match');
+                                    throw new Exception('expression not match');
                                 }
                                 $whereIndex++;
                             }
@@ -153,7 +153,7 @@ class Router {
 
                     if (ltrim($this->request->path(), '/') === ltrim($url, '/')) {
                         if (!$url) {
-                            throw new \Exception('route not match');
+                            throw new Exception('route not match', 404);
                         }
 
                         BaseMiddleware::resolve($routes['middleware']);
@@ -177,9 +177,9 @@ class Router {
                     }
                 }
             }
-            throw new \Exception('route not match');
+            throw new Exception('route not match', 404);
         } else {
-            throw new \Exception('method not match');
+            throw new Exception('method not match');
         }
     }
 
@@ -203,9 +203,9 @@ class Router {
                             $whereIndex++;
 
                         } elseif (str_starts_with($value, ':') && !$params) {
-                            throw new \Exception('param missing');
+                            throw new Exception('param missing');
                         } elseif (!str_starts_with($value, ':') && $params) {
-                            throw new \Exception('send extra params in route func');
+                            throw new Exception('send extra params in route func');
                         } else {
                             $url .= '/' . $value;
                         }
@@ -218,7 +218,7 @@ class Router {
                     // dd($routes['where']);
                     foreach ($routes['where'] as $key => $value) {
                         if (!preg_match('/' . $value . '/', $params[$key])) {
-                            throw new \Exception('expression not match');
+                            throw new Exception('expression not match');
                         }
                     }
 
@@ -236,13 +236,13 @@ class Router {
 
                     redirect($url);
                 } else {
-                    // throw new \Exception('route params where condition not matching');
-                    throw new \Exception('route params where condition not matching or not define any params');
+                    // throw new Exception('route params where condition not matching');
+                    throw new Exception('route params where condition not matching or not define any params');
                 }
 
             }
         }
-        throw new \Exception('route name not found');
+        throw new Exception('route name not found');
     }
 
 }

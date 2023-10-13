@@ -51,6 +51,8 @@ class AppContainer extends BaseContainer {
         $this->bind('Auth', function () {
             return Authentication::singleton();
         });
+    }
 
+    public function boot() {
     }
 }

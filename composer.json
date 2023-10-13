@@ -22,9 +22,11 @@
         "start": [
             "cd public && php -S 127.0.0.1:8000 && cd -"
         ],
-        "create": "cd src/core/Foundation/Database/CLI && php MigrationCreate.php && cd -",
-        "drop": "cd src/core/Foundation/Database/CLI && php MigrationDrop.php && cd -",
-        "migrate": "cd src/core/Foundation/Database/CLI && php Migration.php && cd -"
+        "create": "cd src/core/Foundation/CLI/Database && php MigrationCreate.php && cd -",
+        "drop": "cd src/core/Foundation/CLI/Database && php MigrationDrop.php && cd -",
+        "migrate": "cd src/core/Foundation/CLI/Database && php Migration.php && cd -",
+        "provider": "cd src/core/Foundation/CLI/Provider && php ProviderCreate.php && cd -",
+        "controller": "cd src/core/Foundation/CLI/Controller && php ControllerCreate.php && cd -"
     },
     "authors": [
         {

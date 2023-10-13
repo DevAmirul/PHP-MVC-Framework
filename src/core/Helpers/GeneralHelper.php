@@ -3,6 +3,7 @@
 use Devamirul\PhpMicro\core\Foundation\Application\Application;
 use Devamirul\PhpMicro\core\Foundation\Application\Facade\Facades\Auth;
 use Devamirul\PhpMicro\core\Foundation\Application\Facade\Facades\View;
+use Devamirul\PhpMicro\core\Foundation\Events\Event;
 use Devamirul\PhpMicro\core\Foundation\Exceptions\NotFoundException;
 use Devamirul\PhpMicro\core\Foundation\Session\FlushMessage;
 use Devamirul\PhpMicro\core\Foundation\Session\Session;
@@ -104,7 +105,19 @@ if (!function_exists('auth')) {
 }
 
 if (!function_exists('hash')) {
-    function hash(string $password, string|int|null $algo = PASSWORD_DEFAULT, int $cost = 10): string {
+    function hash(string $password, string | int | null $algo = PASSWORD_DEFAULT, int $cost = 10): string {
         return password_hash($password, $algo, ["cost" => $cost]);
     }
 }
+
+if (!function_exists('event')) {
+    function event(): Event {
+        return Event::singleton();
+    }
+}
+
+// if (!function_exists('listen')) {
+//     function listen(string $name, callable $callback) {
+//         Event::singleton()
+//     }
+// }
