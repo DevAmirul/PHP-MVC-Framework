@@ -76,14 +76,14 @@ class Router {
      *
      */
     public function name(string $name) {
-        if (!empty($this->routeNames)) {
-            if (in_array($name, $this->routeNames)) {
+        if (!empty($this->routeNames[$this->method])) {
+            if (isset($this->routeNames[$this->method][$name])) {
                 throw new Exception('Router name (' . $name . ') has been used more than once');
             }
         }
         $this->routes[$this->method][array_key_last($this->routes[$this->method])]['name'] = $name;
 
-        array_push($this->routeNames, $name);
+        $this->routeNames[$this->method] = $name;
 
         return $this;
     }

@@ -9,8 +9,7 @@ use Devamirul\PhpMicro\core\Foundation\Controller\BaseController;
 class HomeController extends BaseController {
 
     public function index(Request $request) {
-        // return view('index', ['app' => 'ok']);
-        return abort(404);
+        return view('home');
     }
 
     public function create(Request $request) {

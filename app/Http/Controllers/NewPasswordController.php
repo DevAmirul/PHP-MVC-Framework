@@ -5,12 +5,16 @@
     use Devamirul\PhpMicro\core\Foundation\Application\Request\Request;
     use Devamirul\PhpMicro\core\Foundation\Controller\BaseController;
 
-    class FfController extends BaseController {
+    class NewPasswordController extends BaseController {
 
         /**
          * Dummy method
          */
-        public function index(Request $request){
+        public function create(Request $request){
+            return view('guest/reset');
+        }
+
+        public function store(Request $request){
 
         }
     }

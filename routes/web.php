@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\AuthenticatedController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\NewPasswordController;
+use App\Http\Controllers\PasswordResetLinkController;
+use App\Http\Controllers\RegisteredUserController;
 use App\Models\E;
 use Devamirul\PhpMicro\core\Foundation\Application\Facade\Facades\Router;
 
@@ -13,33 +17,16 @@ use Devamirul\PhpMicro\core\Foundation\Application\Facade\Facades\Router;
 |
  */
 
-Router::get('/', function(){
-    return app()->getBindings();
-})
-->name('home');
+Router::get('/', [HomeController::class, 'index'])->name('home');
 
-// Router::get('/about/:id', function () {
-//     echo 'from about function';
-// })->middleware('auth')->name('name')->where('[1-9]$');
+Router::get('/login', [AuthenticatedController::class, 'create'])->name('login');
+Router::post('/login', [AuthenticatedController::class, 'store'])->name('login');
 
-Router::get('/home/:id', [App\Http\Controllers\HomeController::class, 'index'])
-    ->name('index')
-    ->where('[1-9]$');
+Router::get('/register', [RegisteredUserController::class, 'create'])->name('register');
+Router::post('/register', [RegisteredUserController::class, 'store'])->name('register');
 
-Router::post('/home', [App\Http\Controllers\HomeController::class, 'create'])
-    ->name('create');
+Router::get('/forgot-password', [PasswordResetLinkController::class, 'create'])->name('forgot.password');
+Router::post('/forgot-password', [PasswordResetLinkController::class, 'store'])->name('forgot.password');
 
-// Router::post('/about/:id/:o', function () {
-//     echo 'form user route func';
-// })
-//     ->name('postAbout')
-//     ->where(['[0-9]$', '[a-z]$']);
-
-Router::get('/about/:id/:o', function () {
-    echo 'form about route func';
-})->where(['[0-9]$', '[a-z]$'])->name('about')->middleware('auth');
-
-
-Router::get('/user', function () {
-    return 'user';
-})->name('user');
+Router::get('/reset', [NewPasswordController::class, 'create'])->name('reset');
+Router::post('/reset', [NewPasswordController::class, 'store'])->name('reset');
