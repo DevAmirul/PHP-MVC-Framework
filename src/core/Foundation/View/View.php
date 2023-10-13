@@ -22,6 +22,14 @@ class View {
     }
 
     /**
+     *
+     */
+    public function status(int $code) {
+        http_response_code($code);
+        return $this;
+    }
+
+    /**
      * This method Set and include main layout name, then send view() method.
      */
     protected function renderLayoutContent(?string $layout = null, ?array $params = null) {

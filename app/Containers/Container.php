@@ -2,9 +2,9 @@
 
 namespace App\Containers;
 
-use Devamirul\PhpMicro\core\Foundation\Application\Container\BaseContainer;
+use Devamirul\PhpMicro\core\Foundation\Application\Container\BaseContainer\BaseContainer;
 
-class ContainerTrait extends BaseContainer {
+class Container extends BaseContainer {
 
     public function register() {
 
