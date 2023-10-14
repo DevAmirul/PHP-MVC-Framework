@@ -121,7 +121,8 @@ class %s extends BaseMigration{
                 'TIMESTAMP',
                 'NOT NULL',
                 'DEFAULT',
-                'CURRENT_TIMESTAMP'
+                'NOW()',
+                'ON UPDATE NOW()'
             ],
         ]);
     }

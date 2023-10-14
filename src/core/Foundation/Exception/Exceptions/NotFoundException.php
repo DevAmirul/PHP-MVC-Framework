@@ -2,7 +2,9 @@
 
 namespace Devamirul\PhpMicro\core\Foundation\Exceptions;
 
-class NotFoundException extends \Exception {
+use Devamirul\PhpMicro\core\Foundation\Exception\BaseException;
+
+class NotFoundException extends BaseException {
     protected $message = 'Not found!';
     protected $code    = 404;
 }

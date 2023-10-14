@@ -92,8 +92,8 @@ if (!function_exists('session')) {
     }
 }
 
-if (!function_exists('flush')) {
-    function flush(): FlushMessage {
+if (!function_exists('flushMessage')) {
+    function flushMessage(): FlushMessage {
         return FlushMessage::singleton();
     }
 }

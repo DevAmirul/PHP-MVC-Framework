@@ -9,7 +9,6 @@ class FlushMessage extends AbstractSession {
     use Singleton;
 
     private function __construct() {
-
         if (isset($_SESSION['flush'])) {
             foreach ($_SESSION['flush'] as $key => $flashMessage) {
                 $_SESSION['flush'][$key]['remove'] = true;
@@ -27,6 +26,12 @@ class FlushMessage extends AbstractSession {
 
     public function get(string $key): mixed {
         return $_SESSION['flush'][$key]['data'] ?? null;
+    }
+
+    public function has(string $key): bool {
+        if (isset($_SESSION['flush'][$key])) return true;
+
+        else return false;
     }
 
     private function destroyFlushSession(): void {

@@ -47,3 +47,11 @@ if (!function_exists('url')) {
         return APP_ROOT . $path;
     }
 }
+
+if (!function_exists('errors')) {
+    function errors($key) {
+        $errors = flushMessage()->get('errors');
+        
+        if ($errors) echo $errors->first($key);
+    }
+}

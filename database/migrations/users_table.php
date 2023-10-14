@@ -24,6 +24,7 @@ class users_table extends BaseMigration {
             'email'          => [
                 'VARCHAR(225)',
                 'NOT NULL',
+                'UNIQUE'
             ],
             'password'       => [
                 'VARCHAR(225)',
@@ -43,7 +44,8 @@ class users_table extends BaseMigration {
                 'TIMESTAMP',
                 'NOT NULL',
                 'DEFAULT',
-                'CURRENT_TIMESTAMP'
+                'NOW()',
+                'ON UPDATE NOW()'
             ],
         ]);
     }

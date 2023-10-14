@@ -3,7 +3,7 @@
         'name' => 'devamirul/php-micro-framework',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '3d8cda5e8a51aff93749e6efe4e71e0431f26dba',
+        'reference' => 'a992c218b31a4f8ae42aa3be46fdde06844699e7',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -24,7 +24,7 @@
         'devamirul/php-micro-framework' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '3d8cda5e8a51aff93749e6efe4e71e0431f26dba',
+            'reference' => 'a992c218b31a4f8ae42aa3be46fdde06844699e7',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -72,13 +72,15 @@
             ),
             'dev_requirement' => false,
         ),
-        'rlanvin/php-form' => array(
-            'pretty_version' => 'v2.0.1',
-            'version' => '2.0.1.0',
-            'reference' => 'd68c4fe9cc2e9191175169409d718a59ea1bff55',
+        'rakit/validation' => array(
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => 'ff003a35cdf5030a5f2482299f4c93f344a35b29',
             'type' => 'library',
-            'install_path' => __DIR__ . '/../rlanvin/php-form',
-            'aliases' => array(),
+            'install_path' => __DIR__ . '/../rakit/validation',
+            'aliases' => array(
+                0 => '9999999-dev',
+            ),
             'dev_requirement' => false,
         ),
         'symfony/polyfill-ctype' => array(

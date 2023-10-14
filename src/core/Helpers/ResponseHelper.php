@@ -2,6 +2,8 @@
 
 use Devamirul\PhpMicro\core\Foundation\Application\Facade\Facades\Router;
 use Devamirul\PhpMicro\core\Foundation\Application\Facade\Facades\View;
+use Devamirul\PhpMicro\core\Foundation\Application\Redirect\Redirect;
+use Devamirul\PhpMicro\core\Foundation\Session\FlushMessage;
 
 
 if (!function_exists('abort')) {
@@ -15,8 +17,13 @@ if (!function_exists('abort')) {
 
 if (!function_exists('redirect')) {
     function redirect(string $redirectLink) {
-        header('Location: ' . $redirectLink);
-        exit;
+        return (new Redirect())->redirect($redirectLink);
+    }
+}
+
+if (!function_exists('back')) {
+    function back() {
+        return (new Redirect())->back();
     }
 }
 

@@ -23,6 +23,10 @@ class ComposerStaticInita1932bd67bb3d4f87ee188e57d44127b
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Polyfill\\Ctype\\' => 23,
         ),
+        'R' => 
+        array (
+            'Rakit\\Validation\\' => 17,
+        ),
         'P' => 
         array (
             'PhpOption\\' => 10,
@@ -39,10 +43,6 @@ class ComposerStaticInita1932bd67bb3d4f87ee188e57d44127b
         'G' => 
         array (
             'GrahamCampbell\\ResultType\\' => 26,
-        ),
-        'F' => 
-        array (
-            'Form\\' => 5,
         ),
         'D' => 
         array (
@@ -68,6 +68,10 @@ class ComposerStaticInita1932bd67bb3d4f87ee188e57d44127b
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
         ),
+        'Rakit\\Validation\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/rakit/validation/src',
+        ),
         'PhpOption\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpoption/phpoption/src/PhpOption',
@@ -87,10 +91,6 @@ class ComposerStaticInita1932bd67bb3d4f87ee188e57d44127b
         'GrahamCampbell\\ResultType\\' => 
         array (
             0 => __DIR__ . '/..' . '/graham-campbell/result-type/src',
-        ),
-        'Form\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/rlanvin/php-form/src',
         ),
         'Dotenv\\' => 
         array (

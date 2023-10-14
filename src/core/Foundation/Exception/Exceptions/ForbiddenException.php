@@ -2,7 +2,9 @@
 
 namespace Devamirul\PhpMicro\core\Foundation\Exceptions;
 
-class ModelNotFoundException extends \Exception {
+use Devamirul\PhpMicro\core\Foundation\Exception\BaseException;
+
+class ForbiddenException extends BaseException {
     protected $message = 'You don\'t have permission to access this action';
     protected $code    = 403;
 }
