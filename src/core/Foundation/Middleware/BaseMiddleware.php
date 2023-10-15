@@ -2,26 +2,36 @@
 
 namespace Devamirul\PhpMicro\core\Foundation\Middleware;
 
+use Devamirul\PhpMicro\core\Foundation\Application\Request\Request;
+
 class BaseMiddleware {
 
-    public static function resolve($names) {
+    public static function resolve($middlewareNames, Request $request) {
+        $arguments = [];
 
-        if (!$names) return;
+        if (empty($middlewareNames)) {
+            return;
+        }
 
-        if (is_string($names)) {
-            $middleware = config('middleware', 'middleware')[$names] ?? null;
+        foreach ($middlewareNames as $middleware) {
+            if (strpos($middleware, ":")) {
 
-            if (!$middleware) throw new \Exception('No matching middleware found for key' . $names);
+                $explodeMiddleware = explode(':', $middleware);
 
-            (new $middleware())->handle();
-        } else {
-            foreach ($names as $name) {
-                $middleware = config('middleware', 'middleware')[$name] ?? null;
+                $name = $explodeMiddleware[0];
 
-                if (!$middleware) throw new \Exception('No matching middleware found for key' . $name);
-
-                (new $middleware())->handle();
+                $arguments = explode(',', $explodeMiddleware[1]);
+            } else {
+                $name = $middleware;
             }
+
+            $middleware = config('middleware', 'middleware')[$name] ?? null;
+
+            if (!$middleware) {
+                throw new \Exception('No matching middleware found for key' . $name);
+            }
+
+            (new $middleware())->handle($request, $arguments);
         }
     }
 

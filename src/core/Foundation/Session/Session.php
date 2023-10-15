@@ -5,7 +5,7 @@ namespace Devamirul\PhpMicro\core\Foundation\Session;
 use Devamirul\PhpMicro\core\Foundation\Application\Traits\Singleton;
 use Devamirul\PhpMicro\core\Foundation\Session\Abstract\Session as AbstractSession;
 
-class Session extends AbstractSession{
+class Session extends AbstractSession {
     use Singleton;
 
     public function set(string $key, mixed $data): void {
@@ -21,8 +21,10 @@ class Session extends AbstractSession{
     }
 
     public function has(string $key): bool {
-        if (isset($_SESSION[$key])) return true;
-
-        else return false;
+        if (isset($_SESSION[$key])) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

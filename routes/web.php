@@ -5,7 +5,6 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewPasswordController;
 use App\Http\Controllers\PasswordResetLinkController;
 use App\Http\Controllers\RegisteredUserController;
-use App\Models\E;
 use Devamirul\PhpMicro\core\Foundation\Application\Facade\Facades\Router;
 
 /*
@@ -17,16 +16,18 @@ use Devamirul\PhpMicro\core\Foundation\Application\Facade\Facades\Router;
 |
  */
 
-Router::get('/', [HomeController::class, 'index'])->name('home');
+Router::get('/', [HomeController::class, 'index'])->name('home')->middleware('auth');
 
-Router::get('/login', [AuthenticatedController::class, 'create'])->name('login');
-Router::post('/login', [AuthenticatedController::class, 'store'])->name('login');
+Router::get('/login', [AuthenticatedController::class, 'create'])->name('login')->middleware('guest');
+Router::post('/login', [AuthenticatedController::class, 'store'])->name('login')->middleware('guest');
 
-Router::get('/register', [RegisteredUserController::class, 'create'])->name('register');
-Router::post('/register', [RegisteredUserController::class, 'store'])->name('register');
+Router::delete('/logout', [AuthenticatedController::class, 'destroy'])->name('logout')->middleware('auth');
 
-Router::get('/forgot-password', [PasswordResetLinkController::class, 'create'])->name('forgot.password');
-Router::post('/forgot-password', [PasswordResetLinkController::class, 'store'])->name('forgot.password');
+Router::get('/register', [RegisteredUserController::class, 'create'])->name('register')->middleware('guest');
+Router::post('/register', [RegisteredUserController::class, 'store'])->name('register')->middleware('guest');
 
-Router::get('/reset', [NewPasswordController::class, 'create'])->name('reset');
-Router::post('/reset', [NewPasswordController::class, 'store'])->name('reset');
+Router::get('/forgot-password', [PasswordResetLinkController::class, 'create'])->name('forgot.password')->middleware('guest');
+Router::put('/forgot-password', [PasswordResetLinkController::class, 'store'])->name('forgot.password')->middleware('guest');
+
+Router::get('/reset', [NewPasswordController::class, 'create'])->name('reset')->middleware('guest');
+Router::put('/reset', [NewPasswordController::class, 'store'])->name('reset')->middleware('guest');

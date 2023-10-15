@@ -7,9 +7,9 @@ use Devamirul\PhpMicro\core\Foundation\Application\Container\AppContainer;
 return [
     'name' => env('APP_NAME', 'PhpMicroFramework'),
 
-    'url'  => env('APP_URL', 'http://localhost'),
+    'app_url'  => env('APP_URL', 'http://localhost:8000'),
 
-    'home_url' => '/home',
+    'home_url' => '/',
 
     'debug_mode' => env('APP_DEBUG', true),
 

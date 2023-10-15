@@ -6,6 +6,10 @@ use Devamirul\PhpMicro\core\Foundation\Application\Container\BaseContainer\BaseC
 
 class AppServiceProvider extends BaseContainer {
 
+    public Const HOMEPATH = '/';
+    
+    public Const GUESTPATH = '/login';
+
     public function register() {
 
         $this->bind('fahad', function () {

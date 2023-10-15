@@ -3,7 +3,7 @@
 use Devamirul\PhpMicro\core\Foundation\Application\Request\Request;
 
 if (!function_exists('request')) {
-    function request(): void {
-        Request::singleton();
+    function request() {
+        return Request::singleton();
     }
 }

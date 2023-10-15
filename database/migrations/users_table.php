@@ -6,7 +6,7 @@ use Devamirul\PhpMicro\core\Foundation\CLI\Database\Base\BaseMigration;
 class users_table extends BaseMigration {
 
     /**
-     * This up()**************-ase class.####***######**
+     *
      */
     public function up() {
 
@@ -31,20 +31,18 @@ class users_table extends BaseMigration {
                 'NOT NULL',
             ],
             'remember_token' => [
-                'VARCHAR(100)',
-                'NOT NULL',
+                'VARCHAR(255)',
+                'DEFAULT NULL',
             ],
             'created_at' => [
                 'TIMESTAMP',
                 'NOT NULL',
-                'DEFAULT',
-                'CURRENT_TIMESTAMP'
+                'DEFAULT CURRENT_TIMESTAMP'
             ],
             'updated_at' => [
                 'TIMESTAMP',
                 'NOT NULL',
-                'DEFAULT',
-                'NOW()',
+                'DEFAULT NOW()',
                 'ON UPDATE NOW()'
             ],
         ]);

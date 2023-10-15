@@ -10,13 +10,25 @@
                 <li class="nav-item">
                 <a class="nav-link" aria-current="page" href="/">Home</a>
                 </li>
-                <li class="nav-item">
-                <a class="nav-link" href="/login">Login</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="/register">Register</a>
+                <?php if (auth()->check()): ?>
+                    <li class="nav-item">
+                        <form action="/logout" method="POST">
 
-                </li>
+                            <?= setMethod('delete') ?>
+                            <?= setCsrf() ?>
+
+                            <button class="btn btn-danger mt-1">Logout</button>
+                        </form>
+                    </li>
+                <?php else : ?>
+                    <li class="nav-item">
+                    <a class="nav-link" href="/login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="/register">Register</a>
+                    </li>
+                <?php endif?>
+
             </ul>
 
             </div>

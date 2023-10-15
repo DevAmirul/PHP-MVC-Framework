@@ -3,7 +3,6 @@
 namespace Devamirul\PhpMicro\core\Foundation\Application\Redirect;
 
 use Devamirul\PhpMicro\core\Foundation\Session\FlushMessage;
-use Devamirul\PhpMicro\core\Foundation\Session\Session;
 
 class Redirect {
 
@@ -20,7 +19,11 @@ class Redirect {
     }
 
     public function withError(mixed $errors): static {
-        FlushMessage::singleton()->set('errors', $errors);
+        if (is_string($errors)) {
+            FlushMessage::singleton()->set('error', $errors);
+        }else {
+            FlushMessage::singleton()->set('errors', $errors);
+        }
         return $this;
     }
 

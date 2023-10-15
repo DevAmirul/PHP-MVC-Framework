@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Devamirul\PhpMicro\core\Foundation\Application\Request\Request;
+use Devamirul\PhpMicro\core\Foundation\Auth\Authentication\AuthRegister;
 use Devamirul\PhpMicro\core\Foundation\Controller\BaseController;
 use Rakit\Validation\Validator;
 
@@ -31,7 +32,11 @@ class RegisteredUserController extends BaseController {
 
             return back()->withError($errors);
         } else {
-            
+            $validatedData = $validation->getValidatedData();
+
+            $authentication = new AuthRegister();
+
+            $authentication->register($validatedData);
         }
     }
 }

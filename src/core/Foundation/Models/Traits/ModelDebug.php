@@ -25,11 +25,11 @@ trait ModelDebug {
         return $this->db->last();
     }
 
-    public function error(): string {
+    public function error(): string|null {
         return $this->db->error;
     }
 
-    public function errorInfo(): array {
+    public function errorInfo(): array|null {
         return $this->db->errorInfo;
     }
 

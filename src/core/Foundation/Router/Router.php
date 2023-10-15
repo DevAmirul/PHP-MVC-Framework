@@ -156,7 +156,7 @@ class Router {
                             throw new Exception('route not match', 404);
                         }
 
-                        BaseMiddleware::resolve($routes['middleware']);
+                        BaseMiddleware::resolve($routes['middleware'], $this->request);
 
                         if (is_callable($routes['callback'])) {
                             // dd($routes['path']);

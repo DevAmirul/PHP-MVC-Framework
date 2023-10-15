@@ -1,20 +1,22 @@
 <?php
 
-    namespace App\Http\Controllers;
+namespace App\Http\Controllers;
 
-    use Devamirul\PhpMicro\core\Foundation\Application\Request\Request;
-    use Devamirul\PhpMicro\core\Foundation\Controller\BaseController;
+use ICanBoogie\DateTime;
+use Devamirul\PhpMicro\core\Foundation\Application\Request\Request;
+use Devamirul\PhpMicro\core\Foundation\Auth\Authentication\AuthReset;
+use Devamirul\PhpMicro\core\Foundation\Controller\BaseController;
 
-    class PasswordResetLinkController extends BaseController {
+class PasswordResetLinkController extends BaseController {
 
-        /**
-         *
-         */
-        public function create(Request $request){
-            return view('guest/forgot-password');
-        }
-
-        public function store(Request $request){
-
-        }
+    /**
+     *
+     */
+    public function create() {
+        return view('guest/forgot-password');
     }
+
+    public function store() {
+        (new AuthReset())->sendLink('/reset');
+    }
+}

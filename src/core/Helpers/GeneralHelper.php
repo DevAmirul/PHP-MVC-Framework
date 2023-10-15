@@ -1,8 +1,8 @@
 <?php
 
 use Devamirul\PhpMicro\core\Foundation\Application\Application;
-use Devamirul\PhpMicro\core\Foundation\Application\Facade\Facades\Auth;
 use Devamirul\PhpMicro\core\Foundation\Application\Facade\Facades\View;
+use Devamirul\PhpMicro\core\Foundation\Auth\Auth;
 use Devamirul\PhpMicro\core\Foundation\Events\Event;
 use Devamirul\PhpMicro\core\Foundation\Exceptions\NotFoundException;
 use Devamirul\PhpMicro\core\Foundation\Session\FlushMessage;
@@ -99,13 +99,13 @@ if (!function_exists('flushMessage')) {
 }
 
 if (!function_exists('auth')) {
-    function auth(string $user = 'user'): bool | array {
-        return Auth::singleton()->auth($user);
+    function auth(): Auth {
+        return new Auth();
     }
 }
 
-if (!function_exists('hash')) {
-    function hash(string $password, string | int | null $algo = PASSWORD_DEFAULT, int $cost = 10): string {
+if (!function_exists('passwordHash')) {
+    function passwordHash(string $password, string | int | null $algo = PASSWORD_DEFAULT, int $cost = 10): string {
         return password_hash($password, $algo, ["cost" => $cost]);
     }
 }
@@ -116,8 +116,10 @@ if (!function_exists('event')) {
     }
 }
 
-// if (!function_exists('listen')) {
-//     function listen(string $name, callable $callback) {
-//         Event::singleton()
-//     }
-// }
+if (!function_exists('url')) {
+    function url(string $path = null) {
+        return APP_ROOT . $path;
+    }
+}
+
+

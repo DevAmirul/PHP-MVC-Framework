@@ -17,14 +17,14 @@ class Request {
         return trim($url['path']) ?? null;
     }
 
-    public function fragment() {
-        $url = parse_url($_SERVER['REQUEST_URI']);
-        return trim($url['fragment']) ?? null;
-    }
-
     public function query() {
         $url = parse_url($_SERVER['REQUEST_URI']);
-        return trim($url['query']) ?? null;
+
+        $query = $url['query'] ?? null;
+
+        parse_str($query, $params);
+        
+        return $params;
     }
 
     /**

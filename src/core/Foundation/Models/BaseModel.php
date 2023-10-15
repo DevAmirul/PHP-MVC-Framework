@@ -11,7 +11,9 @@ class BaseModel {
     use ModelQuery, ModelDebug;
 
     public $table;
+
     public mixed $data;
+    
     public Medoo $db;
 
     public function __construct() {

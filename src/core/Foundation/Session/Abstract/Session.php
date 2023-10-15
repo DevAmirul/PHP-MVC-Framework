@@ -4,7 +4,7 @@ namespace Devamirul\PhpMicro\core\Foundation\Session\Abstract;
 
 abstract class Session {
 
-    public function __construct(){
+    protected function __construct(){
         session_start();
     }
 
