@@ -29,5 +29,5 @@ Router::post('/register', [RegisteredUserController::class, 'store'])->name('reg
 Router::get('/forgot-password', [PasswordResetLinkController::class, 'create'])->name('forgot.password')->middleware('guest');
 Router::put('/forgot-password', [PasswordResetLinkController::class, 'store'])->name('forgot.password')->middleware('guest');
 
-Router::get('/reset', [NewPasswordController::class, 'create'])->name('reset')->middleware('guest');
+Router::get('/reset/:link', [NewPasswordController::class, 'create'])->name('reset')->middleware('guest');  
 Router::put('/reset', [NewPasswordController::class, 'store'])->name('reset')->middleware('guest');

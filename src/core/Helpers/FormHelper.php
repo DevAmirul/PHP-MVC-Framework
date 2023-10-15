@@ -36,7 +36,6 @@ if (!function_exists('errors')) {
         if ($errors) {
             return $errors->first($key);
         }
-
     }
 }
 
@@ -53,6 +52,21 @@ if (!function_exists('hasError')) {
         if (flushMessage()->has('error')) {
             return true;
         }
+    }
+}
 
+if (!function_exists('success')) {
+    function success() {
+        if (flushMessage()->has('success')) {
+            return flushMessage()->get('success');
+        }
+    }
+}
+
+if (!function_exists('hasSuccess')) {
+    function hasSuccess() {
+        if (flushMessage()->has('success')) {
+            return true;
+        }
     }
 }

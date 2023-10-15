@@ -5,7 +5,7 @@ use App\Providers\EventServiceProvider;
 use Devamirul\PhpMicro\core\Foundation\Application\Container\AppContainer;
 
 return [
-    'name' => env('APP_NAME', 'PhpMicroFramework'),
+    'app_name' => env('APP_NAME', 'PhpMicroFramework'),
 
     'app_url'  => env('APP_URL', 'http://localhost:8000'),
 

@@ -3,7 +3,7 @@
         'name' => 'devamirul/php-micro-framework',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'a992c218b31a4f8ae42aa3be46fdde06844699e7',
+        'reference' => 'd97f62c6cb21b93832ae5e49f135cb05eab66c57',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -24,7 +24,7 @@
         'devamirul/php-micro-framework' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'a992c218b31a4f8ae42aa3be46fdde06844699e7',
+            'reference' => 'd97f62c6cb21b93832ae5e49f135cb05eab66c57',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -72,6 +72,15 @@
             ),
             'dev_requirement' => false,
         ),
+        'psr/log' => array(
+            'pretty_version' => '1.1.4',
+            'version' => '1.1.4.0',
+            'reference' => 'd49695b909c3b7628b6289db5479a1c204601f11',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../psr/log',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'rakit/validation' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
@@ -108,6 +117,17 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/polyfill-php80',
             'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'txthinking/mailer' => array(
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => 'af82e9a2207c66bd43cfea8bf42022fcc322800e',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../txthinking/mailer',
+            'aliases' => array(
+                0 => '9999999-dev',
+            ),
             'dev_requirement' => false,
         ),
         'vlucas/phpdotenv' => array(

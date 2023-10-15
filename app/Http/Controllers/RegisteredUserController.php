@@ -34,9 +34,7 @@ class RegisteredUserController extends BaseController {
         } else {
             $validatedData = $validation->getValidatedData();
 
-            $authentication = new AuthRegister();
-
-            $authentication->register($validatedData);
+            (new AuthRegister())->register($validatedData);
         }
     }
 }

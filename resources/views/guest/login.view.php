@@ -5,9 +5,9 @@
     <div class="row">
         <div class="col-4 m-auto ">
 
-        <?php if (flushMessage()->has('success')): ?>
+        <?php if (hasSuccess()): ?>
             <div class="alert alert-success mt-3" role="alert">
-                <?=flushMessage()->get('success')?>
+                <?=success()?>
             </div>
         <?php endif?>
 
@@ -44,12 +44,11 @@
 
         </form>
 
-        <?php if (flushMessage()->has('error')): ?>
+        <?php if (hasError()): ?>
             <div class="alert alert-success mt-3" role="alert">
                 <?= error() ?>
             </div>
         <?php endif?>
-
 
         </div>
     </div>

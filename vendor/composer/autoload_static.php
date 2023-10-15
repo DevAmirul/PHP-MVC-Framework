@@ -17,6 +17,10 @@ class ComposerStaticInita1932bd67bb3d4f87ee188e57d44127b
     );
 
     public static $prefixLengthsPsr4 = array (
+        'T' => 
+        array (
+            'Tx\\' => 3,
+        ),
         'S' => 
         array (
             'Symfony\\Polyfill\\Php80\\' => 23,
@@ -29,6 +33,7 @@ class ComposerStaticInita1932bd67bb3d4f87ee188e57d44127b
         ),
         'P' => 
         array (
+            'Psr\\Log\\' => 8,
             'PhpOption\\' => 10,
             'PHPMailer\\PHPMailer\\' => 20,
         ),
@@ -56,6 +61,10 @@ class ComposerStaticInita1932bd67bb3d4f87ee188e57d44127b
     );
 
     public static $prefixDirsPsr4 = array (
+        'Tx\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/txthinking/mailer/src',
+        ),
         'Symfony\\Polyfill\\Php80\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php80',
@@ -71,6 +80,10 @@ class ComposerStaticInita1932bd67bb3d4f87ee188e57d44127b
         'Rakit\\Validation\\' => 
         array (
             0 => __DIR__ . '/..' . '/rakit/validation/src',
+        ),
+        'Psr\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
         ),
         'PhpOption\\' => 
         array (

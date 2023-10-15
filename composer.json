@@ -40,6 +40,7 @@
         "catfan/medoo": "dev-master",
         "icanboogie/datetime": "dev-master",
         "phpmailer/phpmailer": "dev-master",
-        "rakit/validation": "dev-master"
+        "rakit/validation": "dev-master",
+        "txthinking/mailer": "dev-master"
     }
 }

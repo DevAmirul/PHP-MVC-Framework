@@ -4,6 +4,12 @@
     <div class="row">
         <div class="col-4 m-auto ">
 
+            <?php if (hasSuccess()): ?>
+                <div class="alert alert-success mt-3" role="alert">
+                    <?=success()?>
+                </div>
+            <?php endif?>
+
             <form action="/forgot-password" method="POST" class="mt-5">
 
                 <?=setMethod('put')?>
@@ -21,9 +27,11 @@
 
             </form>
 
-            <?php
-                error();
-            ?>
+            <?php if (hasError()): ?>
+                <div class="alert alert-success mt-3" role="alert">
+                    <?=error()?>
+                </div>
+            <?php endif?>
 
         </div>
     </div>
