@@ -3,6 +3,7 @@
 namespace Devamirul\PhpMicro\core\Foundation\Application\Traits;
 
 trait Singleton {
+
     private static $instance = null;
 
     public static function singleton(): Object {
@@ -13,4 +14,5 @@ trait Singleton {
     }
 
     private function __clone() {}
+    
 }

@@ -3,14 +3,20 @@
 namespace App\Providers;
 
 use Devamirul\PhpMicro\core\Foundation\Application\Container\BaseContainer;
-use Devamirul\PhpMicro\core\Foundation\Application\Container\Interfaces\ContainerInterfaces;
-use Devamirul\PhpMicro\core\Foundation\Events\Event;
+use Devamirul\PhpMicro\core\Foundation\Application\Container\Interface\ContainerInterface;
 
-class AppServiceProvider extends BaseContainer implements ContainerInterfaces {
+class AppServiceProvider extends BaseContainer implements ContainerInterface {
 
+    /**
+     * Set home path.
+     */
     public Const HOMEPATH = '/';
 
+    /**
+     * Set guest redirect path.
+     */
     public Const GUESTPATH = '/login';
+
 
     /**
      * Register any application services.
@@ -23,13 +29,11 @@ class AppServiceProvider extends BaseContainer implements ContainerInterfaces {
     }
 
     /**
-     * If you want to do something before handling the request.
+     * Bootstrap any application services
+     * and if you want to do something before handling the request.
      */
     public function boot(): void {
-        Event::listen('boot', function () {
-            echo 'return form boot';
-        });
-
-        Event::trigger('boot');
+        //
     }
+
 }

@@ -3,6 +3,7 @@
 namespace Devamirul\PhpMicro\core\Foundation\Models\Traits;
 
 trait ModelDebug {
+    
     public function debug(): static {
         $this->db->debug();
         return $this;

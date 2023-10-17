@@ -1,8 +1,14 @@
 <?php
 
 return [
+    /**
+     * Default Database Connection Name.
+     */
     'default'     => env('DB_CONNECTION', 'mysql'),
 
+    /**
+     * Define multiple database Configurations.
+     */
     'connections' => [
         'mysql' => [
             'driver'   => 'mysql',

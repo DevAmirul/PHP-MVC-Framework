@@ -4,20 +4,21 @@ namespace Devamirul\PhpMicro\core\Foundation\Application\Container\Containers;
 
 use Devamirul\PhpMicro\core\Foundation\Application\Application;
 use Devamirul\PhpMicro\core\Foundation\Application\Container\BaseContainer;
-use Devamirul\PhpMicro\core\Foundation\Application\Container\Interfaces\ContainerInterfaces;
+use Devamirul\PhpMicro\core\Foundation\Application\Container\Interface\ContainerInterface;
 use Devamirul\PhpMicro\core\Foundation\Application\Request\Request;
 use Devamirul\PhpMicro\core\Foundation\Auth\Auth;
 use Devamirul\PhpMicro\core\Foundation\Database\BaseDatabase;
-use Devamirul\PhpMicro\core\Foundation\Mail\Mail;
 use Devamirul\PhpMicro\core\Foundation\Router\Router;
 use Devamirul\PhpMicro\core\Foundation\Session\FlushMessage;
 use Devamirul\PhpMicro\core\Foundation\Session\Session;
 use Devamirul\PhpMicro\core\Foundation\View\View;
 
-class ApplicationContainer extends BaseContainer implements ContainerInterfaces {
+class ApplicationContainer extends BaseContainer implements ContainerInterface {
 
+    /**
+     * Register any application services.
+     */
     public function register(): void {
-
         $this->app->bind('App', function () {
             return Application::singleton();
         });
@@ -42,10 +43,6 @@ class ApplicationContainer extends BaseContainer implements ContainerInterfaces 
             return new Auth();
         });
 
-        $this->app->bind('Mail', function () {
-            return new Mail();
-        });
-
         $this->app->bind('Router', function () {
 
             $router = Router::singleton();
@@ -60,6 +57,10 @@ class ApplicationContainer extends BaseContainer implements ContainerInterfaces 
         });
     }
 
+    /**
+     * Bootstrap any application services
+     * and if you want to do something before handling the request.
+     */
     public function boot(): void {
         //
     }

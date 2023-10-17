@@ -1,13 +1,12 @@
 <?php
 
-namespace Devamirul\PhpMicro\core\Foundation\Mail;
+namespace Devamirul\PhpMicro\core\Foundation\Application\Mail;
 
 use Tx\Mailer;
 
 class Mail {
 
-    public function mailer(): Mailer {
-
+    public static function mailer(): Mailer {
         $mailConfig = config('mail', 'smtp');
 
         return (new Mailer())

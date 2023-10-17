@@ -4,16 +4,33 @@ use App\Providers\AppServiceProvider;
 use Devamirul\PhpMicro\core\Foundation\Application\Container\Containers\ApplicationContainer;
 
 return [
-    'app_name'   => env('APP_NAME', 'PhpMicroFramework'),
 
-    'app_url'    => env('APP_URL', 'http://localhost:8000'),
+    /**
+     * Application Name.
+     */
+    'app_name'  => env('APP_NAME', 'PhpMicroFramework'),
 
-    'home_url'   => '/',
+    /**
+     * Application Url.
+     */
+    'app_url'   => env('APP_URL', 'http://localhost:8000'),
 
-    'debug_mode' => env('APP_DEBUG', true),
+    /**
+     * Application Home path.
+     */
+    'home_url'  => '/',
 
-    'providers'  => [
+    /**
+     * Application Timezone.
+     */
+    'timezone' => 'Asia/Dhaka',
+
+    /**
+     * Autoloaded All Service Providers.
+     */
+    'providers' => [
         ApplicationContainer::class,
         AppServiceProvider::class,
     ],
+
 ];

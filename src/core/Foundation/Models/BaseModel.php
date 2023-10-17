@@ -13,7 +13,7 @@ class BaseModel {
     public $table;
 
     public mixed $data;
-    
+
     public Medoo $db;
 
     public function __construct() {
@@ -22,7 +22,7 @@ class BaseModel {
         $this->getTableName();
     }
 
-    public function getTableName() {
+    public function getTableName(): void {
         if (!$this->table) {
             $explodedClassName = explode("\\", get_called_class());
             $this->table       = strtolower($explodedClassName[array_key_last($explodedClassName)]);
@@ -41,5 +41,4 @@ class BaseModel {
     public function getData(): mixed {
         return $this->data;
     }
-
 }

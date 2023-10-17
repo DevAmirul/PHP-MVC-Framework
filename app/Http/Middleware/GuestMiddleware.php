@@ -9,8 +9,10 @@ use Devamirul\PhpMicro\core\Foundation\Middleware\Interface\Middleware;
 
 class GuestMiddleware implements Middleware {
 
+    /**
+     * Handle an incoming request.
+     */
     public function handle(Request $request, array $guards) {
-
         if (!empty($guards)) {
             foreach ($guards as $guard) {
                 if (Auth::guard($guard)->check()) {
@@ -20,8 +22,7 @@ class GuestMiddleware implements Middleware {
         }elseif (Auth::check()) {
             return redirect(AppServiceProvider::HOMEPATH);
         }
-        
         return;
-
     }
+
 }

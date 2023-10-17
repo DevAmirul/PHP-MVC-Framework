@@ -7,14 +7,10 @@ use App\Http\Controllers\PasswordResetLinkController;
 use App\Http\Controllers\RegisteredUserController;
 use Devamirul\PhpMicro\core\Foundation\Application\Facade\Facades\Router;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register routes for your application.
-|
+/**
+ * Here is where you can register routes for your application.
  */
+
 
 Router::get('/', [HomeController::class, 'index'])->name('home')->middleware('auth');
 

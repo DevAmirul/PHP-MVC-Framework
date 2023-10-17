@@ -3,7 +3,7 @@
 namespace Devamirul\PhpMicro\core\Foundation\Auth\Authentication;
 
 use Devamirul\PhpMicro\core\Foundation\Auth\Traits\Guard;
-use Exception;
+use Devamirul\PhpMicro\core\Foundation\Exception\Exceptions\DatabaseErrorException;
 
 class AuthRegister {
     use Guard;
@@ -20,7 +20,7 @@ class AuthRegister {
         $modelData = (new $this->guard['model'])->insert($input);
 
         if ($modelData->error()) {
-            throw new Exception($modelData->error());
+            throw new DatabaseErrorException($modelData->error());
         }
         flushMessage()->set('success', 'Account created successfully.');
 

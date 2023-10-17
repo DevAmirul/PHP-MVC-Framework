@@ -8,7 +8,7 @@ if ($provider) {
         echo 'error: - A file with this name already exists in the providers folder, please try another name.' . PHP_EOL;
 
         goto provider;
-    }else{
+    } else {
         $resource = fopen('../../../../../app/Providers/' . ucfirst($provider) . 'ServiceProvider.php', "w")
         or die("Unable to create file!");
 
@@ -20,21 +20,32 @@ if ($provider) {
     }
 }
 
-function getProviderTemplate(string $providerName) : string {
+function getProviderTemplate(string $providerName): string {
     return sprintf(
-    "<?php
+        "<?php
 
     namespace App\Providers;
 
-    use Devamirul\PhpMicro\core\Foundation\Application\Container\BaseContainer\BaseContainer;
+    use Devamirul\PhpMicro\core\Foundation\Application\Container\BaseContainer;
+    use Devamirul\PhpMicro\core\Foundation\Application\Container\Interface\ContainerInterface;
 
-    class AppServiceProvider extends BaseContainer {
+    class AppServiceProvider extends BaseContainer implements ContainerInterface {
 
-        public function register() {
+        /**
+         * Register any application services.
+         */
+        public function register(): void {
+            //
         }
 
-        public function boot() {
+        /**
+         * Bootstrap any application services
+         * and if you want to do something before handling the request.
+         */
+        public function boot(): void {
+            //
         }
+
     }", $providerName . 'ServiceProvider'
     );
 }

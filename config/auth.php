@@ -2,8 +2,14 @@
 
 return [
 
+    /**
+     * Set Default authentication guards.
+     */
     'defaults' => 'web',
 
+    /**
+     * Define multiple guards.
+     */
     'guards'   => [
         'web'    => [
             'provider' => 'users',

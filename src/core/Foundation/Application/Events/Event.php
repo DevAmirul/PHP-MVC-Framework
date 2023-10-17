@@ -1,6 +1,6 @@
 <?php
 
-namespace Devamirul\PhpMicro\core\Foundation\Events;
+namespace Devamirul\PhpMicro\core\Foundation\Application\Events;
 
 use Devamirul\PhpMicro\core\Foundation\Application\Traits\Singleton;
 use Exception;
@@ -17,9 +17,7 @@ class Event {
     }
 
     public static function trigger(string $name, mixed $argument = null) {
-
         if (isset(self::$events[$name])) {
-
             $callback = self::$events[$name];
 
             if ($argument && !is_array($argument)) {
@@ -29,10 +27,9 @@ class Event {
             }else{
                 call_user_func($callback);
             }
-
         }else{
-            throw new Exception('event not trigger');
+            throw new Exception('Event not trigger');
         }
-        
     }
+
 }

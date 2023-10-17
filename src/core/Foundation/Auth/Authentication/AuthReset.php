@@ -2,9 +2,10 @@
 
 namespace Devamirul\PhpMicro\core\Foundation\Auth\Authentication;
 
-use Devamirul\PhpMicro\core\Foundation\Application\Facade\Facades\Mail;
+use Devamirul\PhpMicro\core\Foundation\Application\Mail\Mail;
 use Devamirul\PhpMicro\core\Foundation\Application\Supports\url;
 use Devamirul\PhpMicro\core\Foundation\Auth\Traits\Guard;
+use Devamirul\PhpMicro\core\Foundation\Exception\Exceptions\DatabaseErrorException;
 use Exception;
 
 class AuthReset {
@@ -51,7 +52,6 @@ class AuthReset {
         return back();
     }
 
-
     public function resetPassword(array $input, string $redirectLink = '/login') {
 
         $model = new $this->guard['model'];
@@ -68,14 +68,14 @@ class AuthReset {
 
         $updatedRow = $model->update(
             [
-                "password" => passwordHash($input['password']),
-                "reset_token" => null
+                "password"    => passwordHash($input['password']),
+                "reset_token" => null,
             ],
             ["email" => $input['email']]
         );
 
         if ($updatedRow->error()) {
-            throw new Exception($updatedRow->error());
+            throw new DatabaseErrorException($updatedRow->error());
         }
 
         return redirect($redirectLink);

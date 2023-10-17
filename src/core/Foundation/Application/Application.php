@@ -13,9 +13,16 @@ class Application extends AppContainer {
         $this->callServiceProviders();
     }
 
-    public function run() {
+    public function run(): void {
         try {
-            echo var_export(Router::resolve(), true);
+            $content = Router::resolve();
+
+            if (is_array($content)) {
+                echo var_export($content, true);
+            }else {
+                echo $content;
+            }
+
         } catch (\Exception $error) {
             http_response_code($error->getCode());
             echo $error->getMessage();

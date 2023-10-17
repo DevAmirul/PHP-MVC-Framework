@@ -7,6 +7,11 @@ use Devamirul\PhpMicro\core\Foundation\Application\Traits\Singleton;
 class View {
     use Singleton;
 
+    /**
+     * Set page title
+     *
+     * @var string
+     */
     public string $title;
 
     private function __construct() {}
@@ -14,7 +19,7 @@ class View {
     /**
      * This view() method render and view html page in front you.
      */
-    public function view(string $view, ?array $params = null, ?string $layout = null) {
+    public function view(string $view, ?array $params = null, ?string $layout = null): string {
         $viewContent   = $this->renderViewContent($view, $params);
         $layoutContent = $this->renderLayoutContent($layout, $params);
 
@@ -24,7 +29,7 @@ class View {
     /**
      *
      */
-    public function status(int $code) {
+    public function status(int $code): static {
         http_response_code($code);
         return $this;
     }
@@ -32,16 +37,14 @@ class View {
     /**
      * This method Set and include main layout name, then send view() method.
      */
-    protected function renderLayoutContent(?string $layout = null, ?array $params = null) {
+    protected function renderLayoutContent(?string $layout = null, ?array $params = null): string {
         if ($params) {
             foreach ($params as $key => $value) {
                 $$key = $value;
             }
         }
 
-        if (!$layout) {
-            $layout = 'app';
-        }
+        if (!$layout) $layout = 'app';
 
         ob_start();
 
@@ -53,12 +56,13 @@ class View {
     /**
      * This method include html content Based on user's needs then send view() method.
      */
-    protected function renderViewContent(string $view, ?array $params = null) {
+    protected function renderViewContent(string $view, ?array $params = null): string {
         if ($params) {
             foreach ($params as $key => $value) {
                 $$key = $value;
             }
         }
+
         ob_start();
 
         include_once APP_ROOT . "/resources/views/" . $view . ".view.php";
@@ -79,4 +83,5 @@ class View {
     public function getTitle(): string {
         return $this->title;
     }
+    
 }

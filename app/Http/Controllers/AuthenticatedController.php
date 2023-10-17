@@ -10,10 +10,9 @@ use Rakit\Validation\Validator;
 
 class AuthenticatedController extends BaseController {
 
-    /**
-     *
-     */
     public function create() {
+        // return url();
+        // return route('register');
         return view('guest/login');
     }
 

@@ -2,6 +2,7 @@
 
 namespace Devamirul\PhpMicro\core\Foundation\Router;
 
+use Devamirul\PhpMicro\core\Foundation\Application\Redirect\Redirect;
 use Devamirul\PhpMicro\core\Foundation\Application\Request\Request;
 use Devamirul\PhpMicro\core\Foundation\Application\Traits\Singleton;
 use Devamirul\PhpMicro\core\Foundation\Middleware\BaseMiddleware;
@@ -34,55 +35,56 @@ class Router {
             'middleware' => config('middleware', $this->method) ? config('middleware', $this->method) : null,
             'where'      => null,
         ];
+
         return $this;
     }
 
     /**
      * This function store all get method router in $routers[] array.
      */
-    public function get(string $path, $callback) {
+    public function get(string $path, $callback): static {
         return $this->addRoute('get', $path, $callback);
     }
 
     /**
      * This function store all post method router in $routers[] array.
      */
-    public function post(string $path, $callback) {
+    public function post(string $path, $callback): static {
         return $this->addRoute('post', $path, $callback);
     }
 
     /**
      * This function store all post method router in $routers[] array.
      */
-    public function put(string $path, $callback) {
+    public function put(string $path, $callback): static {
         return $this->addRoute('put', $path, $callback);
     }
 
     /**
      * This function store all post method router in $routers[] array.
      */
-    public function patch(string $path, $callback) {
+    public function patch(string $path, $callback): static {
         return $this->addRoute('patch', $path, $callback);
     }
 
     /**
      * This function store all post method router in $routers[] array.
      */
-    public function delete(string $path, $callback) {
+    public function delete(string $path, $callback): static {
         return $this->addRoute('delete', $path, $callback);
     }
 
     /**
      *
      */
-    public function name(string $name) {
+    public function name(string $name): static {
         if (!empty($this->routeNames[$this->method])) {
             if (isset($this->routeNames[$this->method][$name])) {
                 throw new Exception('Router name (' . $name . ') has been used more than once');
             }
         }
-        $this->routes[$this->method][array_key_last($this->routes[$this->method])]['name'] = $name;
 
+        $this->routes[$this->method][array_key_last($this->routes[$this->method])]['name'] = $name;
         $this->routeNames[$this->method] = $name;
 
         return $this;
@@ -91,17 +93,16 @@ class Router {
     /**
      *
      */
-    public function middleware(string | array $middlewareNames): Router {
+    public function middleware(string | array $middlewareNames): static {
 
         $this->routes[$this->method][array_key_last($this->routes[$this->method])]['middleware'][] = $middlewareNames;
-
         return $this;
     }
 
     /**
      *
      */
-    public function where(string | array $expression = null) {
+    public function where(string | array $expression = null): static {
         if (is_string($expression)) {
             $this->routes[$this->method][array_key_last($this->routes[$this->method])]['where'] = [$expression];
         } else {
@@ -114,7 +115,7 @@ class Router {
      * This method is called from the run method, this method resolves all routers.
      * And it is decided which router will do which job.
      */
-    public function resolve() {
+    public function resolve(): mixed {
         // dd($this->routes);
 
         $path = explode('/', ltrim($this->request->path(), '/'));
@@ -183,11 +184,10 @@ class Router {
         }
     }
 
-    public function route(string $name, string | array $params = null) {
+    public function route(string $name, string | array $params = null): Redirect {
 
         foreach ($this->routes[$this->request->method()] as $routes) {
             if ($routes['name'] === $name) {
-
                 if (is_string($params)) {
                     $params = array($params);
                 }
@@ -195,7 +195,6 @@ class Router {
                 if (!$routes['where']) {
                     $url        = '';
                     $whereIndex = 0;
-                    // dd($routes['where']);
 
                     foreach ($routes['path'] as $key => $value) {
                         if (str_starts_with($value, ':') && $params) {
@@ -210,12 +209,9 @@ class Router {
                             $url .= '/' . $value;
                         }
                     }
-
                     redirect($url);
 
                 } elseif (isset($routes['where']) && isset($params) && (sizeof($params) === sizeof($routes['where']))) {
-
-                    // dd($routes['where']);
                     foreach ($routes['where'] as $key => $value) {
                         if (!preg_match('/' . $value . '/', $params[$key])) {
                             throw new Exception('expression not match');
@@ -233,13 +229,10 @@ class Router {
                             $url .= '/' . $value;
                         }
                     }
-
                     redirect($url);
                 } else {
-                    // throw new Exception('route params where condition not matching');
                     throw new Exception('route params where condition not matching or not define any params');
                 }
-
             }
         }
         throw new Exception('route name not found');

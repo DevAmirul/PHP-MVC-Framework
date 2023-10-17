@@ -1,46 +1,62 @@
 <?php
 
-use Devamirul\PhpMicro\core\Foundation\Application\Facade\Facades\Router;
-use Devamirul\PhpMicro\core\Foundation\Application\Facade\Facades\View;
 use Devamirul\PhpMicro\core\Foundation\Application\Redirect\Redirect;
-use Devamirul\PhpMicro\core\Foundation\Session\FlushMessage;
-
+use Devamirul\PhpMicro\core\Foundation\Router\Router;
+use Devamirul\PhpMicro\core\Foundation\View\View;
 
 if (!function_exists('abort')) {
-    function abort(int $code = 404, string $message = '') {
-        return status($code)->view('errors/' . $code, [
+    /**
+     * Throw an HttpException with the given data.
+     */
+    function abort(int $code = 404, string $message = ''): string {
+        return View::singleton()->status($code)->view('errors/' . $code, [
             'message' => $message,
-            'code'=> $code
+            'code'    => $code,
         ]);
     }
 }
 
 if (!function_exists('redirect')) {
-    function redirect(string $redirectLink) {
+    /**
+     * Get an instance of the redirect.
+     */
+    function redirect(string $redirectLink): Redirect {
         return (new Redirect())->redirect($redirectLink);
     }
 }
 
 if (!function_exists('back')) {
-    function back() {
+    /**
+     * Create a new redirect response to the previous location.
+     */
+    function back(): Redirect {
         return (new Redirect())->back();
     }
 }
 
 if (!function_exists('route')) {
-    function route(string $name, array | string $params = null) {
-        Router::route($name, $params);
+    /**
+     * Generate route name to a url.
+     */
+    function route(string $name, array | string $params = null): void {
+        Router::singleton()->route($name, $params);
     }
 }
 
 if (!function_exists('view')) {
-    function view(string $path, ?array $data = null) {
-        return View::view($path, $data);
+    /**
+     * Get the evaluated view contents for the given view.
+     */
+    function view(string $path, ?array $data = null): string {
+        return View::singleton()->view($path, $data);
     }
 }
 
 if (!function_exists('status')) {
-    function status(int $code) {
-        return View::status($code);
+    /**
+     * Set the response status code with the view content.
+     */
+    function status(int $code): View {
+        return View::singleton()->status($code);
     }
 }

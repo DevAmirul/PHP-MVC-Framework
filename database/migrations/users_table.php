@@ -2,31 +2,29 @@
 
 use Devamirul\PhpMicro\core\Foundation\CLI\Database\Base\BaseMigration;
 
-
 class users_table extends BaseMigration {
 
     /**
-     *
+     * Run the migrations.
      */
     public function up() {
-
         return static::db()->create('users', [
-            'id'             => [
+            'id'          => [
                 'INT',
                 'NOT NULL',
                 'AUTO_INCREMENT',
                 'PRIMARY KEY',
             ],
-            'name'           => [
+            'name'        => [
                 'VARCHAR(30)',
                 'NOT NULL',
             ],
-            'email'          => [
+            'email'       => [
                 'VARCHAR(225)',
                 'NOT NULL',
-                'UNIQUE'
+                'UNIQUE',
             ],
-            'password'       => [
+            'password'    => [
                 'VARCHAR(225)',
                 'NOT NULL',
             ],
@@ -34,16 +32,16 @@ class users_table extends BaseMigration {
                 'VARCHAR(255)',
                 'DEFAULT NULL',
             ],
-            'created_at' => [
+            'created_at'  => [
                 'TIMESTAMP',
                 'NOT NULL',
-                'DEFAULT CURRENT_TIMESTAMP'
+                'DEFAULT CURRENT_TIMESTAMP',
             ],
-            'updated_at' => [
+            'updated_at'  => [
                 'TIMESTAMP',
                 'NOT NULL',
                 'DEFAULT NOW()',
-                'ON UPDATE NOW()'
+                'ON UPDATE NOW()',
             ],
         ]);
     }

@@ -29,9 +29,12 @@ class FlushMessage extends AbstractSession {
     }
 
     public function has(string $key): bool {
-        if (isset($_SESSION['flush'][$key])) return true;
+        if (isset($_SESSION['flush'][$key])) {
+            return true;
+        } else {
+            return false;
+        }
 
-        else return false;
     }
 
     private function destroyFlushSession(): void {

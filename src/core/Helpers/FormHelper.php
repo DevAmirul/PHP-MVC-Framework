@@ -3,6 +3,9 @@
 use Devamirul\PhpMicro\core\Foundation\Session\Session;
 
 if (!function_exists('setCsrf')) {
+    /**
+     * Set new CSRF value.
+     */
     function setCsrf(): string {
         if (!Session::singleton()->has('csrf')) {
             Session::singleton()->set('csrf', bin2hex(random_bytes(50)));
@@ -12,7 +15,10 @@ if (!function_exists('setCsrf')) {
 }
 
 if (!function_exists('isCsrfValid')) {
-    function isCsrfValid() {
+    /**
+     * Check CSRF is valid or not.
+     */
+    function isCsrfValid(): bool {
         if (!Session::singleton()->has('csrf') || !isset($_POST['csrf'])) {
             return false;
         }
@@ -24,49 +30,60 @@ if (!function_exists('isCsrfValid')) {
 }
 
 if (!function_exists('setMethod')) {
-    function setMethod(string $methodName) {
-        echo '<input type="hidden" name="_method" value="' . $methodName . '">';
+    /**
+     * Set form method, like put/patch/delete.
+     */
+    function setMethod(string $methodName): string {
+        return '<input type="hidden" name="_method" value="' . $methodName . '">';
     }
 }
 
 if (!function_exists('errors')) {
-    function errors($key) {
+    /**
+     * Get errors key data from form flush session.
+     */
+    function errors($key): mixed {
         $errors = flushMessage()->get('errors');
 
-        if ($errors) {
-            return $errors->first($key);
-        }
+        if ($errors) return $errors->first($key);
+        else return null;
     }
 }
 
 if (!function_exists('error')) {
-    function error() {
-        if (flushMessage()->has('error')) {
-            return flushMessage()->get('error');
-        }
+    function error(): string {
+        /**
+         * Get error key data from form flush session
+         */
+        return flushMessage()->get('error');
     }
 }
 
 if (!function_exists('hasError')) {
-    function hasError() {
-        if (flushMessage()->has('error')) {
-            return true;
-        }
+    /**
+     * Check if the error key is set to session.
+     */
+    function hasError(): bool {
+        if (flushMessage()->has('error')) return true;
+        else return false;
     }
 }
 
 if (!function_exists('success')) {
-    function success() {
-        if (flushMessage()->has('success')) {
-            return flushMessage()->get('success');
-        }
+    /**
+     * Get success key data from form flush session.
+     */
+    function success(): string {
+        return flushMessage()->get('success');
     }
 }
 
 if (!function_exists('hasSuccess')) {
-    function hasSuccess() {
-        if (flushMessage()->has('success')) {
-            return true;
-        }
+    /**
+     * Check if the success key is set to session.
+     */
+    function hasSuccess(): bool {
+        if (flushMessage()->has('success')) return true;
+        else return false;
     }
 }

@@ -1,6 +1,5 @@
 <?php
 
-
 /**
  *
  */
@@ -52,7 +51,6 @@ if ($controller == 'y') {
     goto controller;
 }
 
-
 if (!$isFile) {
 
     if ($table) {
@@ -90,7 +88,6 @@ if (!$isFile) {
 
 }
 
-
 function getMigrationTemplate(string $className, string $tableName): string {
     return sprintf(
         "<?php
@@ -100,10 +97,9 @@ use Devamirul\PhpMicro\core\Foundation\CLI\Database\Base\BaseMigration;
 class %s extends BaseMigration{
 
     /**
-     *
+     * Run the migrations.
      */
     public function up() {
-
         return static::db()->create('%s', [
             'id' => [
                 'INT',
