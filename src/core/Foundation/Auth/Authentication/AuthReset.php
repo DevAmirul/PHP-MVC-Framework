@@ -14,9 +14,9 @@ class AuthReset {
         $this->defineDefaultGuard();
     }
 
-    public function sendLink(string $email, string $resetLink = '/reset') {
+    public function sendLink(string $email, string $path = '/reset') {
 
-        $link = url::makeResetLink($email, $resetLink);
+        $link = url::makeResetLink($email, $path);
 
         $model = new $this->guard['model'];
 
@@ -29,7 +29,7 @@ class AuthReset {
         }
 
         $updatedRow = $model->update(
-            ["remember_token" => $link],
+            ["reset_token" => $link],
             ["email" => $email]
         );
 
@@ -52,14 +52,25 @@ class AuthReset {
     }
 
 
-    public function resetPassword(array $input, string $redirectLink = '/') {
+    public function resetPassword(array $input, string $redirectLink = '/login') {
 
         $model = new $this->guard['model'];
 
-        $input['password'] = passwordHash($input['password']);
-        // TODO: check token...
+        $isTokenExist = $model->get('reset_token', [
+            "email" => $input['email'],
+        ])->getData();
+
+        if ($isTokenExist === null) {
+            return back()->withError('User does not exist with this email.');
+        } elseif ($isTokenExist !== $input['reset_token']) {
+            return back()->withError('User does not exist with this token.');
+        }
+
         $updatedRow = $model->update(
-            ["password" => $input['password']],
+            [
+                "password" => passwordHash($input['password']),
+                "reset_token" => null
+            ],
             ["email" => $input['email']]
         );
 

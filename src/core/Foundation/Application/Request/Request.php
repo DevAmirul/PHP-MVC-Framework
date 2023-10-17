@@ -17,13 +17,15 @@ class Request {
         return trim($url['path']) ?? null;
     }
 
-    public function query() {
+    public function query(string $param = '') {
         $url = parse_url($_SERVER['REQUEST_URI']);
 
         $query = $url['query'] ?? null;
 
         parse_str($query, $params);
-        
+        if ($param) {
+            return $params[$param] ?? null;
+        }
         return $params;
     }
 

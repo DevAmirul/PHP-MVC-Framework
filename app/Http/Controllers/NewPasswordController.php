@@ -17,10 +17,10 @@ class NewPasswordController extends BaseController {
     }
 
     public function store(Request $request) {
-
         $validator = new Validator();
 
-        $validation = $validator->validate($request->only('email', 'password', 'confirm_password'), [
+        $validation = $validator->validate($request->only('reset_token', 'email', 'password', 'confirm_password'), [
+            'reset_token'      => 'required',
             'email'            => 'required|email',
             'password'         => 'required|min:6',
             'confirm_password' => 'required|same:password',
@@ -34,7 +34,7 @@ class NewPasswordController extends BaseController {
 
         } else {
             $validatedData = $validation->getValidatedData();
-
+            
             (new AuthReset())->resetPassword($validatedData);
         }
     }

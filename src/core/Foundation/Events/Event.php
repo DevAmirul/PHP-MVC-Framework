@@ -17,6 +17,7 @@ class Event {
     }
 
     public static function trigger(string $name, mixed $argument = null) {
+
         if (isset(self::$events[$name])) {
 
             $callback = self::$events[$name];
@@ -32,5 +33,6 @@ class Event {
         }else{
             throw new Exception('event not trigger');
         }
+        
     }
 }

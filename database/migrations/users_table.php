@@ -30,7 +30,7 @@ class users_table extends BaseMigration {
                 'VARCHAR(225)',
                 'NOT NULL',
             ],
-            'remember_token' => [
+            'reset_token' => [
                 'VARCHAR(255)',
                 'DEFAULT NULL',
             ],

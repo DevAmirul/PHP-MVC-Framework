@@ -1,21 +1,19 @@
 <?php
 
 use App\Providers\AppServiceProvider;
-use App\Providers\EventServiceProvider;
-use Devamirul\PhpMicro\core\Foundation\Application\Container\AppContainer;
+use Devamirul\PhpMicro\core\Foundation\Application\Container\Containers\ApplicationContainer;
 
 return [
-    'app_name' => env('APP_NAME', 'PhpMicroFramework'),
+    'app_name'   => env('APP_NAME', 'PhpMicroFramework'),
 
-    'app_url'  => env('APP_URL', 'http://localhost:8000'),
+    'app_url'    => env('APP_URL', 'http://localhost:8000'),
 
-    'home_url' => '/',
+    'home_url'   => '/',
 
     'debug_mode' => env('APP_DEBUG', true),
 
-    'providers'=> [
-        AppContainer::class,
+    'providers'  => [
+        ApplicationContainer::class,
         AppServiceProvider::class,
-        EventServiceProvider::class
-    ]
+    ],
 ];
