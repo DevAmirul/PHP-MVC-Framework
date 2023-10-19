@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Create app service Provider by CLI
+ */
 provider:
 $provider = (string) readline('Enter a provider name: ');
 
@@ -12,7 +15,7 @@ if ($provider) {
         $resource = fopen('../../../../../app/Providers/' . ucfirst($provider) . 'ServiceProvider.php', "w")
         or die("Unable to create file!");
 
-        fwrite($resource, getProviderTemplate(ucfirst($provider)));
+        fwrite($resource, getProviderSkeleton(ucfirst($provider)));
 
         fclose($resource);
 
@@ -20,7 +23,10 @@ if ($provider) {
     }
 }
 
-function getProviderTemplate(string $providerName): string {
+/**
+ * Get provider class Skeleton.
+ */
+function getProviderSkeleton(string $providerName): string {
     return sprintf(
         "<?php
 

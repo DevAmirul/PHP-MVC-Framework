@@ -16,11 +16,11 @@ class GuestMiddleware implements Middleware {
         if (!empty($guards)) {
             foreach ($guards as $guard) {
                 if (Auth::guard($guard)->check()) {
-                    return redirect(AppServiceProvider::HOMEPATH);
+                    return redirect('/editors/home');
                 }
             }
         }elseif (Auth::check()) {
-            return redirect(AppServiceProvider::HOMEPATH);
+            return redirect('/');
         }
         return;
     }

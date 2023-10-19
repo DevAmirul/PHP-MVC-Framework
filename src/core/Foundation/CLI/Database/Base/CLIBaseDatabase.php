@@ -7,6 +7,9 @@ use Medoo\Medoo;
 
 class CLIBaseDatabase {
 
+    /**
+     * Get DB instance.
+     */
     public static function db(): Medoo {
         $dotenv = Dotenv::createImmutable('../../../../../');
         $dotenv->safeLoad();

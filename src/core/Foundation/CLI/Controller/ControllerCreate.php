@@ -1,8 +1,14 @@
 <?php
 
+/**
+ * Create app service Provider by CLI
+ */
 controller:
 $controller = (string) readline('Enter a controller name: ');
 
+/**
+ * Check if there is already a file with this controller name.
+ */
 if ($controller) {
     if (file_exists('../../../../../app/Http/Controllers/' . ucfirst($controller) . 'Controller.php')) {
         echo 'error: - A file with this name already exists in the controllers folder, please try another name.' . PHP_EOL;
@@ -12,7 +18,7 @@ if ($controller) {
         $resource = fopen('../../../../../app/Http/Controllers/' . ucfirst($controller) . 'Controller.php', "w")
         or die("Unable to create file!");
 
-        fwrite($resource, getControllerTemplate(ucfirst($controller)));
+        fwrite($resource, getControllerSkeleton(ucfirst($controller)));
 
         fclose($resource);
 
@@ -20,9 +26,12 @@ if ($controller) {
     }
 }
 
-function getControllerTemplate(string $controllerName): string {
+/**
+ * Get controller class skeleton.
+ */
+function getControllerSkeleton(string $controllerName): string {
     return sprintf(
-    "<?php
+        "<?php
 
     namespace App\Http\Controllers;
 

@@ -16,6 +16,9 @@ class FlushMessage extends AbstractSession {
         }
     }
 
+    /**
+     * Set data in flush session.
+     */
     public function set(string $key, mixed $data): void {
         $_SESSION['flush'][$key] = [
             'remove' => false,
@@ -24,10 +27,16 @@ class FlushMessage extends AbstractSession {
 
     }
 
+    /**
+     * Get data from the flush session.
+     */
     public function get(string $key): mixed {
         return $_SESSION['flush'][$key]['data'] ?? null;
     }
 
+    /**
+     * Check if the data exists.
+     */
     public function has(string $key): bool {
         if (isset($_SESSION['flush'][$key])) {
             return true;
@@ -37,6 +46,9 @@ class FlushMessage extends AbstractSession {
 
     }
 
+    /**
+     * Delete data from flush session.
+     */
     private function destroyFlushSession(): void {
         if (isset($_SESSION['flush'])) {
             foreach ($_SESSION['flush'] as $key => $flash) {

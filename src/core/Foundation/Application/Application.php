@@ -13,13 +13,16 @@ class Application extends AppContainer {
         $this->callServiceProviders();
     }
 
+    /**
+     * Resolve router and run the application.
+     */
     public function run(): void {
         try {
             $content = Router::resolve();
 
             if (is_array($content)) {
                 echo var_export($content, true);
-            }else {
+            } else {
                 echo $content;
             }
 
@@ -29,6 +32,9 @@ class Application extends AppContainer {
         }
     }
 
+    /**
+     * Call all service provider.
+     */
     public function callServiceProviders(): void {
         $providers = config('app', 'providers');
 

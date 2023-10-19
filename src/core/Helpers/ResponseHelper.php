@@ -36,7 +36,7 @@ if (!function_exists('back')) {
 
 if (!function_exists('route')) {
     /**
-     * Generate route name to a url.
+     * Finds routes by route name
      */
     function route(string $name, array | string $params = null): void {
         Router::singleton()->route($name, $params);
@@ -47,8 +47,8 @@ if (!function_exists('view')) {
     /**
      * Get the evaluated view contents for the given view.
      */
-    function view(string $path, ?array $data = null): string {
-        return View::singleton()->view($path, $data);
+    function view(string $path, ?array $params = null): string {
+        return View::singleton()->view($path, $params);
     }
 }
 
@@ -58,5 +58,14 @@ if (!function_exists('status')) {
      */
     function status(int $code): View {
         return View::singleton()->status($code);
+    }
+}
+
+if (!function_exists('layout')) {
+    /**
+     * Set the view layout.
+     */
+    function layout(string $layout = ''): View {
+        return View::singleton()->layout($layout);
     }
 }

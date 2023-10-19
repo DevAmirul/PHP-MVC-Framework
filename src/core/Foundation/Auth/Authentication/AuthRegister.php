@@ -12,6 +12,9 @@ class AuthRegister {
         $this->defineDefaultGuard();
     }
 
+    /**
+     * Register new user.
+     */
     public function register(array $input, string $redirect = '/login'): void {
         unset($input['confirm_password']);
 

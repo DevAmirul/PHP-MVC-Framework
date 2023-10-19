@@ -2,6 +2,12 @@
     "name": "devamirul/php-micro-framework",
     "description": "php micro mvc framework",
     "type": "project",
+    "authors": [
+        {
+            "name": "Amirul islam",
+            "email": "inbox.amirul@gmail.com"
+        }
+    ],
     "keywords": [
         "framework",
         "project"
@@ -28,12 +34,6 @@
         "provider": "cd src/core/Foundation/CLI/Provider && php ProviderCreate.php && cd -",
         "controller": "cd src/core/Foundation/CLI/Controller && php ControllerCreate.php && cd -"
     },
-    "authors": [
-        {
-            "name": "Amirul islam",
-            "email": "dev.amirul@gmail.com"
-        }
-    ],
     "minimum-stability": "dev",
     "require": {
         "vlucas/phpdotenv": "^5.5@dev",

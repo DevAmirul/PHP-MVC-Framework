@@ -10,10 +10,19 @@ use Medoo\Medoo;
 class BaseModel {
     use ModelQuery, ModelDebug;
 
+    /**
+     * Table name
+     */
     public $table;
 
+    /**
+     * Store query data.
+     */
     public mixed $data;
 
+    /**
+     * Store DB instance.
+     */
     public Medoo $db;
 
     public function __construct() {
@@ -22,6 +31,9 @@ class BaseModel {
         $this->getTableName();
     }
 
+    /**
+     * When the model is called it will extract the table name from the model.
+     */
     public function getTableName(): void {
         if (!$this->table) {
             $explodedClassName = explode("\\", get_called_class());
@@ -29,6 +41,9 @@ class BaseModel {
         }
     }
 
+    /**
+     * Get query data in json format.
+     */
     public function getJson(string $wrap = null): static {
         if ($wrap) {
             $this->data = json_encode([$wrap => $this->data]);
@@ -38,6 +53,9 @@ class BaseModel {
         return $this;
     }
 
+    /**
+     * Get query Data.
+     */
     public function getData(): mixed {
         return $this->data;
     }

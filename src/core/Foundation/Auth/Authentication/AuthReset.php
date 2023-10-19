@@ -15,8 +15,10 @@ class AuthReset {
         $this->defineDefaultGuard();
     }
 
+    /**
+     * Send reset link to user's mail.
+     */
     public function sendLink(string $email, string $path = '/reset') {
-
         $link = url::makeResetLink($email, $path);
 
         $model = new $this->guard['model'];
@@ -48,12 +50,13 @@ class AuthReset {
             ->send();
 
         flushMessage()->set('success', 'Send mail to your email, Please check your mail');
-
         return back();
     }
 
+    /**
+     * Change user password.
+     */
     public function resetPassword(array $input, string $redirectLink = '/login') {
-
         $model = new $this->guard['model'];
 
         $isTokenExist = $model->get('reset_token', [
@@ -77,7 +80,7 @@ class AuthReset {
         if ($updatedRow->error()) {
             throw new DatabaseErrorException($updatedRow->error());
         }
-
         return redirect($redirectLink);
     }
+    
 }

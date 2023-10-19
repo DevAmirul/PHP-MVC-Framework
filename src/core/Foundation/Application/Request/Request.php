@@ -10,13 +10,16 @@ class Request {
     private function __construct() {}
 
     /**
-     * This function return user input path after remove all param and query.
+     * Get requested url.
      */
     public function path(): string {
         $url = parse_url($_SERVER['REQUEST_URI']);
         return trim($url['path']) ?? null;
     }
 
+    /**
+     * Get requested query params.
+     */
     public function query(string $param = ''): string | array | null {
         $url   = parse_url($_SERVER['REQUEST_URI']);
         $query = $url['query'] ?? null;
@@ -29,7 +32,7 @@ class Request {
     }
 
     /**
-     * This function return user input method.
+     * Get requested method.
      */
     public function method(): string {
         $method = isset($_POST['_method']) ? $_POST['_method'] : $_SERVER['REQUEST_METHOD'];
@@ -37,42 +40,43 @@ class Request {
     }
 
     /**
-     * This function checks and returns whether the method is GET.
+     * Checks and returns boolean whether the method is GET.
      */
     public function isGet(): string {
         return $this->method() === 'get';
     }
 
     /**
-     * This function checks and returns whether the method is POST.
+     * Checks and returns boolean whether the method is POST.
      */
     public function isPost(): string {
         return $this->method() === 'post';
     }
 
     /**
-     *
+     * Checks and returns boolean whether the method is DELETE.
      */
     public function isDelete(): string {
         return $this->method() === 'delete';
     }
 
     /**
-     *
+     * Checks and returns boolean whether the method is PUT.
      */
     public function isPut(): string {
         return $this->method() === 'put';
     }
 
     /**
-     *
+     * Checks and returns boolean whether the method is PATCH.
      */
     public function isPatch(): string {
         return $this->method() === 'patch';
     }
 
     /**
-     * This function checks and returns whether input data valid or not.
+     * Retrieve all requested data., you can also get single data from here.
+     * If no data is found, the default data will be returned.
      */
     public function input(string $key = '', mixed $default = null): mixed {
         if ($key) {
@@ -90,6 +94,9 @@ class Request {
         return $default;
     }
 
+    /**
+     * Retrieve all requested data.
+     */
     public function all(): mixed {
         $all = [];
 
@@ -99,6 +106,9 @@ class Request {
         return $all;
     }
 
+    /**
+     * Retrieve some specific data from all data requested.
+     */
     public function only(): mixed {
         $only = [];
         $args = func_get_args();

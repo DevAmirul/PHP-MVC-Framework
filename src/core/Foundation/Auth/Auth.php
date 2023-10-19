@@ -13,14 +13,23 @@ class Auth {
         $this->defineDefaultGuard();
     }
 
+    /**
+     * Get available auth details in session.
+     */
     public function user(): mixed {
         return Session::singleton()->has($this->guard['provider']) ? Session::singleton()->get($this->guard['provider']) : false;
     }
 
+    /**
+     * Check if user is authenticated or guest, return boolean.
+     */
     public function guest(): bool {
         return Session::singleton()->has($this->guard['provider']) ? true : false;
     }
 
+    /**
+     * Check if the user is authenticated, return boolean.
+     */
     public function check(): bool {
         return Session::singleton()->has($this->guard['provider']) ? true : false;
     }

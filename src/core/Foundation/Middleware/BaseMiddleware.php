@@ -6,6 +6,9 @@ use Devamirul\PhpMicro\core\Foundation\Application\Request\Request;
 
 class BaseMiddleware {
 
+    /**
+     * Resolve middleware.
+     */
     public static function resolve($middlewareNames, Request $request) {
         $arguments = [];
 

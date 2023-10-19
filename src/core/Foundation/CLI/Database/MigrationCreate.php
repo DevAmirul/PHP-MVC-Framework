@@ -1,13 +1,16 @@
 <?php
 
 /**
- *
+ * Get table name from CLI
  */
 table:
 $table = (string) readline('Enter a table name: ');
 
 $isFile = false;
 
+/**
+ * Check if there is already a file with this table name.
+ */
 if ($table) {
     if (file_exists('../../../../../database/migrations' . $table . '_table.php')) {
         echo 'error: - A file with this name already exists in the migrations folder, please try another name.' . PHP_EOL;
@@ -18,6 +21,9 @@ if ($table) {
     }
 }
 
+/**
+ * Check if there is already a file with this model name.
+ */
 model:
 $model = (string) readline('Want to create a model (y/n): ');
 
@@ -35,6 +41,9 @@ if ($model == 'y') {
     goto model;
 }
 
+/**
+ * Check if there is already a file with this controller name.
+ */
 controller:
 $controller = (string) readline('Want to create a Controller (y/n): ');
 
@@ -53,33 +62,42 @@ if ($controller == 'y') {
 
 if (!$isFile) {
 
+    /**
+     * A table will be created with the name given by the user.
+     */
     if ($table) {
         $resource = fopen('../../../../../database/migrations/' . $table . '_table.php', "w")
         or die("Unable to create file!");
 
-        fwrite($resource, getMigrationTemplate($table . '_table', $table));
+        fwrite($resource, getMigrationSkeleton($table . '_table', $table));
 
         fclose($resource);
 
         echo 'Created Table: ' . $table . '_table.php' . PHP_EOL;
     }
 
+    /**
+     * If the user presses y, a model will be created based on the table name.
+     */
     if ($model == 'y') {
         $resource = fopen('../../../../../app/Models/' . ucfirst($table) . '.php', "w")
         or die("Unable to create file!");
 
-        fwrite($resource, getModelTemplate(ucfirst($table)));
+        fwrite($resource, getModelSkeleton(ucfirst($table)));
 
         fclose($resource);
 
         echo 'Created Model: ' . ucfirst($table) . '.php' . PHP_EOL;
     }
 
+    /**
+     * If the user presses y, a controller will be created based on the table name.
+     */
     if ($controller == 'y') {
         $resource = fopen('../../../../../app/Http/Controllers/' . ucfirst($table) . 'Controller.php', "w")
         or die("Unable to create file!");
 
-        fwrite($resource, getControllerTemplate(ucfirst($table)));
+        fwrite($resource, getControllerSkeleton(ucfirst($table)));
 
         fclose($resource);
 
@@ -88,7 +106,10 @@ if (!$isFile) {
 
 }
 
-function getMigrationTemplate(string $className, string $tableName): string {
+/**
+ * Get table class skeleton.
+ */
+function getMigrationSkeleton(string $className, string $tableName): string {
     return sprintf(
         "<?php
 
@@ -125,7 +146,10 @@ class %s extends BaseMigration{
 }", $className, $tableName);
 }
 
-function getModelTemplate(string $modelName): string {
+/**
+ * Get model class skeleton.
+ */
+function getModelSkeleton(string $modelName): string {
     return sprintf(
         "<?php
 
@@ -138,7 +162,10 @@ class %s extends BaseModel {
 }", $modelName);
 }
 
-function getControllerTemplate(string $controllerName): string {
+/**
+ * Get controller class skeleton.
+ */
+function getControllerSkeleton(string $controllerName): string {
     return sprintf(
         "<?php
 

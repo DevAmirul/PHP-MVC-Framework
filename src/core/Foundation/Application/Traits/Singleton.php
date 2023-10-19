@@ -4,8 +4,14 @@ namespace Devamirul\PhpMicro\core\Foundation\Application\Traits;
 
 trait Singleton {
 
+    /**
+     * Store object instance.
+     */
     private static $instance = null;
 
+    /**
+     * Helps to create a singleton class
+     */
     public static function singleton(): Object {
         if (static::$instance === null) {
             static::$instance = new static();
@@ -14,5 +20,5 @@ trait Singleton {
     }
 
     private function __clone() {}
-    
+
 }

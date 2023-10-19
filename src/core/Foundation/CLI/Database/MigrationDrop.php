@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Drop all migrated table.
+ */
 require_once '../../../../../vendor/autoload.php';
 
 use Devamirul\PhpMicro\core\Foundation\CLI\Database\Base\BaseMigration;

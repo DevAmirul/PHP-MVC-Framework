@@ -4,11 +4,16 @@ require_once '../../../../../vendor/autoload.php';
 
 use Devamirul\PhpMicro\core\Foundation\CLI\Database\Base\BaseMigration;
 
-
+/**
+ * Get user confirmation from CLI.
+ */
 $confirmation = (string) readline('Are you sure? (y/n) ');
 
 $migratedClassNames = [];
 
+/**
+ * If the user presses y, check how many tables remain to be migrated and call migrateTables.
+ */
 if ($confirmation === 'y') {
     $db = BaseMigration::db();
 
@@ -42,6 +47,9 @@ if ($confirmation === 'y') {
     }
 }
 
+/**
+ * Migrate remaining Tables.
+ */
 function migrateTables($unMigratedFiles) {
     $migratedClassNames = [];
 
@@ -56,7 +64,7 @@ function migrateTables($unMigratedFiles) {
         $classInstance = (new $className())->up();
 
         if ($classInstance) {
-            echo 'Created table:- ' . substr($className, 0, -6) . PHP_EOL;
+            echo 'Migrated table:- ' . substr($className, 0, -6) . PHP_EOL;
             $migratedClassNames[] = ['migration' => substr($className, 0, -6)];
         }
     }

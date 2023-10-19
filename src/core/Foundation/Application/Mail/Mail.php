@@ -6,6 +6,9 @@ use Tx\Mailer;
 
 class Mail {
 
+    /**
+     * Get Mailer instance.
+     */
     public static function mailer(): Mailer {
         $mailConfig = config('mail', 'smtp');
 

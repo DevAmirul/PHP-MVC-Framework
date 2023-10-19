@@ -8,26 +8,29 @@ class View {
     use Singleton;
 
     /**
-     * Set page title
-     *
-     * @var string
+     * Page title.
      */
     public string $title;
+
+    /**
+     * View layout.
+     */
+    public string $layout = '';
 
     private function __construct() {}
 
     /**
-     * This view() method render and view html page in front you.
+     * Get the evaluated view content for the given view.
      */
-    public function view(string $view, ?array $params = null, ?string $layout = null): string {
+    public function view(string $view, ?array $params = null): string {
         $viewContent   = $this->renderViewContent($view, $params);
-        $layoutContent = $this->renderLayoutContent($layout, $params);
+        $layoutContent = $this->renderLayoutContent($params);
 
         return str_replace('{{content}}', $viewContent, $layoutContent);
     }
 
     /**
-     *
+     * Set response status code.
      */
     public function status(int $code): static {
         http_response_code($code);
@@ -35,26 +38,34 @@ class View {
     }
 
     /**
-     * This method Set and include main layout name, then send view() method.
+     * Set view layout.
      */
-    protected function renderLayoutContent(?string $layout = null, ?array $params = null): string {
+    public function layout(string $layout = ''): static {
+        $this->layout = $layout;
+        return $this;
+    }
+
+    /**
+     * Include and render layout.
+     */
+    protected function renderLayoutContent(?array $params = null): string {
         if ($params) {
             foreach ($params as $key => $value) {
                 $$key = $value;
             }
         }
 
-        if (!$layout) $layout = 'app';
+        if (!$this->layout) $this->layout = 'app';
 
         ob_start();
 
-        include_once APP_ROOT . "/resources/views/layout/$layout.view.php";
+        include_once APP_ROOT . "/resources/views/layout/$this->layout.view.php";
 
         return ob_get_clean();
     }
 
     /**
-     * This method include html content Based on user's needs then send view() method.
+     * Include and render content Based on user's needs then send view() method.
      */
     protected function renderViewContent(string $view, ?array $params = null): string {
         if ($params) {
@@ -62,7 +73,6 @@ class View {
                 $$key = $value;
             }
         }
-
         ob_start();
 
         include_once APP_ROOT . "/resources/views/" . $view . ".view.php";
@@ -83,5 +93,5 @@ class View {
     public function getTitle(): string {
         return $this->title;
     }
-    
+
 }

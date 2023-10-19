@@ -1,9 +1,9 @@
 <?php
 
 use Devamirul\PhpMicro\core\Foundation\Application\Application;
+use Devamirul\PhpMicro\core\Foundation\Application\Events\Event;
 use Devamirul\PhpMicro\core\Foundation\Application\Facade\Facades\View;
 use Devamirul\PhpMicro\core\Foundation\Auth\Auth;
-use Devamirul\PhpMicro\core\Foundation\Events\Event;
 use Devamirul\PhpMicro\core\Foundation\Exceptions\NotFoundException;
 use Devamirul\PhpMicro\core\Foundation\Session\FlushMessage;
 use Devamirul\PhpMicro\core\Foundation\Session\Session;
@@ -114,7 +114,7 @@ if (!function_exists('flushMessage')) {
 
 if (!function_exists('auth')) {
     /**
-     * Get available auth details in session.
+     * Get auth instance.
      */
     function auth(): Auth {
         return new Auth();

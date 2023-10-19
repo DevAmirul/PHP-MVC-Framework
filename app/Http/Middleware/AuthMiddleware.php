@@ -13,10 +13,16 @@ class AuthMiddleware implements Middleware {
      * Check if the request is authenticated and act accordingly.
      */
     public function handle(Request $request, array $guards) {
-        if (!Auth::check()) {
-            return redirect(AppServiceProvider::GUESTPATH);
+        if (!empty($guards)) {
+            foreach ($guards as $guard) {
+                if (!Auth::guard($guard)->check()) {
+                    return redirect('/editors/login');
+                }
+            }
+        } elseif (!Auth::check()) {
+            return redirect('/login');
         }
         return;
     }
-    
+
 }

@@ -4,6 +4,7 @@ namespace Devamirul\PhpMicro\core\Foundation\Exception\Exceptions;
 
 use Devamirul\PhpMicro\core\Foundation\Exception\BaseException;
 
-class RouteNotMatchException extends BaseException {
-    protected $message = 'The route not defined';
+class RouterException extends BaseException {
+    protected $message = 'This route did not defined';
+    protected $code    = 404;
 }
