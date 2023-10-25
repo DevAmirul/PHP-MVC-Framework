@@ -7,7 +7,7 @@ PHP micro framework for web applications.
 Install via git
 
 ```bash
- git clone https://github.com/DevAmirul/php-micro-mvc-framework.git my-app
+ git clone https://github.com/DevAmirul/PHP-MVC-Micro-Framework.git my-app
  cd my-app
 ```
 
