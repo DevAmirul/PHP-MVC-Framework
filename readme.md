@@ -139,7 +139,7 @@ root
 
 `src/core`: This folder contains the main Application, Model, View, and Controller's base files. All custom model, view, and controller files inherit from these. Don't make changes to these files if don't need really.
 
-## Service Providers & Container
+## Service Providers and Container
 `app/Providers`: You can Register any application services and bootstrap any application service and want to do something before handling the request.
 
 ### Make providers
