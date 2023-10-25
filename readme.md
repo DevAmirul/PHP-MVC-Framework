@@ -8,7 +8,7 @@ A simple, fast, and small PHP MVC Framework that enables to develop modern appli
 - **[Examples](#examples)**
 - **[Main Structure](#main-structure)**
 - **[Directories](#directories)**
-- **[Service Providers & Container](#service-providers-&-container)**
+- **[Service Providers and Container](#service-providers-and-container)**
 - **[Configuration](#configuration)**
 - **[Routes](#routes)**
 - **[Middlewares](#middlewares)**
@@ -55,14 +55,14 @@ Router::get('/', [WelcomeController::class, 'index'])->name('welcome');
 ### Dynamic Route
 
 ```php
-Router::get('/user/:id', function(int $id){
+Router::get('/users/:id', function(int $id){
     echo 'User id - ' . $id;
 })->where('^\d+$')->name('user');
 ```
 
 ### Middleware
 ```php
-Router::get('/user/:id', function(int $id){
+Router::get('/users/:id', function(int $id){
     echo 'User id - ' . $id;
 })->middleware('auth')->where('^\d+$')->name('user');
 ```
@@ -147,7 +147,8 @@ root
 ```cli
 composer providers
 ```
-Then enter a provider name.
+
+The command line interface will ask you for a provider name, you enter a name. It will automatically add "ServiceProvider" to the name you provided. For example you want to create a provider named "example". Then your provider class will be `ExampleServiceProvider.php`
 
 After creating the provider add it to the provider array in the 'config/app.php' file.
 
@@ -256,7 +257,7 @@ You can use dynamic route, you just need to use the ":" sign. This type of Route
 **You can do method chaining if needed.**
 
 ```php
-Router::get('/user/:id', function(int $id){
+Router::get('/users/:id', function(int $id){
     echo 'User id - ' . $id;
 })->where('^\d+$')->name('user');
 ```
@@ -264,7 +265,7 @@ Router::get('/user/:id', function(int $id){
 **You can make the dynamic parameter optional if needed.**
 
 ```php
-Router::get('/user/:id?', function(?int $id = null){
+Router::get('/users/:id?', function(?int $id = null){
     echo 'User id - ' . $id;
 })->where('^\d+$')->name('user');
 ```
@@ -277,49 +278,23 @@ Route::fallback(function () {
 ```
 <em>**See the documentation for my "p-router" package for details:- [p-router](https://github.com/DevAmirul/p-router.git)**</em>
 
-## Controllers:
-`app/Http/Controllers`: Controllers respond to user actions (submitting forms, show users, any action etc.). Controllers are classes that extend the BaseController class.
-
-Controllers are stored in the app/Controllers folder. A sample Welcome controllers are included. Controller classes need to be in the App/Controllers namespace. You can add subdirectories to organize your controllers.
-
-<em>**By default you will get request instance in each method.**</em>
-
-### Make controller
-
-```cli
-composer controller
-```
-Then enter a controller name.
-
-```php
-namespace App\Http\Controllers;
-
-use Devamirul\PhpMicro\core\Foundation\Application\Request\Request;
-use Devamirul\PhpMicro\core\Foundation\Controller\BaseController;
-
-class ExampleController extends BaseController {
-    /**
-     * Dummy invoke method.
-     */
-    public function invoke(Request $request) {
-        return view('example controller');
-    }
-}
-```
 
 ## Middlewares:
+
 Middleware provide a convenient mechanism for inspecting and filtering HTTP requests entering your application.
 
 The predefined middleware files are :- `AuthMiddleware.php` `GuestMiddleware.php` `CsrfMiddleware.php`
 
 <em>**By default you will get request instance in handle method.**</em>
 
-### Make middlewares
+### Make middleware
 
 ```cli
 composer middleware
 ```
-Then enter a middleware name.
+
+The command line interface will ask you for a middleware name, you enter a name. It will automatically add "Middleware" to the name you provided. For example you want to create a middleware named "example". Then your middleware class will be `ExampleMiddleware.php`
+
 
 ```php
 namespace App\Http\Middleware;
@@ -354,5 +329,51 @@ public function handle(Request $request, array $guards) {
         return redirect('/login');
     }
     return;
+}
+```
+### Add middleware
+
+We can easily add middleware to root. As Laravel does.
+
+```php
+Router::get('/users/:id', function(int $id){
+    echo 'User id - ' . $id;
+})->middleware('auth');
+```
+
+**We can optionally pass the guard name as a parameter to the middleware if there is multiple auth using guard.**
+
+```php
+Router::get('/login', [AuthenticatedController::class, 'create'])->name('login')->middleware('guest:admin');
+```
+
+
+## Controllers:
+`app/Http/Controllers`: Controllers respond to user actions (submitting forms, show users, any action etc.). Controllers are classes that extend the BaseController class.
+
+Controllers are stored in the app/Controllers folder. A sample Welcome controllers are included. Controller classes need to be in the App/Controllers namespace. You can add subdirectories to organize your controllers.
+
+<em>**By default you will get request instance in each method.**</em>
+
+### Make controller
+
+```cli
+composer controller
+```
+The command line interface will ask you for a controller name, you enter a name. It will automatically add "Controller" to the name you provided. For example you want to create a controller named "example". Then your controller class will be `ExampleController.php`
+
+```php
+namespace App\Http\Controllers;
+
+use Devamirul\PhpMicro\core\Foundation\Application\Request\Request;
+use Devamirul\PhpMicro\core\Foundation\Controller\BaseController;
+
+class ExampleController extends BaseController {
+    /**
+     * Dummy invoke method.
+     */
+    public function invoke(Request $request) {
+        return view('example controller');
+    }
 }
 ```
