@@ -1,12 +1,12 @@
 # PHP Micro Framework
 
-A simple, fast, and small PHP MVC Framework that enables to develop modern applications with standard MVC structure and CLI command line tools. Inspired by laravel. This framework using dependencies as minimum as possible. This project is not suitable for production, but you can use it for learning purposes.
+A simple, fast, and small PHP MVC Framework that enables to develop modern applications with standard MVC structure and CLI command line tools. Inspired by laravel. This framework using dependencies as minimum as possible.
 
 ## Table of Contents
 
 - **[Installation](#installation)**
 - **[Examples](#examples)**
-- **[Main Structure](#main-structure)**
+- **[Folder Structure](#folder-structure)**
 - **[Directories](#directories)**
 - **[Service Providers and Container](#service-providers-and-container)**
 - **[Configuration](#configuration)**
@@ -14,8 +14,8 @@ A simple, fast, and small PHP MVC Framework that enables to develop modern appli
 - **[Middlewares](#middlewares)**
 - **[Controllers](#controllers)**
 - **[Views](#views)**
-- **[Models](#models)**
 - **[Database](#database)**
+- **[Models](#models)**
 - **[Helpers](#helpers)**
 
 
@@ -44,7 +44,7 @@ Create the database and connect the database into the .env file
 
 ```php
 Router::get('/welcome', function(){
-    view('welcome');
+    return view('welcome');
 })->name('welcome');
 ```
 or
@@ -56,18 +56,18 @@ Router::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
 ```php
 Router::get('/users/:id', function(int $id){
-    echo 'User id - ' . $id;
+    return 'User id - ' . $id;
 })->where('^\d+$')->name('user');
 ```
 
 ### Middleware
 ```php
 Router::get('/users/:id', function(int $id){
-    echo 'User id - ' . $id;
+    return 'User id - ' . $id;
 })->middleware('auth')->where('^\d+$')->name('user');
 ```
 
-## Main Structure
+## Folder Structure
 
 ```
 root
@@ -190,8 +190,8 @@ use Devamirul\PhpMicro\core\Foundation\Application\Request\Request;
 
 public function register(): void {
 
-    $this->app->bind('Request', function () {
-        return Request::singleton();
+    $this->app->bind('example', function () {
+        return new example();
     });
 
 }
@@ -248,7 +248,7 @@ or
 
 ```php
 Router::get('/welcome', function(){
-    view('welcome');
+    return view('welcome');
 })->name('user');
 ```
 
@@ -258,7 +258,7 @@ You can use dynamic route, you just need to use the ":" sign. This type of Route
 
 ```php
 Router::get('/users/:id', function(int $id){
-    echo 'User id - ' . $id;
+    return 'User id - ' . $id;
 })->where('^\d+$')->name('user');
 ```
 
@@ -266,7 +266,7 @@ Router::get('/users/:id', function(int $id){
 
 ```php
 Router::get('/users/:id?', function(?int $id = null){
-    echo 'User id - ' . $id;
+    return 'User id - ' . $id;
 })->where('^\d+$')->name('user');
 ```
 
@@ -337,8 +337,8 @@ We can easily add middleware to root. As Laravel does.
 
 ```php
 Router::get('/users/:id', function(int $id){
-    echo 'User id - ' . $id;
-})->middleware('auth');
+    return 'User id - ' . $id;
+})->name('users')->middleware('auth');
 ```
 
 **We can optionally pass the guard name as a parameter to the middleware if there is multiple auth using guard.**
@@ -368,12 +368,52 @@ namespace App\Http\Controllers;
 use Devamirul\PhpMicro\core\Foundation\Application\Request\Request;
 use Devamirul\PhpMicro\core\Foundation\Controller\BaseController;
 
-class ExampleController extends BaseController {
+class UserController extends BaseController {
     /**
-     * Dummy invoke method.
+     * User show method.
      */
-    public function invoke(Request $request) {
-        return view('example controller');
+    public function show(Request $request) {
+        return 'user name -' . $request->input('name');
     }
 }
+```
+
+## Views:
+
+Views are used to display information. Views separate your controller / application logic from your presentation logic and are stored in the resources/views directory.  No database access or anything like that should occur in a view file.
+
+**Fortunately you get a helper function of the main 'view' class.**
+
+```php
+Router::get('/welcome', function(){
+    return view('welcome');
+})->name('welcome');
+```
+
+If you want to pass data to "view" files, you may pass an array of data to views to make that data available to the view:
+
+```php
+return view('welcome', ['name' => 'Amirul']);
+```
+
+When passing information in this manner, the data should be an array with key / value pairs. After providing data to a view, you can then access each value within your view using the data's keys, such as
+
+```php
+<?php echo $name; ?>
+```
+
+You can send a status code if you want.
+
+```php
+return status(200)->view('welcome');
+```
+You can set a different layout for the "view" file if you want. By default the layout will be "app.view.php".
+
+```php
+return layout('main')->view('welcome');
+```
+or
+
+```php
+return layout('main')->status(200)->view('welcome');
 ```
