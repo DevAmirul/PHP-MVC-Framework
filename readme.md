@@ -1,6 +1,53 @@
 # PHP Micro Framework
 
-PHP micro framework for web applications.
+A simple, fast, and small PHP MVC Framework that enables to develop modern applications with standard MVC structure and CLI command line tools. This framework using dependencies as minimum as possible. This project is not suitable for production, but you can use it for learning purposes.
+
+### Table of Contents
+
+- **[Installation](#installation)**
+- **[Main Structure](#main-structure)**
+- **[Directories](#directories)**
+- **[Configuration](#configuration)**
+- **[URL Scheme Examples](#url-scheme-examples)**
+- **[Controllers](#controllers)**
+- **[Views](#views)**
+- **[Models](#models)**
+- **[Page Caching](#page-caching)**
+
+### Main Structure
+
+```
+root
+├── App
+│   ├── Controllers
+│   │   ├── Error.php
+│   │   └── Home.php
+│   ├── Models
+│   │   ├── Error.php
+│   │   └── Home.php
+│   └── Views
+│       ├── Error.php
+│       └── Home.php
+├── Core
+│   ├── App.php
+│   ├── Controller.php
+│   ├── Model.php
+│   └── View.php
+├── Public
+│   ├── cache
+│   ├── css
+│   ├── img
+│   └── js
+├── System
+│   ├── Config.php
+│   ├── SunCache.php
+│   ├── SunDB.php
+│   └── SunSitemap.php
+├── .htaccess
+├── index.php
+└── init.php
+```
+
 
 ## Installation
 
