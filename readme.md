@@ -2,7 +2,7 @@
 
 A simple, fast, and small PHP MVC Framework that enables to develop modern applications with standard MVC structure and CLI command line tools. Inspired by laravel. This framework using dependencies as minimum as possible.
 
-<em>**See full [Documentation](https://github.com/DevAmirul/PHP-MVC-Micro-Framework/wiki/Home)**</em>
+<em>**See full [Documentation](https://github.com/DevAmirul/PHP-MVC-Micro-Framework/wiki/Documentation)**</em>
 
 ## Features:
 
@@ -162,5 +162,5 @@ root
 `src/core`: This folder contains the main Application, Model, View, and Controller's base files. All custom model, view, and controller files inherit from these. Don't make changes to these files if don't need really.
 
 
-<em>**See full [Documentation](https://github.com/DevAmirul/PHP-MVC-Micro-Framework/wiki/Home)**</em>
+<em>**See full [Documentation](https://github.com/DevAmirul/PHP-MVC-Micro-Framework/wiki/Documentation)**</em>
 
