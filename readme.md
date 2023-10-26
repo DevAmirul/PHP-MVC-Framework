@@ -8,6 +8,8 @@ A simple, fast, and small PHP MVC Framework that enables to develop modern appli
 
 **\*Service Provider & Container**
 
+**\*Facade**
+
 **\*Request & Response**
 
 **\*Route**
