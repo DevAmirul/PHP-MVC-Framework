@@ -40,7 +40,7 @@ if (!function_exists('setMethod')) {
 
 if (!function_exists('errors')) {
     /**
-     * Get errors key data from form flush session.
+     * Get errors data from  flush session by key.
      */
     function errors($key): mixed {
         $errors = flushMessage()->get('errors');
@@ -53,7 +53,7 @@ if (!function_exists('errors')) {
 if (!function_exists('error')) {
     function error(): string {
         /**
-         * Get error key data from form flush session
+         * Get error data form flush session.
          */
         return flushMessage()->get('error');
     }
@@ -61,7 +61,7 @@ if (!function_exists('error')) {
 
 if (!function_exists('hasError')) {
     /**
-     * Check if the error key is set to session.
+     * Check if the error is set to session, return bool.
      */
     function hasError(): bool {
         if (flushMessage()->has('error')) return true;
@@ -71,7 +71,7 @@ if (!function_exists('hasError')) {
 
 if (!function_exists('success')) {
     /**
-     * Get success key data from form flush session.
+     * Get success data form flush session.
      */
     function success(): string {
         return flushMessage()->get('success');
@@ -80,7 +80,7 @@ if (!function_exists('success')) {
 
 if (!function_exists('hasSuccess')) {
     /**
-     * Check if the success key is set to session.
+     * Check if the success is set to session, return bool.
      */
     function hasSuccess(): bool {
         if (flushMessage()->has('success')) return true;
