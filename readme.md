@@ -14,8 +14,8 @@ A simple, fast, and small PHP MVC Framework that enables to develop modern appli
 - **[Middlewares](#middlewares)**
 - **[Controllers](#controllers)**
 - **[Views](#views)**
-- **[Database](#database)**
 - **[Models](#models)**
+- **[Database](#database)**
 - **[Helpers](#helpers)**
 
 
@@ -184,10 +184,8 @@ class ExampleServiceProvider extends BaseContainer implements ContainerInterface
 }
 ```
 
-### Bind container:
+#### Bind container:
 ```php
-use Devamirul\PhpMicro\core\Foundation\Application\Request\Request;
-
 public function register(): void {
 
     $this->app->bind('example', function () {
@@ -196,6 +194,15 @@ public function register(): void {
 
 }
 ```
+#### Resolve container:
+```php
+app()->make('example');
+```
+#### Get all bound container:
+```php
+app()->getBindings();
+```
+
 
 ## Configuration:
 Open `config` folder, Here you will find some predefined files which you can modify as you wish.
@@ -332,7 +339,7 @@ public function handle(Request $request, array $guards) {
 }
 ```
 ### Add middleware
-
+// TODO: add config
 We can easily add middleware to root. As Laravel does.
 
 ```php
@@ -416,4 +423,464 @@ or
 
 ```php
 return layout('main')->status(200)->view('welcome');
+```
+
+## Models:
+// TODO: cli
+Models are used to get and store data in your application. They know nothing about how this data will be presented in the views. Models extend the core\Model class and use PDO to access the database (by Medoo). They're stored in the App/Models folder.
+
+```php
+namespace App\Models;
+
+use Devamirul\PhpMicro\core\Foundation\Models\BaseModel;
+
+class Users extends BaseModel {
+    protected $table = 'editors'
+}
+```
+
+If your model's corresponding database table does not fit this convention, you may manually specify the model's table name by defining a table property on the model:
+
+```php
+protected $table = 'editors'
+```
+
+## Database:
+
+Almost every modern web application interacts with a database. micro framework makes interacting with databases extremely simple across a variety of supported databases using SQL.
+
+"Medoo" is handling all queries with SQL-92 standard. You should keep in mind the quotation marks in the query, or use prepared statements to prevent SQL injection as possible.
+
+Internally it uses a **PHP** database package called **medoo**.// TODO: link
+
+The configuration for database services is located in your application's `config/database`.php configuration file. In this file, you may define all of your database connections, as well as specify which connection should be used by default.
+
+### Config:
+```php
+return [
+    /**
+     * Default Database Connection Name.
+     */
+    'default'     => env('DB_CONNECTION', 'mysql'),
+
+    /**
+     * Define multiple database Configurations.
+     */
+    'connections' => [
+        'mysql' => [
+            'driver'   => 'mysql',
+            'host'     => env('DB_HOST', '127.0.0.1'),
+            'port'     => env('DB_PORT', '3306'),
+            'database' => env('DB_DATABASE', 'php_micro_framework'),
+            'username' => env('DB_USERNAME', 'root'),
+            'password' => env('DB_PASSWORD', ''),
+            'error'    => env('DB_ERROR', 'PDO::ERRMODE_EXCEPTION'),
+        ],
+    ],
+];
+```
+
+### DB instance:
+
+**DB::db()** actually returns a **Medoo** singleton instance behind the scenes.
+
+```php
+DB::db();
+```
+
+**You can easily perform tasks using model.**
+#### Model:
+
+If your model's corresponding database table does not fit this convention, you may manually specify the model's table name by defining a table property on the model:
+
+```php
+protected $table = 'editors'
+```
+
+The target columns of data will be fetched and The WHERE clause to filter records.
+`select($columns, $where(optional))`
+
+```php
+$user = new User();
+
+$user->select([
+	"user_name",
+	"email"
+], [
+    // Where condition.
+	"user_id[>]" => 100
+])->getData();
+```
+#### Table Joining:
+SQL JOIN clause can combine rows between two tables. Medoo provides a simple syntax for the JOIN clause.
+
+[>] ==> LEFT JOIN
+[<] ==> RIGHT JOIN
+[<>] ==> FULL JOIN
+[><] ==> INNER JOIN
+
+```php
+$user = new User();
+
+$user->select([
+	// Here is the table relativity argument that tells the relativity between the table you want to join.
+	"[>]account" => ["author_id" => "user_id"]
+], [
+	"post.title",
+	"account.city"
+])->getData();
+```
+
+#### Data Mapping:
+```php
+$user = new User();
+
+$user->select([
+	"[>]account" => ["user_id"]
+], [
+	"post.content",
+
+	"userData" => [
+		"account.user_id",
+		"account.email",
+
+		"meta" => [
+			"account.location",
+			"account.gender"
+		]
+	]
+], [
+	"LIMIT" => [0, 2]
+])->getJson()->getData();
+```
+
+#### Insert:
+Insert one or more records into the table.
+`insert($values)`
+
+```php
+$user = new User();
+
+$user->insert([
+	[
+		"user_name" => "foo",
+		"email" => "foo@bar.com",
+	],
+	[
+		"user_name" => "bar",
+		"email" => "bar@foo.com",
+	]
+]);
+// Get last inserted id.
+$user->id();
+```
+
+#### Errors And Error Handling:
+
+```php
+$user = new User();
+
+$user->select([
+	"user_name",
+	"email"
+])->getData();
+
+// DB::db()->error and DB::db()->errorInfo will be null value if no error occurred.
+// You can simply check if the value is null or not to know about that.
+if ($user->error()) {
+	echo "Error happened!";
+};
+```
+<em>**See the "medoo" documentation for details.**</em>
+
+**You can invoke all methods of "medoo" from the model.**
+
+**However, 2 things should be noted.**
+
+1. You cannot use the table names shown in the "sql query " in the "medoo" documentation, because the framework will magically choose the table names based on the model. So model name and table name should be same.
+
+**In meddo documention**
+```php
+// Here the table name "user" is used.
+DB::db()->select("users", [
+	"user_name",
+	"email"
+]);
+```
+
+**In framework**
+```php
+// Here automatically the table name will be obtained from the "new User()" model.
+$user = new User();
+
+$user->select([
+	"user_name",
+	"email"
+]);
+```
+
+2. Also you need to use "getData()" method to get the data.
+
+**In meddo documention**
+```php
+$user = DB::db()->select("users", [
+	"user_name",
+	"email"
+]);
+
+print_r($user);
+```
+
+**In framework**
+```php
+$user = new User();
+
+$user = $user->select([
+	"user_name",
+	"email"
+])->getData();
+
+print_r($user);
+```
+
+**Also run customized raw queries easily.**
+
+### Raw Query:
+
+`query($query)`
+
+```php
+DB::db()->query("SELECT email FROM account")->fetchAll();
+```
+
+The query() also supports prepared statements. Medoo will auto-detect the data type for input parameters.
+
+```php
+DB::db()->query(
+	"SELECT * FROM <account> WHERE <user_name> = :user_name AND <age> = :age", [
+		":user_name" => "John Smite",
+		":age" => 20
+	]
+)->fetchAll();
+```
+
+Medoo is based on the PDO object. You can access the PDO object directly via using $database->pdo, so that you can use all PDO methods if you needed, like prepare, transaction, rollBack, or more.
+
+#### Transaction:
+
+```php
+DB::db()->pdo->beginTransaction();
+
+DB::db()->insert("account", [
+	"user_name" => "foo",
+	"email" => "foo@bar.com",
+	"age" => 25
+]);
+
+/* Commit the changes */
+DB::db()->pdo->commit();
+
+/* Recognize mistakes and roll back changes */
+DB::db()->pdo->rollBack();
+```
+
+#### Create a table:
+
+`create($table, $columns, $options)`
+
+```php
+DB::db()->create("account", [
+	"id" => [
+		"INT",
+		"NOT NULL",
+		"AUTO_INCREMENT",
+		"PRIMARY KEY"
+	],
+	"first_name" => [
+		"VARCHAR(30)",
+		"NOT NULL"
+	]
+]);
+```
+
+
+## Helpers:
+
+Micro frameworks provide some helper methods for the convenience of developers.
+
+#### General Helpers:
+
+**Get Application instance**
+```php
+app()
+```
+**Get config data**
+```php
+config();
+```
+```php
+config('app', 'timezone');
+```
+**Get env data**
+```php
+env();
+```
+```php
+env('APP_NAME', 'default');
+```
+**View the data in details then exit the code**
+```php
+dd([1,2,3]);
+```
+**View the data in details**
+```php
+dump();
+```
+**Set page title**
+```php
+setTitle();
+```
+```php
+<?php setTitle('login');?>
+```
+**Get page title, Use it in title tags**
+```php
+getTitle();
+```
+```php
+<title><?= getTitle() ?></title>
+```
+**Get session instance**
+```php
+session();
+```
+**Get flushMessage instance**
+```php
+flushMessage();
+```
+**Get auth instance**
+```php
+auth();
+```
+```php
+auth()->user();
+```
+**Get bcrypt password**
+```php
+passwordHash('password');
+```
+**Get event instance**
+```php
+event();
+```
+**Get app base path**
+```php
+basePath();
+```
+**Get app url**
+```php
+url();
+```
+
+#### Form Helpers:
+
+**Set new CSRF value**
+```php
+setCsrf();
+```
+```php
+<form>
+    <?=setCsrf()?>
+</form>
+```
+**Check CSRF is valid or not, return bool**
+```php
+isCsrfValid();
+```
+**Set form method, like put/patch/delete**
+```php
+setMethod('delete');
+```
+```php
+<form>
+    <?=setMethod('delete')?>
+</form>
+```
+
+**Get errors data from  flush session by key**
+```php
+errors($key);
+```
+```php
+<?=errors($key)?>
+```
+**Get error data form flush session**
+```php
+error()
+```
+```php
+<?=error()?>
+```
+
+**Check if the error is set to session, return bool**
+```php
+hasError();
+```
+**Get success data form flush session**
+```php
+success();
+```
+```php
+<?=success()?>
+```
+**Check if the success is set to session, return bool**
+```php
+hasSuccess();
+```
+
+#### Request Helpers:
+
+**Get request instance**
+```php
+request();
+```
+```php
+request()->input();
+```
+
+#### Response Helpers:
+
+**The abort function throws an HTTP exception which will be rendered by the exception handler**
+```php
+abort(404, 'optional message');
+```
+**Redirect link**
+```php
+redirect('/redirect-link');
+```
+**Create a new redirect response to the previous location**
+```php
+back();
+```
+**Finds routes by route name and redirect this route**
+```php
+route('users');
+```
+**Get the evaluated view contents for the given view**
+```php
+view('welcome');
+```
+**Set the response status code with the view content**
+```php
+status(200);
+```
+```php
+return status(200)->view('welcome');
+```
+**Set the view layout**
+```php
+layout('app');
+```
+```php
+return layout('app')->view('welcome');
 ```
