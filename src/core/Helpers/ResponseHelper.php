@@ -19,7 +19,7 @@ if (!function_exists('abort')) {
 
 if (!function_exists('redirect')) {
     /**
-     * Get an instance of the redirect.
+     * Redirect link.
      */
     function redirect(string $redirectLink): Redirect {
         return (new Redirect())->redirect($redirectLink);
@@ -37,7 +37,7 @@ if (!function_exists('back')) {
 
 if (!function_exists('route')) {
     /**
-     * Finds routes by route name
+     * Finds routes by route name and redirect this route.
      */
     function route(string $name, array | string $params = null): void {
         Router::singleton()->route($name, $params);
