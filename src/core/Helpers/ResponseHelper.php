@@ -6,7 +6,8 @@ use Devamirul\PhpMicro\core\Foundation\View\View;
 
 if (!function_exists('abort')) {
     /**
-     * Throw an HttpException with the given data.
+     * The abort function throws an HTTP exception which will be
+     * rendered by the exception handler.
      */
     function abort(int $code = 404, string $message = ''): string {
         return View::singleton()->status($code)->view('errors/' . $code, [
