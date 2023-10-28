@@ -35,12 +35,12 @@ if (!function_exists('back')) {
     }
 }
 
-if (!function_exists('route')) {
+if (!function_exists('toRoute')) {
     /**
-     * Finds routes by route name and redirect this route.
+     * Finds route by route name and redirect this route.
      */
-    function route(string $name, array | string $params = null): void {
-        Router::singleton()->route($name, $params);
+    function toRoute(string $name, array | string $params = null): void {
+        Router::singleton()->toRoute($name, $params);
     }
 }
 
