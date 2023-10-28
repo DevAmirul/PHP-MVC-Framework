@@ -198,9 +198,9 @@ class Router {
     }
 
     /**
-     * Finds routes by route name
+     * Finds route by route name
      */
-    public function route(string $name, string | array $params = null): Redirect {
+    public function toRoute(string $name, string | array $params = null): Redirect {
         foreach ($this->routes[$this->request->method()] as $routes) {
             if ($routes['name'] === $name) {
                 if (is_string($params)) {
