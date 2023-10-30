@@ -38,6 +38,8 @@ A simple, fast, and small PHP MVC Framework that enables to develop modern appli
 
 - Helpers
 
+- Command line interface(CLI)
+
 
 ## Table of Contents:
 
