@@ -6,7 +6,7 @@ A simple, fast, and small PHP MVC Framework that enables to develop modern appli
 
 ## Features:
 
-- Service Provider & Container
+- Service Provider & Container 
 
 - Facade
 
