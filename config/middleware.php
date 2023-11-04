@@ -6,8 +6,8 @@ return [
      * Autoloaded All Middleware.
      */
     'middleware' => [
-        'auth'  => App\Http\Middleware\AuthMiddleware::class,
-        'guest' => App\Http\Middleware\GuestMiddleware::class,
+        'auth'  => App\Http\Middlewares\AuthMiddleware::class,
+        'guest' => App\Http\Middlewares\GuestMiddleware::class,
         'csrf'  => Devamirul\PhpMicro\core\Foundation\Middleware\Middlewares\CsrfMiddleware::class,
     ],
 

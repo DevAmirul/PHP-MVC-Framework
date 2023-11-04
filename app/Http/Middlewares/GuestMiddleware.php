@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace App\Http\Middlewares;
 
 use App\Providers\AppServiceProvider;
 use Devamirul\PhpMicro\core\Foundation\Application\Facade\Facades\Auth;
@@ -12,10 +12,10 @@ class GuestMiddleware implements Middleware {
     /**
      * Handle an incoming request.
      */
-    public function handle(Request $request, array $guards) {
+    public function handle(Request $request, array $guards): void {
         if (!empty($guards)) {
             foreach ($guards as $guard) {
-                if (Auth::guard($guard)->check()) {
+                if ($guard === 'admin' && Auth::guard($guard)->check()) {
                     return redirect('/editors/home');
                 }
             }

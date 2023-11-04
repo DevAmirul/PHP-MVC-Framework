@@ -32,7 +32,8 @@
         "drop": "cd src/core/Foundation/CLI/Database && php MigrationDrop.php && cd -",
         "migrate": "cd src/core/Foundation/CLI/Database && php Migration.php && cd -",
         "provider": "cd src/core/Foundation/CLI/Provider && php ProviderCreate.php && cd -",
-        "controller": "cd src/core/Foundation/CLI/Controller && php ControllerCreate.php && cd -"
+        "controller": "cd src/core/Foundation/CLI/Controller && php CreateController.php && cd -",
+        "middleware": "cd src/core/Foundation/CLI/Middleware && php CreateMiddleware.php && cd -"
     },
     "minimum-stability": "dev",
     "require": {
