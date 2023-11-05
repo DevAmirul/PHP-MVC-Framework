@@ -7,6 +7,8 @@ use Devamirul\PhpMicro\core\Foundation\Application\Traits\Singleton;
 class Request {
     use Singleton;
 
+    private array $params;
+
     private function __construct() {}
 
     /**
@@ -78,16 +80,17 @@ class Request {
      * Retrieve all requested data., you can also get single data from here.
      * If no data is found, the default data will be returned.
      */
-    public function input(string $key = '', mixed $default = null): mixed {
+    public function input(?string $key = null, mixed $default = null): mixed
+    {
         if ($key) {
             if (isset($_REQUEST[$key])) {
-                return $_REQUEST[$key];
+                return strip_tags($_REQUEST[$key]);
             }
         } else {
             $input = [];
 
             foreach ($_REQUEST as $index => $value) {
-                $input[$index] = $value;
+                $input[$index] = strip_tags($value);
             }
             return $input;
         }
@@ -97,11 +100,12 @@ class Request {
     /**
      * Retrieve all requested data.
      */
-    public function all(): mixed {
+    public function all(): mixed
+    {
         $all = [];
 
         foreach ($_REQUEST as $key => $value) {
-            $all[$key] = $value;
+            $all[$key] = strip_tags($value);
         }
         return $all;
     }
@@ -109,15 +113,38 @@ class Request {
     /**
      * Retrieve some specific data from all data requested.
      */
-    public function only(): mixed {
+    public function only(): mixed
+    {
         $only = [];
         $args = func_get_args();
 
         foreach ($args as $key) {
             if (isset($_REQUEST[$key])) {
-                $only[$key] = $_REQUEST[$key];
+                $only[$key] = strip_tags($_REQUEST[$key]);
             }
         }
         return $only;
+    }
+
+    /**
+     * Set param.
+     */
+    public function setParam($key, $value): void
+    {
+        $this->params[$key] = strip_tags($value);
+    }
+
+    /**
+     * Get param.
+     */
+    public function getParam(?string $key = null): string | array | null
+    {
+        if ($key) {
+            return $this->params[$key] ?? null;
+        } elseif (!empty($this->params)) {
+            return $this->params;
+        } else {
+            return null;
+        }
     }
 }
