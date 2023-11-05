@@ -80,16 +80,16 @@ Router::get('/', [WelcomeController::class, 'index'])->name('welcome');
 #### Dynamic Route
 
 ```php
-Router::get('/users/:id', function(int $id){
-    return 'User id - ' . $id;
-})->where('^\d+$')->name('user');
+Router::get('/users/:id', function(){
+    //
+})->where(['id'=>'^\d+$'])->name('user');
 ```
 
 #### Middleware
 ```php
-Router::get('/users/:id', function(int $id){
-    return 'User id - ' . $id;
-})->middleware('auth')->where('^\d+$')->name('user');
+Router::get('/users/:id', function(){
+    //
+})->middleware('auth')->where(['id'=>'^\d+$'])->name('user');
 ```
 
 ## Folder Structure
