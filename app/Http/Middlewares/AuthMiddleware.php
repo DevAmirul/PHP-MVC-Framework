@@ -5,7 +5,6 @@ namespace App\Http\Middlewares;
 use Devamirul\PhpMicro\core\Foundation\Application\Facade\Facades\Auth;
 use Devamirul\PhpMicro\core\Foundation\Application\Request\Request;
 use Devamirul\PhpMicro\core\Foundation\Middleware\Interface\Middleware;
-use Exception;
 
 class AuthMiddleware implements Middleware {
 
@@ -15,9 +14,10 @@ class AuthMiddleware implements Middleware {
     public function handle(Request $request, array $guards) {
         if (!empty($guards)) {
             foreach ($guards as $guard) {
-                if ($guard === 'admin' && Auth::guard($guard)->check()) {
-                    return redirect('/admin/login');
+                if ($guard === 'editor' && Auth::guard($guard)->check()) {
+                    return;
                 }
+                return redirect('/editors/login');
             }
         } elseif (!Auth::check()) {
             return redirect('/login');

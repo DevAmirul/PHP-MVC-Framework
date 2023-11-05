@@ -49,5 +49,6 @@ class Redirect {
 
     public function __destruct() {
         header('Location: ' . $this->redirectLink);
+        exit;
     }
 }

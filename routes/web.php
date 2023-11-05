@@ -9,4 +9,3 @@ use Devamirul\PhpMicro\core\Foundation\Application\Mail\Mail;
  */
 
 Router::get('/', [WelcomeController::class, 'index'])->name('welcome');
-
