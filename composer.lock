@@ -208,12 +208,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPMailer/PHPMailer.git",
-                "reference": "a1fa2714c447adda7e6b07c4bfa290dfc1a035b2"
+                "reference": "ee4090bd62ad3ded3eac19d6fd0213abbe3596f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/a1fa2714c447adda7e6b07c4bfa290dfc1a035b2",
-                "reference": "a1fa2714c447adda7e6b07c4bfa290dfc1a035b2",
+                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/ee4090bd62ad3ded3eac19d6fd0213abbe3596f1",
+                "reference": "ee4090bd62ad3ded3eac19d6fd0213abbe3596f1",
                 "shasum": ""
             },
             "require": {
@@ -281,7 +281,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-10-09T11:27:29+00:00"
+            "time": "2023-10-31T22:08:15+00:00"
         },
         {
             "name": "phpoption/phpoption",
@@ -858,7 +858,8 @@
         "catfan/medoo": 20,
         "icanboogie/datetime": 20,
         "phpmailer/phpmailer": 20,
-        "rakit/validation": 20
+        "rakit/validation": 20,
+        "txthinking/mailer": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

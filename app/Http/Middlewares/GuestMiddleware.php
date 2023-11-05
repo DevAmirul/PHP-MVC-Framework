@@ -12,7 +12,7 @@ class GuestMiddleware implements Middleware {
     /**
      * Handle an incoming request.
      */
-    public function handle(Request $request, array $guards): void {
+    public function handle(Request $request, array $guards) {
         if (!empty($guards)) {
             foreach ($guards as $guard) {
                 if ($guard === 'admin' && Auth::guard($guard)->check()) {

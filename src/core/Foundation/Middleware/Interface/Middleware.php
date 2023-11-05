@@ -9,6 +9,6 @@ interface Middleware {
     /**
      * Handle an incoming request.
      */
-    public function handle(Request $request, array $guards): void;
+    public function handle(Request $request, array $guards) ;
 
 }

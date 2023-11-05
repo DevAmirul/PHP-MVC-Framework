@@ -12,7 +12,7 @@ class AuthMiddleware implements Middleware {
     /**
      * Check if the request is authenticated and act accordingly.
      */
-    public function handle(Request $request, array $guards): void {
+    public function handle(Request $request, array $guards) {
         if (!empty($guards)) {
             foreach ($guards as $guard) {
                 if ($guard === 'admin' && Auth::guard($guard)->check()) {
@@ -22,8 +22,6 @@ class AuthMiddleware implements Middleware {
         } elseif (!Auth::check()) {
             return redirect('/login');
         }
-        throw new Exception("Error Processing Request", 1);
-
         return;
     }
 

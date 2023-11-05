@@ -44,7 +44,7 @@ function getMiddlewareSkeleton(string $MiddlewareName): string {
         /**
          * Check if the request is authenticated and act accordingly.
          */
-        public function handle(Request \$request, array \$guards): void {
+        public function handle(Request \$request, array \$guards) {
             //
         }
 
