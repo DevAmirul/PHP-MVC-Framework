@@ -1,6 +1,6 @@
-# PHP Micro Framework
+# PHP MVC Framework
 
-A simple, fast, and small PHP MVC Framework that enables to develop modern applications with standard MVC structure and CLI command line tools. This framework using dependencies as minimum as possible. Inspired by laravel.
+A simple, fast, and small PHP MVC Framework that enables to develope of modern applications with standard MVC structure and CLI command line tools. This framework uses dependencies as minimum as possible. Inspired by Laravel.
 
 <em>**Click to view full [Documentation](https://github.com/DevAmirul/PHP-MVC-Micro-Framework/wiki/Documentation)**</em>
 
@@ -55,7 +55,7 @@ A simple, fast, and small PHP MVC Framework that enables to develop modern appli
 Install via git
 
 ```bash
- git clone https://github.com/DevAmirul/PHP-MVC-Micro-Framework.git my-app
+ git clone https://github.com/DevAmirul/PHP-MVC-Framework.git my-app
  cd my-app
 ```
 
