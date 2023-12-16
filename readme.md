@@ -1,6 +1,6 @@
 # PHP MVC Framework
 
-A simple, fast, and small PHP MVC Framework that enables to develope of modern applications with standard MVC structure and CLI command line tools. This framework uses dependencies as minimum as possible. Inspired by Laravel.
+A simple, fast, and small PHP MVC Framework that enables to develop of modern applications with standard MVC structure and CLI command line tools. This framework uses dependencies as minimum as possible. Inspired by Laravel.
 
 <em>**Click to view full [Documentation](https://github.com/DevAmirul/PHP-MVC-Framework/wiki/Documentation)**</em>
 
