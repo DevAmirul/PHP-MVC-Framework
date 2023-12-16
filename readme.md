@@ -2,7 +2,7 @@
 
 A simple, fast, and small PHP MVC Framework that enables to develope of modern applications with standard MVC structure and CLI command line tools. This framework uses dependencies as minimum as possible. Inspired by Laravel.
 
-<em>**Click to view full [Documentation](https://github.com/DevAmirul/PHP-MVC-Micro-Framework/wiki/Documentation)**</em>
+<em>**Click to view full [Documentation](https://github.com/DevAmirul/PHP-MVC-Framework/wiki/Documentation)**</em>
 
 ## Features:
 
@@ -167,6 +167,6 @@ root
 
 ## Documentation:
 
-<em>**Click to view full [Documentation](https://github.com/DevAmirul/PHP-MVC-Micro-Framework/wiki/Documentation)**</em>
+<em>**Click to view full [Documentation](https://github.com/DevAmirul/PHP-MVC-Framework/wiki/Documentation)**</em>
 
 
